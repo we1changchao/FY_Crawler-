@@ -2906,3 +2906,38 @@ Stacktrace:
 2025-10-22 21:38:29,955 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
 2025-10-22 21:38:29,956 - INFO - 当前工作目录: D:\Pycharmcode\test
 2025-10-22 21:38:29,956 - INFO - ===== 开始下载订单了 =====
+2025-10-23 22:18:59,397 - INFO - === 日志系统初始化测试 ===
+2025-10-23 22:18:59,397 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-10-23 22:18:59,397 - INFO - 当前工作目录: D:\Pycharmcode\test
+2025-10-23 22:18:59,398 - INFO - ===== 开始下载订单了 =====
+2025-10-23 22:19:00,680 - INFO - 浏览器初始化成功
+2025-10-23 22:19:00,680 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-23 22:19:33,238 - INFO - 开始登录流程
+2025-10-23 22:19:35,435 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-23 22:19:35,497 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-23 22:19:35,556 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-23 22:19:35,666 - INFO - 识别到验证码: fd68
+2025-10-23 22:19:35,773 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-23 22:19:35,819 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-23 22:19:35,819 - INFO - 验证登录结果：尝试查找'我的订单'元素
+2025-10-23 22:19:37,567 - INFO - 登录成功：成功找到'我的订单'元素
+2025-10-23 22:19:43,607 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-10-23 22:19:43,607 - INFO - 开始点击文件按钮并读取内容
+2025-10-23 22:19:45,650 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-10-23 22:19:45,773 - INFO - 文件创建: C:\Users\Lenovo\Downloads\5cfd44e3-359d-42e2-8982-7209c5f9a879.tmp
+2025-10-23 22:19:45,804 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\5cfd44e3-359d-42e2-8982-7209c5f9a879.tmp → C:\Users\Lenovo\Downloads\A202510231403105597.txt.crdownload
+2025-10-23 22:19:45,804 - INFO - 记录中间临时文件: C:\Users\Lenovo\Downloads\A202510231403105597.txt.crdownload
+2025-10-23 22:19:45,830 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\A202510231403105597.txt.crdownload → C:\Users\Lenovo\Downloads\A202510231403105597.txt
+2025-10-23 22:19:45,830 - INFO - 检测到最终txt文件: C:\Users\Lenovo\Downloads\A202510231403105597.txt
+2025-10-23 22:19:46,654 - INFO - 捕获到直接下载的TXT文件
+2025-10-23 22:19:46,655 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-10-23 22:19:46,655 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-10-23 22:19:46,655 - INFO - 成功获取下载的txt文件内容
+2025-10-23 22:19:46,655 - INFO - 从txt文件中提取到1个FTP格式HDF链接，开始下载...
+2025-10-23 22:19:46,656 - INFO - 正在下载第1/1个FTP链接: ftp://A202510231403105597:_0LV6dl_@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251023_0850_1000M_MS.HDF
+2025-10-23 22:20:20,112 - INFO - 成功下载: FY3D_MERSI_GBAL_L1_20251023_0850_1000M_MS.HDF
+2025-10-23 22:20:20,112 - INFO - ✅ 第1个FTP链接下载成功: ftp://A202510231403105597:_0LV6dl_@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251023_0850_1000M_MS.HDF
+2025-10-23 22:20:20,112 - INFO - 下载完成统计: 总计1个文件, 成功1个, 失败0个
+2025-10-23 22:20:20,112 - INFO - ✅ 成功下载1个HDF文件！
+2025-10-23 22:20:20,112 - INFO - 已清理临时TXT文件：C:\Users\Lenovo\Downloads\A202510231403105597.txt
+2025-10-23 22:20:20,112 - INFO - ===== 订单下载完成了 =====

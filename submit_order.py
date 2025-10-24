@@ -15,6 +15,7 @@ import time
 import os
 from PIL import Image
 import io
+import sys
 import logging
 import configparser
 from pathlib import Path
@@ -251,10 +252,12 @@ class SatelliteDataDownloader:
             # 全部选择
             'click_AllChoose': (By.XPATH, '//*[@id="allSele1"]'),  # 点击"全部选择"
 
-            'text': (By.XPATH, '//*[@id="c-beginDate"]'),
+            'beginDate': (By.XPATH, '//*[@id="c-beginDate"]'),
+            'endDate': (By.XPATH, '//*[@id="c-endDate"]')
+
         }
 
-    def run(self):
+    def run(self,time_param):
         """运行主程序"""
         try:
             # 初始化浏览器
@@ -265,7 +268,7 @@ class SatelliteDataDownloader:
             # 打开网站
             logger.info(f"打开网站: {self.base_url}")
             self.browser.driver.get(self.base_url)
-            time.sleep(2)  # 初始加载等待
+            time.sleep(3)  # 初始加载等待
 
             # 执行登录流程
             if not self._login():
@@ -278,7 +281,7 @@ class SatelliteDataDownloader:
                 return
 
             # 选择地理范围
-            if not self._select_Range():
+            if not self._select_Range(time_param):
                 logger.error("选择地理范围失败，程序退出")
                 return
 
@@ -310,7 +313,7 @@ class SatelliteDataDownloader:
         # 1. 先点击登录按钮（仅需点击一次，弹出登录弹窗）
         if not self.browser.safe_click_element(*self.locators['login_button']):
             return False
-        time.sleep(1)   # 等待登录弹窗弹出
+        # time.sleep(1)   # 等待登录弹窗弹出
 
         # 2. 循环重试验证码（直到登录成功或达到最大次数）
         for retry in range(max_login_retries):
@@ -411,7 +414,7 @@ class SatelliteDataDownloader:
         logger.info("卫星数据选择完成")
         return True
 
-    def _select_Range(self):
+    def _select_Range(self,time_param):
         """空间范围选择"""
         logger.info("开始选择空间范围")
         #点击 “空间范围”
@@ -420,36 +423,30 @@ class SatelliteDataDownloader:
         # 输入坐标
         if not self.browser.safe_send_keys(*self.locators['N_degree'], "60"):
             return False
-        time.sleep(0.5)
         if not self.browser.safe_send_keys(*self.locators['N_minute'], "00"):
             return False
-        time.sleep(0.5)
         if not self.browser.safe_send_keys(*self.locators['W_degree'], "-180"):
             return False
-        time.sleep(0.5)
         if not self.browser.safe_send_keys(*self.locators['W_minute'], "00"):
             return False
-        time.sleep(0.5)
         if not self.browser.safe_send_keys(*self.locators['E_degree'], "180"):
             return False
-        time.sleep(0.5)
         if not self.browser.safe_send_keys(*self.locators['E_minute'], "00"):
             return False
-        time.sleep(0.5)
         if not self.browser.safe_send_keys(*self.locators['S_degree'], "90"):
             return False
-        time.sleep(0.5)
         if not self.browser.safe_send_keys(*self.locators['S_minute'], "00"):
             return False
-        time.sleep(0.5)
         # 点击显示范围  点击确定
         if not self.browser.safe_click_element(*self.locators['click_displayRange']):
             return False
         if not self.browser.safe_click_element(*self.locators['click_confirm1']):
             return False
 
-
-        if not self.browser.safe_send_keys1(*self.locators['text'], "2025/10/20"):
+        # 输入开始日期 结束日期
+        if not self.browser.safe_send_keys1(*self.locators['beginDate'], "2025/10/20"):
+            return False
+        if not self.browser.safe_send_keys1(*self.locators['endDate'], time_param):
             return False
         time.sleep(0.5)
 
@@ -480,18 +477,15 @@ class SatelliteDataDownloader:
         # 点击筛选
         if not self.browser.safe_click_element(*self.locators['click_filter']):
             return False
-        time.sleep(1)
         # 选中第二个数据
         if not self.browser.safe_click_element(*self.locators['second_data_row']):
             return False
-        time.sleep(1)
         # 点击提交编辑
         if not self.browser.safe_click_element(*self.locators['commit_edit']):
             return False
         # 勾选发送确认邮件
         if not self.browser.safe_click_element(*self.locators['send_email_checkbox']):
             return False
-        time.sleep(1)
         # 提交订单
         if not self.browser.safe_click_element(*self.locators['submit_order']):
             return False
@@ -511,9 +505,20 @@ class SatelliteDataDownloader:
 
     # 主程序入口
 if __name__  ==  "__main__":
+
+
+    # 获取传递的参数（sys.argv[1] 对应 time_param）
+    if len(sys.argv) < 2:
+        print("错误：未收到时间参数")
+        sys.exit(1)
+    #   开始时间
+    time_param = sys.argv[1]
+    print(f"收到的时间参数：{time_param}")
+
+
     logger.info("===== 订单提交程序启动 =====")
     downloader = SatelliteDataDownloader()
-    downloader.run()
+    downloader.run(time_param)
     logger.info("===== 订单提交程序结束 =====")
 
 

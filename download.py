@@ -424,7 +424,7 @@ class SatelliteDataDownloader:
             # 打开网站
             logger.info(f"打开网站: {self.base_url}")
             self.browser.driver.get(self.base_url)
-            time.sleep(5)  # 初始加载等待
+            time.sleep(2)  # 初始加载等待
 
             # 执行登录流程
             if not self._login():
@@ -436,7 +436,6 @@ class SatelliteDataDownloader:
             if not self.browser.safe_click_element(*self.locators['my_order']):
                 return False
 
-            time.sleep(1)
             # 点击文件按钮并读取内容
             logger.info("开始点击文件按钮并读取内容")
             result = self.browser.click_and_read_content(self.locators['file_button'])
@@ -591,7 +590,7 @@ class SatelliteDataDownloader:
         # 1. 先点击登录按钮（仅需点击一次，弹出登录弹窗）
         if not self.browser.safe_click_element(*self.locators['login_button']):
             return False
-        time.sleep(1)
+
 
         # 2. 循环重试验证码（直到登录成功或达到最大次数）
         for retry in range(max_login_retries):
@@ -612,7 +611,7 @@ class SatelliteDataDownloader:
                 captcha_input = self.browser.safe_find_element(*self.locators['captcha_input'])
                 if captcha_input:
                     captcha_input.clear()
-                    time.sleep(0.5)
+
 
                 # 识别新验证码
                 captcha_text = self.browser.solve_captcha(self.locators['captcha_image'][1])
@@ -631,7 +630,6 @@ class SatelliteDataDownloader:
                 if not self.browser.safe_click_element(*self.locators['submit_login']):
                     logger.warning(f"登录提交失败，重试 {retry + 1}/{max_login_retries}")
                     continue  # 提交失败，直接重试
-                time.sleep(3)  # 等待登录结果（关键：给页面足够时间判断登录状态）
 
                 # --------------------------
                 # 步骤4：验证登录是否成功（核心判定逻辑）
