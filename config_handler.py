@@ -66,6 +66,34 @@ class ConfigHandler:
     def get_download_dir(self):
         """获取下载目录（统一提供给所有程序使用）"""
         return self.config.get('SETTINGS', 'download_dir', fallback=os.path.expanduser("~/Downloads"))
+    def get_listen_dir(self):
+        """获取下载目录（统一提供给所有程序使用）"""
+        return self.config.get('SETTINGS', 'listen_dir', fallback=os.path.expanduser("~/Downloads"))
+
+    def set_config_value(self, section, key, value):
+        """
+        向配置文件中写入/修改指定字段的值
+        Args:
+            section: 配置节（如'SETTINGS'）
+            key: 字段名（如'download_dir'）
+            value: 要设置的值（字符串类型）
+        Returns:
+            bool: 操作成功返回True，失败返回False
+        """
+        try:
+            # 若节不存在，先创建节
+            if not self.config.has_section(section):
+                self.config.add_section(section)
+            # 设置字段值（确保值为字符串类型）
+            self.config.set(section, key, str(value))
+            # 写入配置文件（覆盖原文件）
+            with open(self.config_file, 'w', encoding='utf-8') as f:
+                self.config.write(f)
+            return True
+        except Exception as e:
+            logger.error(f"修改配置文件[{section}] {key} 失败：{str(e)}")
+            return False
+
 
     # 配置文件处理
     # class ConfigHandler:

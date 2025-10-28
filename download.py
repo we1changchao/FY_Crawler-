@@ -185,6 +185,7 @@ class SatelliteBrowser:
         self.retry_attempts = config.get_retry_attempts()
         self.ocr = ddddocr.DdddOcr()
         self.download_dir = config.get_download_dir()  # 下载目录
+        self.listen_dir = config.get_listen_dir()
 
     def init_browser(self):
         """初始化浏览器"""
@@ -320,12 +321,12 @@ class SatelliteBrowser:
         # 记录点击前的窗口句柄和下载目录状态
         original_window = self.driver.current_window_handle  # 记录当前浏览器窗口的唯一标识（句柄），用于后续在多个窗口之间切换时，能准确回到初始窗口
         start_time = time.time()
-        download_dir = self.download_dir
+        listen_dir = self.listen_dir
 
         # 初始化文件监控
         event_handler = TxtFileHandler()    # 自定义的 文件下载监控处理器
         observer = Observer()  # watchdog 库中创建文件系统监控器实例的核心代码，用于启动一个后台线程来监听指定目录的文件变化（如创建、删除、修改、移动等）。
-        observer.schedule(event_handler, download_dir, recursive=False)  # 请监控 download_dir 目录下的文件变化，当变化时，用 event_handler 中定义的规则来处理这些事件
+        observer.schedule(event_handler, listen_dir, recursive=False)  # 请监控 download_dir 目录下的文件变化，当变化时，用 event_handler 中定义的规则来处理这些事件
         observer.start()
 
         # 等待监控完全启动

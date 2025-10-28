@@ -3989,3 +3989,1259 @@ Stacktrace:
 2025-10-26 10:35:33,338 - INFO - 下载操作完成
 2025-10-26 10:35:33,338 - INFO - 所有操作完成
 2025-10-26 10:35:33,338 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 20:05:31,797 - INFO - === 日志系统初始化 ===
+2025-10-28 20:05:31,797 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 20:05:31,797 - INFO - 当前工作目录: D:\Pycharmcode\test
+2025-10-28 20:06:57,131 - INFO - === 日志系统初始化 ===
+2025-10-28 20:06:57,131 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 20:06:57,131 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 20:06:57,132 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 20:06:58,692 - INFO - 浏览器初始化成功
+2025-10-28 20:06:58,692 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 20:07:05,847 - INFO - 开始登录流程
+2025-10-28 20:07:07,701 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 20:07:07,787 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 20:07:07,836 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 20:07:08,477 - INFO - 识别到验证码: k3qz
+2025-10-28 20:07:08,611 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 20:07:08,655 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 20:07:11,669 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 20:07:11,670 - WARNING - 登录失败（Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775ccc0a5]
+	(No symbol) [0x0x7ff775cf144a]
+	(No symbol) [0x0x7ff775d67be6]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+），刷新验证码重试 2/3
+2025-10-28 20:07:11,671 - ERROR - 程序运行出错: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce011c]
+	(No symbol) [0x0x7ff775d27c1d]
+	(No symbol) [0x0x7ff775d60242]
+	(No symbol) [0x0x7ff775d5ac14]
+	(No symbol) [0x0x7ff775d59cca]
+	(No symbol) [0x0x7ff775caa755]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	(No symbol) [0x0x7ff775ca9731]
+	GetHandleVerifier [0x0x7ff77634b568+4182008]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-28 20:07:11,674 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 363, in _login
+    fengyun_element = self.browser.safe_find_element(*self.locators['FengYun_satellite'])  # 注意key是'FengYun_satellite'（原代码中首字母大写）
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 96, in until
+    value = method(self._driver)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 84, in _predicate
+    return driver.find_element(*locator)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 770, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775ccc0a5]
+	(No symbol) [0x0x7ff775cf144a]
+	(No symbol) [0x0x7ff775d67be6]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 274, in run
+    if not self._login():
+  File "D:/Pycharmcode/test/submit_order.py", line 375, in _login
+    captcha_image = self.browser.safe_find_element(*self.locators['captcha_image'])
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 96, in until
+    value = method(self._driver)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 84, in _predicate
+    return driver.find_element(*locator)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 770, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce011c]
+	(No symbol) [0x0x7ff775d27c1d]
+	(No symbol) [0x0x7ff775d60242]
+	(No symbol) [0x0x7ff775d5ac14]
+	(No symbol) [0x0x7ff775d59cca]
+	(No symbol) [0x0x7ff775caa755]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	(No symbol) [0x0x7ff775ca9731]
+	GetHandleVerifier [0x0x7ff77634b568+4182008]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-28 20:07:11,674 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 20:07:30,262 - INFO - === 日志系统初始化 ===
+2025-10-28 20:07:30,262 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 20:07:30,262 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 20:07:30,262 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 20:07:31,561 - INFO - 浏览器初始化成功
+2025-10-28 20:07:31,561 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 20:07:40,186 - INFO - 开始登录流程
+2025-10-28 20:07:41,804 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 20:07:41,895 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 20:07:41,974 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 20:07:42,558 - INFO - 识别到验证码: 9crj
+2025-10-28 20:07:42,690 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 20:07:42,752 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 20:07:45,754 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 20:07:45,760 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-28 20:07:45,760 - INFO - 开始选择卫星数据
+2025-10-28 20:07:48,795 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 20:07:49,847 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[4]
+2025-10-28 20:07:50,889 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 20:07:50,959 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-28 20:07:50,996 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[1]
+2025-10-28 20:07:50,997 - INFO - 卫星数据选择完成
+2025-10-28 20:07:50,997 - INFO - 开始选择空间范围
+2025-10-28 20:07:51,049 - INFO - 成功点击元素: xpath: //*[@id="txt-spaceArea"]
+2025-10-28 20:07:51,633 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-28 20:07:51,763 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-28 20:07:51,857 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-28 20:07:51,937 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-28 20:07:52,003 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-28 20:07:52,066 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-28 20:07:52,134 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-28 20:07:52,201 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-28 20:07:52,250 - INFO - 成功点击元素: xpath: //*[@id="other-GISWebLocation"]/input
+2025-10-28 20:07:52,317 - INFO - 成功点击元素: xpath: //*[@id="btn-space-area-confirm"]
+2025-10-28 20:07:52,331 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-28 20:07:52,346 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-28 20:07:52,848 - INFO - 选择空间范围完成
+2025-10-28 20:07:52,848 - INFO - 开始提交订单
+2025-10-28 20:07:54,889 - INFO - 成功点击元素: xpath: //*[@id="btn-search"]
+2025-10-28 20:07:57,951 - INFO - 成功点击元素: xpath: //*[@id="menuProNames"]
+2025-10-28 20:07:57,991 - INFO - 成功点击元素: xpath: //*[@id="fileListHead"]/th[3]/div/ul/li[3]/a/input
+2025-10-28 20:07:58,043 - INFO - 成功点击元素: xpath: //*[@id="searchId"]
+2025-10-28 20:07:58,604 - INFO - 成功点击元素: xpath: /html/body/div[9]/div/div[2]/div/div[2]/div[2]/div/table/tbody/tr[2]/td[1]/input
+2025-10-28 20:07:59,051 - INFO - 成功点击元素: xpath: //*[@id="commitEdit"]
+2025-10-28 20:07:59,225 - INFO - 成功点击元素: xpath: //*[@id="chkIsSendMail"]
+2025-10-28 20:07:59,265 - INFO - 成功点击元素: xpath: /html/body/div[4]/div/div[3]/div[2]/div[2]/div[4]/button
+2025-10-28 20:08:00,268 - INFO - 订单提交完成
+2025-10-28 20:08:00,268 - INFO - 查看订单
+2025-10-28 20:08:02,005 - INFO - 成功点击元素: xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-28 20:08:02,005 - INFO - 下载操作完成
+2025-10-28 20:08:02,005 - INFO - 所有操作完成
+2025-10-28 20:08:02,005 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 20:50:08,823 - INFO - === 日志系统初始化 ===
+2025-10-28 20:50:08,823 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 20:50:08,824 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 20:50:08,824 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 20:50:10,349 - INFO - 浏览器初始化成功
+2025-10-28 20:50:10,349 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 20:50:14,185 - INFO - 开始登录流程
+2025-10-28 20:50:14,186 - ERROR - 程序运行出错: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-28 20:50:14,187 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 274, in run
+    if not self._login():
+  File "D:/Pycharmcode/test/submit_order.py", line 314, in _login
+    if not self.browser.safe_click_element(*self.locators['login_button']):
+  File "D:/Pycharmcode/test/submit_order.py", line 125, in safe_click_element
+    element = self.wait.until(EC.element_to_be_clickable((by, value)))
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 96, in until
+    value = method(self._driver)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 363, in _predicate
+    target = driver.find_element(*target)  # grab element at locator
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 770, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-28 20:50:14,187 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 21:04:08,055 - INFO - === 日志系统初始化 ===
+2025-10-28 21:04:08,055 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 21:04:08,055 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 21:04:08,055 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 21:04:09,468 - INFO - 浏览器初始化成功
+2025-10-28 21:04:09,468 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 21:04:18,885 - INFO - 开始登录流程
+2025-10-28 21:04:18,886 - ERROR - 程序运行出错: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-28 21:04:18,887 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 274, in run
+    if not self._login():
+  File "D:/Pycharmcode/test/submit_order.py", line 314, in _login
+    if not self.browser.safe_click_element(*self.locators['login_button']):
+  File "D:/Pycharmcode/test/submit_order.py", line 125, in safe_click_element
+    element = self.wait.until(EC.element_to_be_clickable((by, value)))
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 96, in until
+    value = method(self._driver)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 363, in _predicate
+    target = driver.find_element(*target)  # grab element at locator
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 770, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-28 21:04:18,887 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 21:04:52,582 - INFO - === 日志系统初始化 ===
+2025-10-28 21:04:52,582 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 21:04:52,582 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 21:04:52,582 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 21:04:53,923 - INFO - 浏览器初始化成功
+2025-10-28 21:04:53,923 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 21:04:59,243 - INFO - 开始登录流程
+2025-10-28 21:04:59,244 - ERROR - 程序运行出错: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-28 21:04:59,245 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 274, in run
+    if not self._login():
+  File "D:/Pycharmcode/test/submit_order.py", line 314, in _login
+    if not self.browser.safe_click_element(*self.locators['login_button']):
+  File "D:/Pycharmcode/test/submit_order.py", line 125, in safe_click_element
+    element = self.wait.until(EC.element_to_be_clickable((by, value)))
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 96, in until
+    value = method(self._driver)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 363, in _predicate
+    target = driver.find_element(*target)  # grab element at locator
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 770, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-28 21:04:59,245 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 21:06:29,553 - INFO - === 日志系统初始化 ===
+2025-10-28 21:06:29,553 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 21:06:29,553 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 21:06:29,553 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 21:06:30,921 - INFO - 浏览器初始化成功
+2025-10-28 21:06:30,921 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 21:06:34,899 - INFO - 开始登录流程
+2025-10-28 21:06:34,900 - ERROR - 程序运行出错: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-28 21:06:34,901 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 274, in run
+    if not self._login():
+  File "D:/Pycharmcode/test/submit_order.py", line 314, in _login
+    if not self.browser.safe_click_element(*self.locators['login_button']):
+  File "D:/Pycharmcode/test/submit_order.py", line 125, in safe_click_element
+    element = self.wait.until(EC.element_to_be_clickable((by, value)))
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 96, in until
+    value = method(self._driver)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 363, in _predicate
+    target = driver.find_element(*target)  # grab element at locator
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 770, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-28 21:06:34,901 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 21:07:31,400 - INFO - === 日志系统初始化 ===
+2025-10-28 21:07:31,400 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 21:07:31,400 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 21:07:31,400 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 21:07:32,776 - INFO - 浏览器初始化成功
+2025-10-28 21:07:32,776 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 21:07:36,696 - INFO - 开始登录流程
+2025-10-28 21:07:36,697 - ERROR - 程序运行出错: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-28 21:07:36,698 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 274, in run
+    if not self._login():
+  File "D:/Pycharmcode/test/submit_order.py", line 314, in _login
+    if not self.browser.safe_click_element(*self.locators['login_button']):
+  File "D:/Pycharmcode/test/submit_order.py", line 125, in safe_click_element
+    element = self.wait.until(EC.element_to_be_clickable((by, value)))
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 96, in until
+    value = method(self._driver)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 363, in _predicate
+    target = driver.find_element(*target)  # grab element at locator
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 770, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-28 21:07:36,698 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 21:19:41,496 - INFO - === 日志系统初始化 ===
+2025-10-28 21:19:41,496 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 21:19:41,496 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 21:19:41,496 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 21:19:42,833 - INFO - 浏览器初始化成功
+2025-10-28 21:19:42,833 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 21:19:48,578 - INFO - 开始登录流程
+2025-10-28 21:19:50,175 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 21:19:50,280 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 21:19:50,353 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 21:19:50,948 - INFO - 识别到验证码: 2tlh
+2025-10-28 21:19:51,105 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 21:19:51,152 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 21:19:54,159 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 21:19:54,165 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-28 21:19:54,165 - INFO - 开始选择卫星数据
+2025-10-28 21:19:57,201 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 21:19:58,259 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[4]
+2025-10-28 21:19:59,297 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 21:19:59,341 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-28 21:19:59,380 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[1]
+2025-10-28 21:19:59,380 - INFO - 卫星数据选择完成
+2025-10-28 21:19:59,380 - ERROR - 程序运行出错: _select_Range() missing 1 required positional argument: 'selected_text_comboBox'
+2025-10-28 21:19:59,381 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 284, in run
+    if not self._select_Range(time_param,time_param2,North,South,East,West):
+TypeError: _select_Range() missing 1 required positional argument: 'selected_text_comboBox'
+
+2025-10-28 21:19:59,381 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 21:21:37,415 - INFO - === 日志系统初始化 ===
+2025-10-28 21:21:37,415 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 21:21:37,415 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 21:21:37,415 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 21:21:38,920 - INFO - 浏览器初始化成功
+2025-10-28 21:21:38,920 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 21:21:45,406 - INFO - 开始登录流程
+2025-10-28 21:21:47,172 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 21:21:47,271 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 21:21:47,344 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 21:21:47,915 - INFO - 识别到验证码: sbdr
+2025-10-28 21:21:48,087 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 21:21:48,143 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 21:21:51,149 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 21:21:51,155 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-28 21:21:51,155 - INFO - 开始选择卫星数据
+2025-10-28 21:21:54,200 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 21:21:55,253 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[4]
+2025-10-28 21:21:56,297 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 21:21:56,338 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-28 21:21:56,380 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[1]
+2025-10-28 21:21:56,380 - INFO - 卫星数据选择完成
+2025-10-28 21:21:56,380 - ERROR - 程序运行出错: _select_Range() missing 1 required positional argument: 'selected_text_comboBox'
+2025-10-28 21:21:56,380 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 284, in run
+    if not self._select_Range(time_param,time_param2,North,South,East,West):
+TypeError: _select_Range() missing 1 required positional argument: 'selected_text_comboBox'
+
+2025-10-28 21:21:56,381 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 21:24:06,247 - INFO - === 日志系统初始化 ===
+2025-10-28 21:24:06,248 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 21:24:06,248 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 21:24:06,248 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 21:24:07,597 - INFO - 浏览器初始化成功
+2025-10-28 21:24:07,597 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 21:24:15,307 - INFO - 开始登录流程
+2025-10-28 21:24:16,776 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 21:24:16,884 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 21:24:16,931 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 21:24:17,551 - INFO - 识别到验证码: b110
+2025-10-28 21:24:17,700 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 21:24:17,747 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 21:24:20,759 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 21:24:20,766 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-28 21:24:20,766 - INFO - 开始选择卫星数据
+2025-10-28 21:24:23,888 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 21:24:24,935 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[4]
+2025-10-28 21:24:25,979 - WARNING - 点击元素失败，重试 1/3 - xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 21:24:27,032 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 21:24:27,071 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-28 21:24:27,114 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[1]
+2025-10-28 21:24:27,114 - INFO - 卫星数据选择完成
+2025-10-28 21:24:27,114 - ERROR - 程序运行出错: _select_Range() missing 1 required positional argument: 'selected_text_comboBox'
+2025-10-28 21:24:27,115 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 284, in run
+    if not self._select_Range(time_param,time_param2,North,South,East,West):
+TypeError: _select_Range() missing 1 required positional argument: 'selected_text_comboBox'
+
+2025-10-28 21:24:27,115 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 21:27:40,623 - INFO - === 日志系统初始化 ===
+2025-10-28 21:27:40,623 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 21:27:40,623 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 21:27:40,623 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 21:27:41,968 - INFO - 浏览器初始化成功
+2025-10-28 21:27:41,968 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 21:27:47,599 - INFO - 开始登录流程
+2025-10-28 21:27:49,847 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 21:27:49,945 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 21:27:50,001 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 21:27:50,574 - INFO - 识别到验证码: zijb
+2025-10-28 21:27:50,727 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 21:27:50,799 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 21:27:53,805 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 21:27:53,812 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-28 21:27:53,812 - INFO - 开始选择卫星数据
+2025-10-28 21:27:56,846 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 21:27:57,889 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[4]
+2025-10-28 21:27:58,923 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 21:27:58,966 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-28 21:27:59,014 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[1]
+2025-10-28 21:27:59,014 - INFO - 卫星数据选择完成
+2025-10-28 21:27:59,014 - INFO - 开始选择空间范围
+2025-10-28 21:27:59,014 - ERROR - 程序运行出错: list index out of range
+2025-10-28 21:27:59,014 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 285, in run
+    if not self._select_Range(time_param,time_param2,North,South,East,West):
+  File "D:/Pycharmcode/test/submit_order.py", line 422, in _select_Range
+    print(North.split(",",1)[1])
+IndexError: list index out of range
+
+2025-10-28 21:27:59,015 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 21:29:49,948 - INFO - === 日志系统初始化 ===
+2025-10-28 21:29:49,948 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 21:29:49,948 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 21:29:49,948 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 21:29:51,318 - INFO - 浏览器初始化成功
+2025-10-28 21:29:51,318 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 21:29:57,566 - INFO - 开始登录流程
+2025-10-28 21:29:59,019 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 21:29:59,123 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 21:29:59,179 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 21:29:59,795 - INFO - 识别到验证码: sl1l
+2025-10-28 21:29:59,919 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 21:29:59,969 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 21:30:02,980 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 21:30:02,987 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-28 21:30:02,987 - INFO - 开始选择卫星数据
+2025-10-28 21:30:06,051 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 21:30:07,106 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[4]
+2025-10-28 21:30:08,172 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 21:30:08,239 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-28 21:30:08,279 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[1]
+2025-10-28 21:30:08,279 - INFO - 卫星数据选择完成
+2025-10-28 21:30:08,279 - INFO - 开始选择空间范围
+2025-10-28 21:30:08,324 - INFO - 成功点击元素: xpath: //*[@id="txt-spaceArea"]
+2025-10-28 21:30:08,920 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-28 21:30:09,027 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-28 21:30:09,093 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-28 21:30:09,218 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-28 21:30:09,342 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-28 21:30:09,444 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-28 21:30:09,523 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-28 21:30:09,616 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-28 21:30:09,690 - INFO - 成功点击元素: xpath: //*[@id="other-GISWebLocation"]/input
+2025-10-28 21:30:09,753 - INFO - 成功点击元素: xpath: //*[@id="btn-space-area-confirm"]
+2025-10-28 21:30:09,794 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-28 21:30:09,812 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-28 21:30:10,319 - INFO - 选择空间范围完成
+2025-10-28 21:30:10,319 - INFO - 开始提交订单
+2025-10-28 21:30:12,372 - INFO - 成功点击元素: xpath: //*[@id="btn-search"]
+2025-10-28 21:30:15,431 - INFO - 成功点击元素: xpath: //*[@id="menuProNames"]
+2025-10-28 21:30:15,488 - INFO - 成功点击元素: xpath: //*[@id="fileListHead"]/th[3]/div/ul/li[3]/a/input
+2025-10-28 21:30:15,541 - INFO - 成功点击元素: xpath: //*[@id="searchId"]
+2025-10-28 21:30:16,137 - INFO - 成功点击元素: xpath: /html/body/div[9]/div/div[2]/div/div[2]/div[2]/div/table/tbody/tr[2]/td[1]/input
+2025-10-28 21:30:16,859 - INFO - 成功点击元素: xpath: //*[@id="commitEdit"]
+2025-10-28 21:30:17,023 - INFO - 成功点击元素: xpath: //*[@id="chkIsSendMail"]
+2025-10-28 21:30:17,065 - INFO - 成功点击元素: xpath: /html/body/div[4]/div/div[3]/div[2]/div[2]/div[4]/button
+2025-10-28 21:30:18,080 - INFO - 订单提交完成
+2025-10-28 21:30:18,080 - INFO - 查看订单
+2025-10-28 21:30:18,237 - INFO - 成功点击元素: xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-28 21:30:18,237 - INFO - 下载操作完成
+2025-10-28 21:30:18,237 - INFO - 所有操作完成
+2025-10-28 21:30:18,237 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 21:55:10,645 - INFO - === 日志系统初始化 ===
+2025-10-28 21:55:10,645 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 21:55:10,645 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 21:55:10,645 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 21:55:10,725 - INFO - 已将配置文件中的下载目录更新为：D:\
+2025-10-28 21:55:12,036 - INFO - 浏览器初始化成功
+2025-10-28 21:55:12,036 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 21:55:18,195 - INFO - 开始登录流程
+2025-10-28 21:55:20,083 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 21:55:20,138 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 21:55:20,178 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 21:55:20,808 - INFO - 识别到验证码: ffdi
+2025-10-28 21:55:20,953 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 21:55:21,004 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 21:55:24,006 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 21:55:24,013 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-28 21:55:24,013 - INFO - 开始选择卫星数据
+2025-10-28 21:55:27,057 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 21:55:28,123 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[4]
+2025-10-28 21:55:29,172 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 21:55:29,248 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-28 21:55:29,286 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[1]
+2025-10-28 21:55:29,286 - INFO - 卫星数据选择完成
+2025-10-28 21:55:29,286 - INFO - 开始选择空间范围
+2025-10-28 21:55:29,360 - INFO - 成功点击元素: xpath: //*[@id="txt-spaceArea"]
+2025-10-28 21:55:29,961 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-28 21:55:30,020 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-28 21:55:30,057 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-28 21:55:30,094 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-28 21:55:30,134 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-28 21:55:30,177 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-28 21:55:30,240 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-28 21:55:30,289 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-28 21:55:30,362 - INFO - 成功点击元素: xpath: //*[@id="other-GISWebLocation"]/input
+2025-10-28 21:55:30,415 - INFO - 成功点击元素: xpath: //*[@id="btn-space-area-confirm"]
+2025-10-28 21:55:30,435 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-28 21:55:30,455 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-28 21:55:30,965 - INFO - 选择空间范围完成
+2025-10-28 21:55:30,965 - INFO - 开始提交订单
+2025-10-28 21:55:33,015 - INFO - 成功点击元素: xpath: //*[@id="btn-search"]
+2025-10-28 21:55:36,082 - INFO - 成功点击元素: xpath: //*[@id="menuProNames"]
+2025-10-28 21:55:36,139 - INFO - 成功点击元素: xpath: //*[@id="fileListHead"]/th[3]/div/ul/li[3]/a/input
+2025-10-28 21:55:36,191 - INFO - 成功点击元素: xpath: //*[@id="searchId"]
+2025-10-28 21:55:36,819 - INFO - 成功点击元素: xpath: /html/body/div[9]/div/div[2]/div/div[2]/div[2]/div/table/tbody/tr[2]/td[1]/input
+2025-10-28 21:55:37,265 - INFO - 成功点击元素: xpath: //*[@id="commitEdit"]
+2025-10-28 21:55:37,501 - INFO - 成功点击元素: xpath: //*[@id="chkIsSendMail"]
+2025-10-28 21:55:37,538 - INFO - 成功点击元素: xpath: /html/body/div[4]/div/div[3]/div[2]/div[2]/div[4]/button
+2025-10-28 22:13:46,933 - INFO - === 日志系统初始化 ===
+2025-10-28 22:13:46,934 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 22:13:46,934 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 22:13:46,934 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 22:13:47,073 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-28 22:13:48,376 - INFO - 浏览器初始化成功
+2025-10-28 22:13:48,376 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 22:13:57,139 - INFO - 开始登录流程
+2025-10-28 22:13:59,184 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 22:13:59,270 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 22:13:59,336 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 22:13:59,938 - INFO - 识别到验证码: 7km
+2025-10-28 22:14:00,070 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 22:14:00,129 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 22:14:03,130 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 22:15:03,659 - WARNING - 查找元素失败，重试 1/3 - xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 22:15:34,699 - WARNING - 查找元素失败，重试 2/3 - xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 22:16:05,721 - WARNING - 查找元素失败，重试 3/3 - xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 22:16:36,785 - ERROR - 多次尝试后仍无法找到元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 22:16:36,786 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d37cd7]
+	(No symbol) [0x0x7ff775d37f9c]
+	(No symbol) [0x0x7ff775d8ba87]
+	(No symbol) [0x0x7ff775d603bf]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d37cd7]
+	(No symbol) [0x0x7ff775d37f9c]
+	(No symbol) [0x0x7ff775d8ba87]
+	(No symbol) [0x0x7ff775d603bf]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d37cd7]
+	(No symbol) [0x0x7ff775d37f9c]
+	(No symbol) [0x0x7ff775d8ba87]
+	(No symbol) [0x0x7ff775d603bf]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d37cd7]
+	(No symbol) [0x0x7ff775d37f9c]
+	(No symbol) [0x0x7ff775d8ba87]
+	(No symbol) [0x0x7ff775d603bf]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-28 22:16:36,786 - WARNING - 登录失败（未找到'风云极轨卫星'元素，可能是因为验证码输入错误，未成功登录），刷新验证码重试 2/3
+2025-10-28 22:16:38,390 - INFO - 识别到验证码: h9vb
+2025-10-28 22:16:38,535 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 22:16:38,580 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 22:16:41,585 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 22:16:41,589 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-28 22:16:41,589 - INFO - 开始选择卫星数据
+2025-10-28 22:16:44,632 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 22:16:45,691 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[3]
+2025-10-28 22:16:46,746 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 22:16:46,808 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-28 22:16:46,868 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[1]
+2025-10-28 22:16:46,868 - INFO - 卫星数据选择完成
+2025-10-28 22:16:46,869 - INFO - 开始选择空间范围
+2025-10-28 22:16:46,943 - INFO - 成功点击元素: xpath: //*[@id="txt-spaceArea"]
+2025-10-28 22:16:47,534 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-28 22:16:47,636 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-28 22:16:47,716 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-28 22:16:47,796 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-28 22:16:47,875 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-28 22:16:47,953 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-28 22:16:48,040 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-28 22:16:48,125 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-28 22:16:48,190 - INFO - 成功点击元素: xpath: //*[@id="other-GISWebLocation"]/input
+2025-10-28 22:16:48,257 - INFO - 成功点击元素: xpath: //*[@id="btn-space-area-confirm"]
+2025-10-28 22:16:48,284 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-28 22:16:48,304 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-28 22:16:48,819 - INFO - 选择空间范围完成
+2025-10-28 22:16:48,819 - INFO - 开始提交订单
+2025-10-28 22:16:50,867 - INFO - 成功点击元素: xpath: //*[@id="btn-search"]
+2025-10-28 22:16:53,922 - INFO - 成功点击元素: xpath: //*[@id="menuProNames"]
+2025-10-28 22:16:53,994 - INFO - 成功点击元素: xpath: //*[@id="fileListHead"]/th[3]/div/ul/li[3]/a/input
+2025-10-28 22:16:54,051 - INFO - 成功点击元素: xpath: //*[@id="searchId"]
+2025-10-28 22:16:55,030 - INFO - 成功点击元素: xpath: /html/body/div[9]/div/div[2]/div/div[2]/div[2]/div/table/tbody/tr[2]/td[1]/input
+2025-10-28 22:16:55,513 - INFO - 成功点击元素: xpath: //*[@id="commitEdit"]
+2025-10-28 22:16:55,704 - INFO - 成功点击元素: xpath: //*[@id="chkIsSendMail"]
+2025-10-28 22:16:55,757 - INFO - 成功点击元素: xpath: /html/body/div[4]/div/div[3]/div[2]/div[2]/div[4]/button
+2025-10-28 22:16:56,763 - INFO - 订单提交完成
+2025-10-28 22:16:56,763 - INFO - 查看订单
+2025-10-28 22:16:57,577 - INFO - 成功点击元素: xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-28 22:16:57,577 - INFO - 下载操作完成
+2025-10-28 22:16:57,577 - INFO - 所有操作完成
+2025-10-28 22:16:57,577 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 22:18:41,194 - INFO - === 日志系统初始化 ===
+2025-10-28 22:18:41,194 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 22:18:41,194 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 22:18:41,194 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 22:18:41,265 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-28 22:18:42,566 - INFO - 浏览器初始化成功
+2025-10-28 22:18:42,566 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 22:18:48,737 - INFO - 开始登录流程
+2025-10-28 22:18:49,973 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 22:18:50,082 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 22:18:50,177 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 22:18:50,778 - INFO - 识别到验证码: 6nzh
+2025-10-28 22:18:50,925 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 22:18:50,971 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 22:18:53,981 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 22:18:53,987 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-28 22:18:53,987 - INFO - 开始选择卫星数据
+2025-10-28 22:18:57,034 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 22:18:58,096 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[3]
+2025-10-28 22:18:59,137 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 22:18:59,185 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-28 22:18:59,231 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[1]
+2025-10-28 22:18:59,231 - INFO - 卫星数据选择完成
+2025-10-28 22:18:59,231 - INFO - 开始选择空间范围
+2025-10-28 22:18:59,287 - INFO - 成功点击元素: xpath: //*[@id="txt-spaceArea"]
+2025-10-28 22:18:59,881 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-28 22:18:59,881 - ERROR - 程序运行出错: list index out of range
+2025-10-28 22:18:59,882 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 285, in run
+    if not self._select_Range(time_param,time_param2,North,South,East,West):
+  File "D:/Pycharmcode/test/submit_order.py", line 433, in _select_Range
+    if not self.browser.safe_send_keys(*self.locators['N_minute'], South.split(".",1)[1]):   # 00
+IndexError: list index out of range
+
+2025-10-28 22:18:59,882 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 22:19:45,809 - INFO - === 日志系统初始化 ===
+2025-10-28 22:19:45,810 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 22:19:45,810 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 22:19:45,810 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 22:19:45,880 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-28 22:19:47,209 - INFO - 浏览器初始化成功
+2025-10-28 22:19:47,209 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 22:19:53,533 - INFO - 开始登录流程
+2025-10-28 22:19:57,711 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 22:19:57,805 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 22:19:57,866 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 22:19:58,436 - INFO - 识别到验证码: by1z
+2025-10-28 22:19:58,574 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 22:19:58,622 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 22:20:01,636 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 22:20:01,643 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-28 22:20:01,643 - INFO - 开始选择卫星数据
+2025-10-28 22:20:04,695 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 22:20:05,747 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[3]
+2025-10-28 22:20:06,792 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 22:20:06,843 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-28 22:20:06,885 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[1]
+2025-10-28 22:20:06,885 - INFO - 卫星数据选择完成
+2025-10-28 22:20:06,885 - INFO - 开始选择空间范围
+2025-10-28 22:20:06,935 - INFO - 成功点击元素: xpath: //*[@id="txt-spaceArea"]
+2025-10-28 22:20:07,546 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-28 22:20:07,675 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-28 22:20:07,799 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-28 22:20:07,887 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-28 22:20:07,964 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-28 22:20:08,039 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-28 22:20:08,124 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-28 22:20:08,215 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-28 22:20:08,279 - INFO - 成功点击元素: xpath: //*[@id="other-GISWebLocation"]/input
+2025-10-28 22:20:08,329 - INFO - 成功点击元素: xpath: //*[@id="btn-space-area-confirm"]
+2025-10-28 22:20:08,344 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-28 22:20:08,362 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-28 22:20:08,865 - INFO - 选择空间范围完成
+2025-10-28 22:20:08,866 - INFO - 开始提交订单
+2025-10-28 22:20:10,925 - INFO - 成功点击元素: xpath: //*[@id="btn-search"]
+2025-10-28 22:20:13,967 - INFO - 成功点击元素: xpath: //*[@id="menuProNames"]
+2025-10-28 22:20:14,013 - INFO - 成功点击元素: xpath: //*[@id="fileListHead"]/th[3]/div/ul/li[3]/a/input
+2025-10-28 22:20:14,056 - INFO - 成功点击元素: xpath: //*[@id="searchId"]
+2025-10-28 22:20:14,462 - INFO - 成功点击元素: xpath: /html/body/div[9]/div/div[2]/div/div[2]/div[2]/div/table/tbody/tr[2]/td[1]/input
+2025-10-28 22:20:14,706 - INFO - 成功点击元素: xpath: //*[@id="commitEdit"]
+2025-10-28 22:20:14,869 - INFO - 成功点击元素: xpath: //*[@id="chkIsSendMail"]
+2025-10-28 22:20:14,932 - INFO - 成功点击元素: xpath: /html/body/div[4]/div/div[3]/div[2]/div[2]/div[4]/button
+2025-10-28 22:20:15,943 - INFO - 订单提交完成
+2025-10-28 22:20:15,943 - INFO - 查看订单
+2025-10-28 22:20:16,115 - INFO - 成功点击元素: xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-28 22:20:16,116 - INFO - 下载操作完成
+2025-10-28 22:20:16,116 - INFO - 所有操作完成
+2025-10-28 22:20:16,116 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 22:21:41,554 - INFO - === 日志系统初始化 ===
+2025-10-28 22:21:41,555 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 22:21:41,555 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 22:21:41,555 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 22:21:41,653 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-28 22:21:42,881 - INFO - 浏览器初始化成功
+2025-10-28 22:21:42,882 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 22:21:48,754 - INFO - 开始登录流程
+2025-10-28 22:21:50,953 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 22:21:51,081 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 22:21:51,186 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 22:21:51,826 - INFO - 识别到验证码: oNIn
+2025-10-28 22:21:51,937 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 22:21:51,982 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 22:21:54,987 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 22:21:54,988 - WARNING - 登录失败（Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775ccc0a5]
+	(No symbol) [0x0x7ff775cf144a]
+	(No symbol) [0x0x7ff775d67be6]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+），刷新验证码重试 2/3
+2025-10-28 22:21:54,988 - ERROR - 程序运行出错: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce011c]
+	(No symbol) [0x0x7ff775d27c1d]
+	(No symbol) [0x0x7ff775d60242]
+	(No symbol) [0x0x7ff775d5ac14]
+	(No symbol) [0x0x7ff775d59cca]
+	(No symbol) [0x0x7ff775caa755]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	(No symbol) [0x0x7ff775ca9731]
+	GetHandleVerifier [0x0x7ff77634b568+4182008]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-28 22:21:54,990 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 364, in _login
+    fengyun_element = self.browser.safe_find_element(*self.locators['FengYun_satellite'])  # 注意key是'FengYun_satellite'（原代码中首字母大写）
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 96, in until
+    value = method(self._driver)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 84, in _predicate
+    return driver.find_element(*locator)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 770, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775ccc0a5]
+	(No symbol) [0x0x7ff775cf144a]
+	(No symbol) [0x0x7ff775d67be6]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 275, in run
+    if not self._login():
+  File "D:/Pycharmcode/test/submit_order.py", line 376, in _login
+    captcha_image = self.browser.safe_find_element(*self.locators['captcha_image'])
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 96, in until
+    value = method(self._driver)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 84, in _predicate
+    return driver.find_element(*locator)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 770, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce011c]
+	(No symbol) [0x0x7ff775d27c1d]
+	(No symbol) [0x0x7ff775d60242]
+	(No symbol) [0x0x7ff775d5ac14]
+	(No symbol) [0x0x7ff775d59cca]
+	(No symbol) [0x0x7ff775caa755]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	(No symbol) [0x0x7ff775ca9731]
+	GetHandleVerifier [0x0x7ff77634b568+4182008]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-28 22:21:54,990 - INFO - ===== 订单提交程序结束 =====
+2025-10-28 22:21:55,861 - INFO - === 日志系统初始化 ===
+2025-10-28 22:21:55,861 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-28 22:21:55,861 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-28 22:21:55,861 - INFO - ===== 订单提交程序启动 =====
+2025-10-28 22:21:55,955 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-28 22:21:57,506 - INFO - 浏览器初始化成功
+2025-10-28 22:21:57,506 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 22:22:04,516 - INFO - 开始登录流程
+2025-10-28 22:22:06,836 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 22:22:06,956 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 22:22:07,036 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 22:22:07,630 - INFO - 识别到验证码: nu78
+2025-10-28 22:22:07,785 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 22:22:07,864 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 22:22:10,874 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-28 22:22:10,881 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-28 22:22:10,882 - INFO - 开始选择卫星数据
+2025-10-28 22:22:13,920 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-28 22:22:14,968 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[3]
+2025-10-28 22:22:16,021 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-28 22:22:16,068 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-28 22:22:16,117 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[1]
+2025-10-28 22:22:16,118 - INFO - 卫星数据选择完成
+2025-10-28 22:22:16,118 - INFO - 开始选择空间范围
+2025-10-28 22:22:16,171 - INFO - 成功点击元素: xpath: //*[@id="txt-spaceArea"]
+2025-10-28 22:22:16,816 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-28 22:22:16,895 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-28 22:22:16,972 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-28 22:22:17,042 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-28 22:22:17,109 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-28 22:22:17,183 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-28 22:22:17,263 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-28 22:22:17,349 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-28 22:22:17,404 - INFO - 成功点击元素: xpath: //*[@id="other-GISWebLocation"]/input
+2025-10-28 22:22:17,461 - INFO - 成功点击元素: xpath: //*[@id="btn-space-area-confirm"]
+2025-10-28 22:22:17,495 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-28 22:22:17,522 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-28 22:22:18,024 - INFO - 选择空间范围完成
+2025-10-28 22:22:18,024 - INFO - 开始提交订单
+2025-10-28 22:22:20,067 - INFO - 成功点击元素: xpath: //*[@id="btn-search"]
+2025-10-28 22:22:23,126 - INFO - 成功点击元素: xpath: //*[@id="menuProNames"]
+2025-10-28 22:22:23,180 - INFO - 成功点击元素: xpath: //*[@id="fileListHead"]/th[3]/div/ul/li[3]/a/input
+2025-10-28 22:22:23,235 - INFO - 成功点击元素: xpath: //*[@id="searchId"]
+2025-10-28 22:22:24,158 - INFO - 成功点击元素: xpath: /html/body/div[9]/div/div[2]/div/div[2]/div[2]/div/table/tbody/tr[2]/td[1]/input
+2025-10-28 22:22:24,591 - INFO - 成功点击元素: xpath: //*[@id="commitEdit"]
+2025-10-28 22:22:24,785 - INFO - 成功点击元素: xpath: //*[@id="chkIsSendMail"]
+2025-10-28 22:22:24,849 - INFO - 成功点击元素: xpath: /html/body/div[4]/div/div[3]/div[2]/div[2]/div[4]/button
+2025-10-28 22:22:25,864 - INFO - 订单提交完成
+2025-10-28 22:22:25,864 - INFO - 查看订单
+2025-10-28 22:22:26,002 - INFO - 成功点击元素: xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-28 22:22:26,002 - INFO - 下载操作完成
+2025-10-28 22:22:26,002 - INFO - 所有操作完成
+2025-10-28 22:22:26,002 - INFO - ===== 订单提交程序结束 =====

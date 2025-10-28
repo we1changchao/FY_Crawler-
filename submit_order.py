@@ -220,6 +220,8 @@ class SatelliteDataDownloader:
             'level1_data': (By.XPATH, '/html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]'),   # 1级数据
             'data_type_select': (By.XPATH, '//*[@id="select2-sel-dataType-container"]'),     # 点击“数据名称”白框
             'choose_MERSI': (By.XPATH, '/html/body/span/span/span[2]/ul/li[1]'),  # 数据名称中选择MERSI
+            'choose_MERSI_3e': (By.XPATH, '//*[@id="select2-sel-dataType-result-edd1-MERSI"]'),  # 数据名称中选择MERSI 3e里面的
+
             'click_GeographicalRange': (By.XPATH, '//*[@id="txt-spaceArea"]'),     # 点击 空间范围
             # 输入空间范围数据
             'N_degree': (By.XPATH, '//*[@id="other-North_D"]'),
@@ -257,9 +259,10 @@ class SatelliteDataDownloader:
 
         }
 
-    def run(self,time_param):
+    def run(self,time_param,time_param2,North,South,East,West,selected_text_comboBox):
         """运行主程序"""
         try:
+            print(selected_text_comboBox)
             # 初始化浏览器
             if not self.browser.init_browser():
                 logger.error("无法初始化浏览器，程序退出")
@@ -281,7 +284,7 @@ class SatelliteDataDownloader:
                 return
 
             # 选择地理范围
-            if not self._select_Range(time_param):
+            if not self._select_Range(time_param,time_param2,North,South,East,West):
                 logger.error("选择地理范围失败，程序退出")
                 return
 
@@ -397,9 +400,15 @@ class SatelliteDataDownloader:
         if not self.browser.safe_click_element(*self.locators['FengYun_satellite']):
             return False
         time.sleep(1)
-        # 选择FY-3D
-        if not self.browser.safe_click_element(*self.locators['fy3d_satellite']):
-            return False
+
+        # 选择卫星 是3D还是3E
+        print(selected_text_comboBox.split(":",1)[0])
+        if selected_text_comboBox.split(":",1)[0] == "FY-3D" :
+            if not self.browser.safe_click_element(*self.locators['fy3d_satellite']):
+                return False
+        elif selected_text_comboBox.split(":",1)[0] == "FY-3E":
+            if not self.browser.safe_click_element(*self.locators['fy3e_satellite']):
+                return False
         time.sleep(1)
         # 选择1级数据
         if not self.browser.safe_click_element(*self.locators['level1_data']):
@@ -408,34 +417,37 @@ class SatelliteDataDownloader:
         if not self.browser.safe_click_element(*self.locators['data_type_select']):
             return False
         # 选择MERSI
-        if not self.browser.safe_click_element(*self.locators['choose_MERSI']):
-            return False
-
+        if selected_text_comboBox.split(":", 1)[0] == "FY-3D":
+            if not self.browser.safe_click_element(*self.locators['choose_MERSI']):
+                return False
+        elif selected_text_comboBox.split(":", 1)[0] == "FY-3E":
+            if not self.browser.safe_click_element(*self.locators['choose_MERSI_3e']):
+                return False
         logger.info("卫星数据选择完成")
         return True
 
-    def _select_Range(self,time_param):
+    def _select_Range(self,time_param,time_param2,North,South,East,West):
         """空间范围选择"""
         logger.info("开始选择空间范围")
         #点击 “空间范围”
         if not self.browser.safe_click_element(*self.locators['click_GeographicalRange']):
             return False
         # 输入坐标
-        if not self.browser.safe_send_keys(*self.locators['N_degree'], "60"):
+        if not self.browser.safe_send_keys(*self.locators['N_degree'], South.split(".",1)[0]):   # 60
             return False
-        if not self.browser.safe_send_keys(*self.locators['N_minute'], "00"):
+        if not self.browser.safe_send_keys(*self.locators['N_minute'], South.split(".",1)[1]):   # 00
             return False
-        if not self.browser.safe_send_keys(*self.locators['W_degree'], "-180"):
+        if not self.browser.safe_send_keys(*self.locators['W_degree'], West.split(".",1)[0]):
             return False
-        if not self.browser.safe_send_keys(*self.locators['W_minute'], "00"):
+        if not self.browser.safe_send_keys(*self.locators['W_minute'], West.split(".",1)[1]):
             return False
-        if not self.browser.safe_send_keys(*self.locators['E_degree'], "180"):
+        if not self.browser.safe_send_keys(*self.locators['E_degree'], East.split(".",1)[0]):
             return False
-        if not self.browser.safe_send_keys(*self.locators['E_minute'], "00"):
+        if not self.browser.safe_send_keys(*self.locators['E_minute'], East.split(".",1)[1]):
             return False
-        if not self.browser.safe_send_keys(*self.locators['S_degree'], "90"):
+        if not self.browser.safe_send_keys(*self.locators['S_degree'], North.split(".",1)[0]):
             return False
-        if not self.browser.safe_send_keys(*self.locators['S_minute'], "00"):
+        if not self.browser.safe_send_keys(*self.locators['S_minute'], North.split(".",1)[1]):
             return False
         # 点击显示范围  点击确定
         if not self.browser.safe_click_element(*self.locators['click_displayRange']):
@@ -444,9 +456,9 @@ class SatelliteDataDownloader:
             return False
 
         # 输入开始日期 结束日期
-        if not self.browser.safe_send_keys1(*self.locators['beginDate'], "2025/10/20"):
+        if not self.browser.safe_send_keys1(*self.locators['beginDate'],time_param):
             return False
-        if not self.browser.safe_send_keys1(*self.locators['endDate'], time_param):
+        if not self.browser.safe_send_keys1(*self.locators['endDate'], time_param2):
             return False
         time.sleep(0.5)
 
@@ -500,6 +512,42 @@ class SatelliteDataDownloader:
         logger.info("下载操作完成")
         return True
 
+    def update_ini_from_external(self, external_save_dir):
+        """
+        根据外部传递的下载目录更新INI配置文件中的download_dir和listen_dir字段
+        Args:
+            external_save_dir: 外部传递的下载目录路径（字符串）
+        Returns:
+            bool: 更新成功返回True，失败返回False
+        """
+        try:
+            # 1. 验证外部目录的有效性（确保路径存在，不存在则创建）
+            if not os.path.exists(external_save_dir):
+                os.makedirs(external_save_dir, exist_ok=True)  # exist_ok=True避免目录已存在时报错
+                logger.info(f"外部目录不存在，已自动创建：{external_save_dir}")
+
+            # 2. 调用ConfigHandler的方法修改配置（需先在ConfigHandler中添加set_config_value方法）
+            # 更新下载目录（download_dir）
+            success_download = self.config.set_config_value(
+                section='SETTINGS',
+                key='download_dir',
+                value=external_save_dir
+            )
+
+            # 3. 验证是否全部更新成功
+            if success_download :
+                logger.info(f"已将配置文件中的下载目录更新为：{external_save_dir}")
+                return True
+            else:
+                logger.error("更新配置文件中的下载目录失败")
+                return False
+
+        except Exception as e:
+            logger.error(f"更新INI文件时发生错误：{str(e)}")
+            logger.error(traceback.format_exc())  # 记录详细堆栈信息
+            return False
+
+
     # 主程序入口
 if __name__  ==  "__main__":
 
@@ -510,12 +558,23 @@ if __name__  ==  "__main__":
         sys.exit(1)
     #   开始时间
     time_param = sys.argv[1]
-    print(f"收到的时间参数：{time_param}")
+    time_param2 = sys.argv[2]
+    North  =sys.argv[3]
+    South =sys.argv[4]
+    East =sys.argv[5]
+    West = sys.argv[6]
+    selected_text_comboBox =sys.argv[7]
+    external_save_dir=sys.argv[8]
 
 
     logger.info("===== 订单提交程序启动 =====")
     downloader = SatelliteDataDownloader()
-    downloader.run(time_param)
+
+    if not downloader.update_ini_from_external(external_save_dir):
+        logger.error("INI文件更新失败，程序退出")
+        sys.exit(1)
+
+    downloader.run(time_param,time_param2,North,South,East,West,selected_text_comboBox)
     logger.info("===== 订单提交程序结束 =====")
 
 
