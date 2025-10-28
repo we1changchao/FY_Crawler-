@@ -4,28 +4,23 @@ from pathlib import Path
 import os
 
 
-def download_http_file(url1):
-  # 禁用不安全的请求警告（仅用于开发环境）
+def download_http_file(url1,save_dir):
 
+    # 禁用 SSL 安全警告
     import urllib3
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-    # 原始URL（已解码）
     url = url1
 
 
-    # 步骤1：分割URL，去掉问号后的参数部分
+    # 分割URL，去掉问号后的参数部分（如 ?id=123）
     url_without_params = url.split('?')[0]
-    # 步骤2：按斜杠分割路径，取最后一个元素（即文件名）
+    # 按斜杠分割路径，取最后一个元素作为文件名（如从 "http://example.com/file.zip" 提取 "file.zip"）
     filename = url_without_params.split('/')[-1]
-    # 文件名从URL中提取
 
     # 创建下载目录
-    download_dir = Path("FY4B_Downloads")
-    download_dir.mkdir(exist_ok=True)
-
-    # 完整的文件路径
-    file_path = download_dir / filename
+    os.makedirs(save_dir, exist_ok=True)  # 创建本地保存目录（若不存在）
+    file_path = os.path.join(save_dir, filename)   # 拼接本地保存的完整路径
 
     # 设置请求头，模拟浏览器行为
     headers = {
@@ -35,6 +30,7 @@ def download_http_file(url1):
         'Connection': 'keep-alive',
     }
 
+    #  开始下载
     try:
         print(f"开始下载文件: {filename}")
 

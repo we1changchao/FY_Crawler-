@@ -3,11 +3,11 @@ import os
 import configparser
 import logging
 
-logger = logging.getLogger(__name__)  # Python日志模块（logging）获取日志记录器  __name__是好事
+logger = logging.getLogger(__name__)  # 初始化日志模块
 
 class ConfigHandler:
     def __init__(self, config_file=None):  # 配置文件名
-        # 关键：获取当前脚本（config_handler.py）所在的目录
+        # 获取当前脚本（config_handler.py）所在的目录
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
 
         # 确定最终的配置文件路径

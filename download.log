@@ -2941,3 +2941,67 @@ Stacktrace:
 2025-10-23 22:20:20,112 - INFO - ✅ 成功下载1个HDF文件！
 2025-10-23 22:20:20,112 - INFO - 已清理临时TXT文件：C:\Users\Lenovo\Downloads\A202510231403105597.txt
 2025-10-23 22:20:20,112 - INFO - ===== 订单下载完成了 =====
+2025-10-28 15:50:08,364 - INFO - === 日志系统初始化测试 ===
+2025-10-28 15:50:08,365 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-10-28 15:50:08,365 - INFO - 当前工作目录: D:\Pycharmcode\test
+2025-10-28 15:50:08,365 - INFO - ===== 开始下载订单了 =====
+2025-10-28 15:50:10,894 - INFO - 浏览器初始化成功
+2025-10-28 15:50:10,894 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 15:50:16,997 - INFO - 开始登录流程
+2025-10-28 15:50:18,825 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 15:50:18,892 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 15:50:18,942 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 15:50:19,057 - INFO - 识别到验证码: 2h2h
+2025-10-28 15:50:19,144 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 15:50:19,182 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 15:50:19,182 - INFO - 验证登录结果：尝试查找'我的订单'元素
+2025-10-28 15:50:20,316 - INFO - 登录成功：成功找到'我的订单'元素
+2025-10-28 15:50:24,335 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-10-28 15:50:24,336 - INFO - 开始点击文件按钮并读取内容
+2025-10-28 15:50:26,378 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-10-28 15:50:26,697 - INFO - 文件创建: C:\Users\Lenovo\Downloads\dfc4d3d1-a9b5-42b4-b7e3-049f89ea2e4f.tmp
+2025-10-28 15:50:26,717 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\dfc4d3d1-a9b5-42b4-b7e3-049f89ea2e4f.tmp → C:\Users\Lenovo\Downloads\A202510260234009379.txt.crdownload
+2025-10-28 15:50:26,717 - INFO - 记录中间临时文件: C:\Users\Lenovo\Downloads\A202510260234009379.txt.crdownload
+2025-10-28 15:50:26,740 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\A202510260234009379.txt.crdownload → C:\Users\Lenovo\Downloads\A202510260234009379.txt
+2025-10-28 15:50:26,740 - INFO - 检测到最终txt文件: C:\Users\Lenovo\Downloads\A202510260234009379.txt
+2025-10-28 15:50:27,393 - INFO - 捕获到直接下载的TXT文件
+2025-10-28 15:50:27,393 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-10-28 15:50:27,394 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-10-28 15:50:27,394 - INFO - 成功获取下载的txt文件内容
+2025-10-28 15:50:27,394 - INFO - 从txt文件中提取到1个FTP格式HDF链接，开始下载...
+2025-10-28 15:50:27,394 - INFO - 正在下载第1/1个FTP链接: ftp://A202510260234009379:_T48elOF@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251022_2240_1000M_MS.HDF
+2025-10-28 15:52:00,929 - INFO - 成功下载: FY3D_MERSI_GBAL_L1_20251022_2240_1000M_MS.HDF
+2025-10-28 15:52:00,929 - INFO - ✅ 第1个FTP链接下载成功: ftp://A202510260234009379:_T48elOF@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251022_2240_1000M_MS.HDF
+2025-10-28 15:52:00,929 - INFO - 已清理临时TXT文件：C:\Users\Lenovo\Downloads\A202510260234009379.txt
+2025-10-28 15:52:00,929 - INFO - 下载完成统计: 总计1个文件, 成功1个, 失败0个
+2025-10-28 15:52:00,929 - INFO - ✅ 成功下载1个HDF文件！
+2025-10-28 15:52:00,929 - INFO - ===== 订单下载完成了 =====
+2025-10-28 16:01:51,994 - INFO - === 日志系统初始化测试 ===
+2025-10-28 16:01:51,994 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-10-28 16:01:51,994 - INFO - 当前工作目录: D:\Pycharmcode\test
+2025-10-28 16:01:51,994 - INFO - ===== 开始下载订单了 =====
+2025-10-28 16:01:53,249 - INFO - 浏览器初始化成功
+2025-10-28 16:01:53,249 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-28 16:01:58,921 - INFO - 开始登录流程
+2025-10-28 16:02:01,034 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-28 16:02:01,115 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-28 16:02:01,165 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-28 16:02:01,222 - INFO - 识别到验证码: hjsb
+2025-10-28 16:02:01,326 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-28 16:02:01,365 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-28 16:02:01,365 - INFO - 验证登录结果：尝试查找'我的订单'元素
+2025-10-28 16:02:02,223 - INFO - 登录成功：成功找到'我的订单'元素
+2025-10-28 16:02:03,530 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-10-28 16:02:03,530 - INFO - 开始点击文件按钮并读取内容
+2025-10-28 16:02:05,603 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-10-28 16:02:05,673 - INFO - 检测到新窗口，它的URL为: http://clouddata.nsmc.org.cn:8089/ORDERFILELIST/C202510280758062919.txt?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1761984062&Signature=b9LmOUTUcvOheswlxXLqEeYXOMg%3D
+2025-10-28 16:02:05,673 - INFO - 新窗口是HTML页面，读取页面源码
+2025-10-28 16:02:05,675 - INFO - --------HTMl页面内容:<html><head><meta name="color-scheme" content="light dark"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251028/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251028073000_20251028074459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1761984061&amp;Signature=MXrXnHJy8xVB6vCVowpEpI0kDK0%3D</pre></body></html>
+2025-10-28 16:02:05,691 - INFO - --------真实的页面内容:http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251028/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251028073000_20251028074459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1761984061&Signature=MXrXnHJy8xVB6vCVowpEpI0kDK0%3D
+2025-10-28 16:02:05,692 - INFO - 识别到是页面了，并且拿到了页面内容
+2025-10-28 16:02:05,692 - INFO - 从页面中提取到1个HTTP格式HDF链接，开始下载...
+2025-10-28 16:02:05,692 - INFO - 正在下载第1/1个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251028/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251028073000_20251028074459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1761984061&Signature=MXrXnHJy8xVB6vCVowpEpI0kDK0%3D
+2025-10-28 16:02:18,672 - INFO - ✅ 第1个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251028/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251028073000_20251028074459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1761984061&Signature=MXrXnHJy8xVB6vCVowpEpI0kDK0%3D
+2025-10-28 16:02:18,673 - INFO - 页面链接处理完成：总计1个文件, 成功1个, 失败0个
+2025-10-28 16:02:18,673 - INFO - ✅ 成功下载1个HDF文件！
+2025-10-28 16:02:18,673 - INFO - ===== 订单下载完成了 =====

@@ -454,9 +454,6 @@ class SatelliteDataDownloader:
         logger.info("选择空间范围完成")
         return True
 
-
-
-
     def _submit_order(self):
         """提交订单"""
         logger.info("开始提交订单")

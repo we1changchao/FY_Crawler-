@@ -54,43 +54,44 @@ logger.info(f"日志文件路径: {log_path}")
 logger.info(f"当前工作目录: {os.getcwd()}")
 
 
-# 新增：带进度显示的FTP下载函数
-def download_ftp_with_progress(ftp_url, save_dir):
+# 带进度显示的FTP下载函数
+def download_ftp_with_progress(ftp_url, save_dir):     # 参数（url ，保存位置）
     """下载FTP文件并显示进度"""
     try:
-        parsed_url = urlparse(ftp_url)
-        os.makedirs(save_dir, exist_ok=True)
-        filename = os.path.basename(parsed_url.path)
-        save_path = os.path.join(save_dir, filename)
+        # urlparse 是 Python 内置的 URL 解析工具，能从类似 ftp://user:pass@host/path/file.txt 的链接中提取关键信息。
+        parsed_url = urlparse(ftp_url)  # 解析FTP URL（分离主机、路径、用户名、密码等）
+        os.makedirs(save_dir, exist_ok=True)  # 创建本地保存目录（若不存在）
+        filename = os.path.basename(parsed_url.path)  # 从URL路径中提取文件名（如 "file.txt"）
+        save_path = os.path.join(save_dir, filename)   # 拼接本地保存的完整路径
 
-        # 解析FTP凭据
-        username = parsed_url.username if parsed_url.username else 'anonymous'
-        password = parsed_url.password if parsed_url.password else ''
-        host = parsed_url.hostname
-        path = parsed_url.path
+        # 解析 FTP 连接信息
+        username = parsed_url.username if parsed_url.username else 'anonymous'   # 用户名（默认匿名）
+        password = parsed_url.password if parsed_url.password else ''   # 密码（默认空）
+        host = parsed_url.hostname   # FTP服务器主机地址（如 ftp.example.com）
+        path = parsed_url.path   # 服务器上的文件路径（如 /data/file.txt）
 
         # 连接FTP服务器
-        ftp = FTP(host)
-        ftp.login(username, password)
+        ftp = FTP(host)   # 建立与FTP服务器的连接
+        ftp.login(username, password)  # 使用用户名密码登录
 
         # 获取文件大小
-        ftp.voidcmd('TYPE I')  # 二进制传输模式
-        file_size = ftp.size(path)
-        downloaded_size = 0
+        ftp.voidcmd('TYPE I') # 切换到二进制传输模式（适用于所有文件类型，避免文本模式的编码问题）
+        file_size = ftp.size(path)   # 获取服务器上文件的总大小（字节）
+        downloaded_size = 0  # 记录已下载的字节数（初始为0）
 
-        # 下载文件
-        with open(save_path, 'wb') as file:
-            def callback(data):
-                nonlocal downloaded_size
-                file.write(data)
-                downloaded_size += len(data)
+        # 下载文件并显示进度
+        with open(save_path, 'wb') as file:  # 以二进制写模式打开本地文件
+            def callback(data):    # 回调函数：每次接收数据时触发
+                nonlocal downloaded_size  # 引用外部变量 downloaded_size
+                file.write(data)  # 将接收到的数据写入本地文件
+                downloaded_size += len(data)   # 更新已下载大小
 
                 # 显示下载进度
                 if file_size > 0:
-                    progress = (downloaded_size / file_size) * 100
-                    print(f"\r下载进度: {filename} {progress:.2f}%", end='', flush=True)
+                    progress = (downloaded_size / file_size) * 100  # 进度百分比
+                    print(f"\r下载进度: {filename} {progress:.2f}%", end='', flush=True)  # 实时刷新显示
 
-            ftp.retrbinary(f'RETR {path}', callback)
+            ftp.retrbinary(f'RETR {path}', callback)   # 二进制方式下载文件，每收到数据调用 callback
 
         if file_size > 0:
             print()  # 换行
@@ -102,10 +103,10 @@ def download_ftp_with_progress(ftp_url, save_dir):
         return False
 
 
-# 文件下载监控处理器、
 
 
 
+# 文件下载监控处理器
 class TxtFileHandler(FileSystemEventHandler):
     """监控下载文件夹，捕获txt文件（包括临时文件重命名）"""
     def __init__(self):
@@ -240,7 +241,6 @@ class SatelliteBrowser:
             logger.error(traceback.format_exc())
             return False
 
-
     def safe_find_element(self, by, value, retry=0):
         """安全查找元素，带重试机制"""
         try:
@@ -325,7 +325,7 @@ class SatelliteBrowser:
         # 初始化文件监控
         event_handler = TxtFileHandler()    # 自定义的 文件下载监控处理器
         observer = Observer()  # watchdog 库中创建文件系统监控器实例的核心代码，用于启动一个后台线程来监听指定目录的文件变化（如创建、删除、修改、移动等）。
-        observer.schedule(event_handler, download_dir, recursive=False)
+        observer.schedule(event_handler, download_dir, recursive=False)  # 请监控 download_dir 目录下的文件变化，当变化时，用 event_handler 中定义的规则来处理这些事件
         observer.start()
 
         # 等待监控完全启动
@@ -353,16 +353,16 @@ class SatelliteBrowser:
                     }
 
                 # 检查是否打开了新窗口
-                if len(self.driver.window_handles) > 1:  #判断当前浏览器是否打开了多个窗口
+                if len(self.driver.window_handles) > 1:  # 判断当前浏览器是否打开了多个窗口
                     # 切换到新窗口
                     for window_handle in self.driver.window_handles:
                         if window_handle != original_window:
-                            self.driver.switch_to.window(window_handle)
-                            new_window_url = self.driver.current_url
+                            self.driver.switch_to.window(window_handle)  # 切换到新窗口
+                            new_window_url = self.driver.current_url   # 获取新窗口的URL
                             logger.info(f"检测到新窗口，它的URL为: {new_window_url}")
                             # 若新窗口是HTML页面，读取页面内容
                             logger.info("新窗口是HTML页面，读取页面源码")
-                            page_content = self.driver.page_source
+                            page_content = self.driver.page_source   # 读取新窗口的完整HTML源码
                             logger.info(f"--------HTMl页面内容:{page_content}")
                             # 定位<pre>标签并获取文本
                             pre_element = self.driver.find_element(By.TAG_NAME, 'pre')
@@ -372,10 +372,10 @@ class SatelliteBrowser:
                             observer.join()
                             return {
                                 'type': 'page',
-                                'content': page_content,
-                                'url': new_window_url,
-                                'raw_content': page_content,
-                                'raw_text': raw_text
+                                'content': page_content,  # 完整HTML源码
+                                'url': new_window_url,   # 新窗口的URL
+                                'raw_content': page_content,   # 原始HTML（与content一致，可能用于备份）
+                                'raw_text': raw_text  # <pre>标签中的纯文本（核心数据，如链接列表）
                             }
 
                 time.sleep(1)  # 降低检查频率，减少资源占用
@@ -410,7 +410,7 @@ class SatelliteDataDownloader:
             'submit_login': (By.XPATH, '//*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button'),  # 提交登录
             # 添加文件按钮定位符（请根据实际页面更新）
             'my_order': (By.XPATH, '//*[@id="u-myorder"]'),  # 点击我的订单
-            'file_button': (By.XPATH, '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')  # //*[@id="displayOrderBody"]/tr[3]/td[8]/a/span
+            'file_button': (By.XPATH, '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')  #
         }
 
     def run(self):
@@ -431,7 +431,6 @@ class SatelliteDataDownloader:
                 logger.error("登录失败，程序退出")
                 return
 
-            time.sleep(1)
             # 登录成功后， 点击我的订单  跳转页面
             if not self.browser.safe_click_element(*self.locators['my_order']):
                 return False
@@ -440,135 +439,8 @@ class SatelliteDataDownloader:
             logger.info("开始点击文件按钮并读取内容")
             result = self.browser.click_and_read_content(self.locators['file_button'])
 
-            # 处理读取结果
-            if result:
-                if result['type'] == 'file':
-                    print(result['content'])
-                    # ftp://A202510130830070581:6cq9Cv_Y@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251013_0500_GEO1K_MS.HDF
-                    logger.info("成功获取下载的txt文件内容")
-                    raw_text = result['raw_content'].strip()  # 去除首尾空格/换行
-                    save_dir = self.config.get_download_dir()
-                    download_success = False
-                    hdf_url = None
-                    # 初始化下载统计
-                    total_downloads = 0
-                    successful_downloads = 0
-                    failed_downloads = 0
-
-
-                    # -------------------------- 第一步：双格式链接识别（HTTP + FTP） --------------------------
-                    # 1. 识别HTTP格式HDF链接（支持带参数如?AccessKey=...和纯链接两种场景）
-                    http_pattern = r'http://[^\s"]+\.HDF(?:\?[^\s"]+)?'  # 非捕获组(?:...)避免匹配冗余分组
-                    http_matches = re.findall(http_pattern, raw_text, re.IGNORECASE)  # 忽略大小写（适配.HDF/.hdf）
-
-                    # 2. 识别FTP格式HDF链接（支持带用户名密码如ftp://user:pass@xxx.xx/...和匿名登录两种场景）
-                    ftp_pattern = r'ftp://(?:[^\s:@]+:[^\s:@]+@)?[^\s/]+/[^\s"]+\.HDF'  # (?:user:pass@)为可选匿名登录
-                    ftp_matches = re.findall(ftp_pattern, raw_text, re.IGNORECASE)
-
-                    all_matches = http_matches + ftp_matches
-                    total_downloads = len(all_matches)
-
-                    # -------------------------- 第二步：确定有效链接并执行下载 --------------------------
-                    # # 修改1：下载所有HTTP链接
-                    # if http_matches:
-                    #     logger.info(f"从txt文件中提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
-                    #     for i, hdf_url in enumerate(http_matches, 1):
-                    #         logger.info(f"正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
-                    #         # 修改2：使用带进度显示的下载函数
-                    #         if not download_http_file(hdf_url):
-                    #             logger.error(f"第{i}个HTTP链接下载失败: {hdf_url}")
-                    # 下载所有HTTP链接
-                    if http_matches:
-                        logger.info(f"从txt文件中提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
-                        for i, hdf_url in enumerate(http_matches, 1):
-                            logger.info(f"正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
-                            if download_http_file(hdf_url):
-                                successful_downloads += 1
-                                logger.info(f"✅ 第{i}个HTTP链接下载成功: {hdf_url}")
-                            else:
-                                failed_downloads += 1
-                                logger.error(f"❌ 第{i}个HTTP链接下载失败: {hdf_url}")
-
-                    # # 修改1：下载所有FTP链接
-                    # if ftp_matches:
-                    #     logger.info(f"从txt文件中提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
-                    #     for i, hdf_url in enumerate(ftp_matches, 1):
-                    #         logger.info(f"正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
-                    #         # 修改2：使用带进度显示的下载函数
-                    #         if not download_ftp_with_progress(hdf_url, save_dir):
-                    #             logger.error(f"第{i}个FTP链接下载失败: {hdf_url}")
-                    # 下载所有FTP链接
-                    if ftp_matches:
-                        logger.info(f"从txt文件中提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
-                        for i, hdf_url in enumerate(ftp_matches, 1):
-                            logger.info(f"正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
-                            if download_ftp_with_progress(hdf_url, save_dir):
-                                successful_downloads += 1
-                                logger.info(f"✅ 第{i}个FTP链接下载成功: {hdf_url}")
-                            else:
-                                failed_downloads += 1
-                                logger.error(f"❌ 第{i}个FTP链接下载失败: {hdf_url}")
-
-                    # 场景3：同时识别到两种格式链接（极端场景，取HTTP优先，可根据需求调整）
-                    elif http_matches and ftp_matches:
-                        hdf_url = http_matches[0]
-                        logger.warning(f"从txt文件中同时提取到HTTP和FTP链接，优先使用HTTP链接：{hdf_url}")
-                        logger.warning(f"忽略的FTP链接：{ftp_matches[0]}")
-                        download_success = download_http_file(hdf_url)
-
-                    # 场景4：未识别到任何有效链接
-                    else:
-                        logger.error("txt文件中未找到有效HDF链接（支持格式：HTTP带参数/纯链接、FTP带用户名/匿名登录）")
-                        # 清理临时TXT文件（无论是否下载，都删除临时文件）
-                        if result.get('path') and os.path.exists(result['path']):
-                            os.remove(result['path'])
-                            logger.info(f"已清理临时TXT文件：{result['path']}")
-                        return
-
-                    # -------------------------- 第三步：下载结果处理 + 临时文件清理 --------------------------
-                    # 输出下载统计
-                    logger.info(f"下载完成统计: 总计{total_downloads}个文件, 成功{successful_downloads}个, 失败{failed_downloads}个")
-
-                    if successful_downloads > 0:
-                        logger.info(f"✅ 成功下载{successful_downloads}个HDF文件！")
-                    if failed_downloads > 0:
-                        logger.error(f"❌ {failed_downloads}个HDF文件下载失败！")
-
-                    # 清理临时TXT文件（无论下载成功/失败，均删除，避免残留）
-                    if result.get('path') and os.path.exists(result['path']):
-                        os.remove(result['path'])
-                        logger.info(f"已清理临时TXT文件：{result['path']}")
-                if result['type'] == 'page':
-                    logger.info('识别到是页面了，并且拿到了页面内容')
-                    raw_text = result['raw_text']
-                    save_dir = self.config.get_download_dir()
-
-                    # 从页面内容提取所有链接并下载
-                    http_pattern = r'http://[^\s"]+\.HDF(?:\?[^\s"]+)?'
-                    http_matches = re.findall(http_pattern, raw_text, re.IGNORECASE)
-
-                    ftp_pattern = r'ftp://(?:[^\s:@]+:[^\s:@]+@)?[^\s/]+/[^\s"]+\.HDF'
-                    ftp_matches = re.findall(ftp_pattern, raw_text, re.IGNORECASE)
-
-                    if http_matches:
-                        logger.info(f"从页面中提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
-                        for i, hdf_url in enumerate(http_matches, 1):
-                            logger.info(f"正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
-                            if not download_http_file(hdf_url):
-                                logger.error(f"第{i}个HTTP链接下载失败: {hdf_url}")
-
-                    if ftp_matches:
-                        logger.info(f"从页面中提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
-                        for i, hdf_url in enumerate(ftp_matches, 1):
-                            logger.info(f"正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
-                            if not download_ftp_with_progress(hdf_url, save_dir):
-                                logger.error(f"第{i}个FTP链接下载失败: {hdf_url}")
-
-                    if not http_matches and not ftp_matches:
-                        logger.error("页面中未找到有效HDF链接")
-                    else:
-                        logger.info("页面链接处理完成")
-
+            # 调用封装后的函数处理结果
+            self.process_result(result)
 
         except Exception as e:
             logger.error(f"程序运行出错: {str(e)}")
@@ -579,7 +451,134 @@ class SatelliteDataDownloader:
             #     self.browser.driver.quit()
             pass
 
+        # 封装的核心函数：处理读取结果（原代码中这部分逻辑）
 
+    def process_result(self, result):
+        """处理从文件或页面提取的结果，提取并下载HDF链接"""
+        if not result:
+            logger.warning("无有效结果可处理")
+            return
+
+        save_dir = self.config.get_download_dir()
+        # 初始化下载统计
+        total_downloads = 0
+        successful_downloads = 0
+        failed_downloads = 0
+
+        # 根据结果类型处理（文件或页面）
+        if result['type'] == 'file':
+            logger.info("成功获取下载的txt文件内容")
+            raw_text = result['raw_content'].strip()
+            # 提取HTTP和FTP链接
+            http_matches, ftp_matches = self.extract_links(raw_text)
+            # 下载链接
+            total_downloads, successful_downloads, failed_downloads = self.download_links(
+                http_matches, ftp_matches, save_dir
+            )
+            # 清理临时TXT文件
+            if result.get('path') and os.path.exists(result['path']):
+                os.remove(result['path'])
+                logger.info(f"已清理临时TXT文件：{result['path']}")
+
+        elif result['type'] == 'page':
+            logger.info('识别到是页面了，并且拿到了页面内容')
+            raw_text = result['raw_text']
+            # 提取HTTP和FTP链接
+            http_matches, ftp_matches = self.extract_links(raw_text)
+            # 下载链接（页面处理不统计成功/失败数，保持原逻辑）
+            self.download_links_page(http_matches, ftp_matches, save_dir)
+
+        # 输出下载统计（仅文件类型需要）
+        if result['type'] == 'file':
+            logger.info(
+                f"下载完成统计: 总计{total_downloads}个文件, 成功{successful_downloads}个, 失败{failed_downloads}个")
+            if successful_downloads > 0:
+                logger.info(f"✅ 成功下载{successful_downloads}个HDF文件！")
+            if failed_downloads > 0:
+                logger.error(f"❌ {failed_downloads}个HDF文件下载失败！")
+
+    def extract_links(self, raw_text):
+        """提取文本中的HTTP和FTP链接（复用正则逻辑）"""
+        # 识别HTTP链接
+        http_pattern = r'http://[^\s"]+\.HDF(?:\?[^\s"]+)?'
+        http_matches = re.findall(http_pattern, raw_text, re.IGNORECASE)
+        # 识别FTP链接
+        ftp_pattern = r'ftp://(?:[^\s:@]+:[^\s:@]+@)?[^\s/]+/[^\s"]+\.HDF'
+        ftp_matches = re.findall(ftp_pattern, raw_text, re.IGNORECASE)
+        return http_matches, ftp_matches
+
+    def download_links(self, http_matches, ftp_matches, save_dir):
+        """下载文件类型结果中的链接（带统计）"""
+        total = len(http_matches) + len(ftp_matches)
+        success = 0
+        failed = 0
+
+        # 下载HTTP链接
+        if http_matches:
+            logger.info(f"从txt文件中提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
+            for i, hdf_url in enumerate(http_matches, 1):
+                logger.info(f"正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
+                if download_http_file(hdf_url, save_dir):
+                    success += 1
+                    logger.info(f"✅ 第{i}个HTTP链接下载成功: {hdf_url}")
+                else:
+                    failed += 1
+                    logger.error(f"❌ 第{i}个HTTP链接下载失败: {hdf_url}")
+
+        # 下载FTP链接
+        if ftp_matches:
+            logger.info(f"从txt文件中提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
+            for i, hdf_url in enumerate(ftp_matches, 1):
+                logger.info(f"正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
+                if download_ftp_with_progress(hdf_url, save_dir):
+                    success += 1
+                    logger.info(f"✅ 第{i}个FTP链接下载成功: {hdf_url}")
+                else:
+                    failed += 1
+                    logger.error(f"❌ 第{i}个FTP链接下载失败: {hdf_url}")
+
+        # 未识别到链接的处理
+        if not http_matches and not ftp_matches:
+            logger.error("未找到有效HDF链接（支持格式：HTTP带参数/纯链接、FTP带用户名/匿名登录）")
+        return total, success, failed
+
+    def download_links_page(self, http_matches, ftp_matches, save_dir):
+        """下载页面类型结果中的链接（增加统计功能）"""
+        total = len(http_matches) + len(ftp_matches)
+        success = 0
+        failed = 0
+
+        if http_matches:
+            logger.info(f"从页面中提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
+            for i, hdf_url in enumerate(http_matches, 1):
+                logger.info(f"正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
+                if download_http_file(hdf_url, save_dir):
+                    success += 1
+                    logger.info(f"✅ 第{i}个HTTP链接下载成功: {hdf_url}")
+                else:
+                    failed += 1
+                    logger.error(f"❌ 第{i}个HTTP链接下载失败: {hdf_url}")
+
+        if ftp_matches:
+            logger.info(f"从页面中提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
+            for i, hdf_url in enumerate(ftp_matches, 1):
+                logger.info(f"正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
+                if download_ftp_with_progress(hdf_url, save_dir):
+                    success += 1
+                    logger.info(f"✅ 第{i}个FTP链接下载成功: {hdf_url}")
+                else:
+                    failed += 1
+                    logger.error(f"❌ 第{i}个FTP链接下载失败: {hdf_url}")
+
+        # 输出汇总统计
+        if total == 0:
+            logger.error("页面中未找到有效HDF链接")
+        else:
+            logger.info(f"页面链接处理完成：总计{total}个文件, 成功{success}个, 失败{failed}个")
+            if success > 0:
+                logger.info(f"✅ 成功下载{success}个HDF文件！")
+            if failed > 0:
+                logger.error(f"❌ {failed}个HDF文件下载失败！")
 
 
     def _login(self):
