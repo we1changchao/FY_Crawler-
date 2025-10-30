@@ -220,7 +220,7 @@ class SatelliteDataDownloader:
             'level1_data': (By.XPATH, '/html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]'),   # 1级数据
             'data_type_select': (By.XPATH, '//*[@id="select2-sel-dataType-container"]'),     # 点击“数据名称”白框
             'choose_MERSI': (By.XPATH, '/html/body/span/span/span[2]/ul/li[1]'),  # 数据名称中选择MERSI
-            'choose_MERSI_3e': (By.XPATH, '//*[@id="select2-sel-dataType-result-edd1-MERSI"]'),  # 数据名称中选择MERSI 3e里面的
+            'choose_MERSI_3e': (By.XPATH, '/html/body/span/span/span[2]/ul/li[3]'), # 数据名称中选择MERSI 3e里面的
 
             'click_GeographicalRange': (By.XPATH, '//*[@id="txt-spaceArea"]'),     # 点击 空间范围
             # 输入空间范围数据
@@ -255,14 +255,13 @@ class SatelliteDataDownloader:
             'click_AllChoose': (By.XPATH, '//*[@id="allSele1"]'),  # 点击"全部选择"
 
             'beginDate': (By.XPATH, '//*[@id="c-beginDate"]'),
-            'endDate': (By.XPATH, '//*[@id="c-endDate"]')
+            'endDate': (By.XPATH, '//*[@id="c-endDate"]'),
 
         }
 
     def run(self,time_param,time_param2,North,South,East,West,selected_text_comboBox):
         """运行主程序"""
         try:
-            print(selected_text_comboBox)
             # 初始化浏览器
             if not self.browser.init_browser():
                 logger.error("无法初始化浏览器，程序退出")
@@ -279,7 +278,7 @@ class SatelliteDataDownloader:
                 return
 
             # 选择卫星数据
-            if not self._select_satellite_data():
+            if not self._select_satellite_data(selected_text_comboBox):
                 logger.error("选择卫星数据失败，程序退出")
                 return
 
@@ -392,17 +391,19 @@ class SatelliteDataDownloader:
         return False
 
 
-    def _select_satellite_data(self):
+    def _select_satellite_data(self,selected_text_comboBox):
         """选择卫星数据"""
         logger.info("开始选择卫星数据")
         time.sleep(3)
         # 选择风云极轨卫星
         if not self.browser.safe_click_element(*self.locators['FengYun_satellite']):
             return False
+        self.browser.wait.until(
+            EC.presence_of_element_located(self.locators['fy3d_satellite'])
+        )
         time.sleep(1)
 
         # 选择卫星 是3D还是3E
-        print(selected_text_comboBox.split(":",1)[0])
         if selected_text_comboBox.split(":",1)[0] == "FY-3D" :
             if not self.browser.safe_click_element(*self.locators['fy3d_satellite']):
                 return False
@@ -413,8 +414,20 @@ class SatelliteDataDownloader:
         # 选择1级数据
         if not self.browser.safe_click_element(*self.locators['level1_data']):
             return False
+        self.browser.wait.until(
+            EC.presence_of_element_located(self.locators['data_type_select'])
+        )
         # 点击数据名称框
         if not self.browser.safe_click_element(*self.locators['data_type_select']):
+            return False
+        try:
+            # 等待父元素ul可见，确保选项已渲染
+            self.browser.wait.until(
+                EC.visibility_of_element_located((By.ID, "select2-sel-dataType-results"))
+            )
+            logger.info("下拉菜单选项列表加载完成")
+        except TimeoutException:
+            logger.error("下拉菜单加载超时，无法选择MERSI")
             return False
         # 选择MERSI
         if selected_text_comboBox.split(":", 1)[0] == "FY-3D":
@@ -423,6 +436,7 @@ class SatelliteDataDownloader:
         elif selected_text_comboBox.split(":", 1)[0] == "FY-3E":
             if not self.browser.safe_click_element(*self.locators['choose_MERSI_3e']):
                 return False
+
         logger.info("卫星数据选择完成")
         return True
 
@@ -489,7 +503,7 @@ class SatelliteDataDownloader:
         # 选中第二个数据
         if not self.browser.safe_click_element(*self.locators['second_data_row']):
             return False
-        # 点击提交编辑
+        # 去购物车
         if not self.browser.safe_click_element(*self.locators['commit_edit']):
             return False
         # 勾选发送确认邮件
@@ -499,6 +513,31 @@ class SatelliteDataDownloader:
         if not self.browser.safe_click_element(*self.locators['submit_order']):
             return False
         time.sleep(1)
+        # 等待模态框加载完成，获取所有订单号元素
+        try:
+            # 关键：用find_elements（复数）定位所有class="order-code"的元素，且限定在模态框内
+            order_code_elements = WebDriverWait(self.browser.driver, 10).until(
+                EC.presence_of_all_elements_located(
+                    (By.CSS_SELECTOR, "#submit-order .order-code")  # 定位模态框内所有符合条件的元素
+                )
+            )
+
+            # 遍历元素，提取所有订单号文本，存入列表
+            all_order_ids = [element.text for element in order_code_elements]
+            print("!!!!!!!")
+            print(all_order_ids)
+            # 写入指定TXT文件（例如：order_ids.txt）
+            with open("D:/Pycharmcode/test/download.txt", "w", encoding="utf-8") as f:
+                # 每个订单号占一行
+                for order_id in all_order_ids:
+                    f.write(f"{order_id}\n")
+
+            print(f"成功写入{len(all_order_ids)}个订单号到download.txt")
+
+        except Exception as e:
+            print(f"获取订单号失败：{e}")
+
+
         logger.info("订单提交完成")
         return True
 

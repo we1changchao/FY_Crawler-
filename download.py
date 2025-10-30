@@ -102,7 +102,34 @@ def download_ftp_with_progress(ftp_url, save_dir):     # 参数（url ，保存�
         logger.error(f"FTP下载失败: {str(e)}")
         return False
 
+def get_order_status(browser, order_number):
+    """
+    根据订单号查找对应行，并返回订单状态
+    :param browser: SatelliteBrowser 实例（包含 webdriver）
+    :param order_number: 要查询的订单号（如 "C202510300255033490"）
+    :return: 订单状态（如 "准备中"）或 None（未找到时）
+    """
+    try:
+        # 定位tbody
+        tbody = browser.safe_find_element(By.ID, "displayOrderBody")
+        if not tbody:
+            return None
 
+        # 遍历所有行
+        rows = tbody.find_elements(By.TAG_NAME, "tr")
+        for row in rows:
+            # 定位该行的“订单号”列（第一个td）
+            order_td = row.find_element(By.CSS_SELECTOR, "td:nth-child(1)")
+            if order_td.text.strip() == order_number:
+                # 找到匹配的行，定位“状态”列（第5个td）
+                status_td = row.find_element(By.CSS_SELECTOR, "td:nth-child(4)")
+                return status_td.text.strip()
+
+        # 遍历完所有行未找到匹配订单号
+        return None
+    except Exception as e:
+        logger.error(f"查询订单状态失败: {str(e)}")
+        return None
 
 
 
@@ -414,7 +441,7 @@ class SatelliteDataDownloader:
             'file_button': (By.XPATH, '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')  #
         }
 
-    def run(self):
+    def run(self,content):
         """运行主程序"""
         try:
             # 初始化浏览器
@@ -435,6 +462,23 @@ class SatelliteDataDownloader:
             # 登录成功后， 点击我的订单  跳转页面
             if not self.browser.safe_click_element(*self.locators['my_order']):
                 return False
+
+            order_status = get_order_status(self.browser, content)
+            print("!!!!!!!!!!")
+            print(content)
+            if order_status:
+                print(f"!!!!!!!!!!!订单的状态是：{order_status}")
+                # 判断状态：准备成功则继续，准备中则退出程序
+                if order_status == "准备中":
+                    logger.info("订单状态为【准备中】，停止程序")
+                    sys.exit(0)  # 正常退出程序
+            else:
+                print(f"未找到订单")
+                logger.error("未找到目标订单，停止程序")
+                if self.browser.driver:
+                    self.browser.driver.quit()
+                sys.exit(1)  # 异常退出
+
 
             # 点击文件按钮并读取内容
             logger.info("开始点击文件按钮并读取内容")
@@ -664,11 +708,24 @@ class SatelliteDataDownloader:
         # 所有重试都失败，返回False
         logger.error("登录流程全部重试失败")
         return False
+
+
 # 主程序入口
 if __name__ == "__main__":
     logger.info("===== 开始下载订单了 =====")
+    if len(sys.argv) < 2:
+        print("错误：未收到时间参数")
+        sys.exit(1)
+
+    txt_order_path = sys.argv[1]
+
+    with open(txt_order_path, 'r', encoding='utf-8') as f:
+        content = f.read()  # 读取全部内容
+        # 可选：去除首尾空白（如换行符、空格）
+        content = content.strip()
+        print("从txt里面读取的内容："+content)
     downloader = SatelliteDataDownloader()
-    downloader.run()
+    downloader.run(content)
     logger.info("===== 订单下载完成了 =====")
 
 
