@@ -79,21 +79,36 @@ def download_ftp_with_progress(ftp_url, save_dir):     # 参数（url ，保存�
         file_size = ftp.size(path)   # 获取服务器上文件的总大小（字节）
         downloaded_size = 0  # 记录已下载的字节数（初始为0）
 
+        # 新增：记录上次输出进度的时间（初始为当前时间）
+        last_print_time = time.time()
+        # 设定输出间隔（0.25秒）
+        print_interval = 2
+        last_progress = -0.1  # 初始进度（确保首次能输出）
+        min_progress_change = 5  # 最小进度变化量（0.1%）
+
         # 下载文件并显示进度
         with open(save_path, 'wb') as file:  # 以二进制写模式打开本地文件
             def callback(data):    # 回调函数：每次接收数据时触发
-                nonlocal downloaded_size  # 引用外部变量 downloaded_size
+                nonlocal downloaded_size , last_print_time,last_progress # 引用外部变量 downloaded_size
                 file.write(data)  # 将接收到的数据写入本地文件
                 downloaded_size += len(data)   # 更新已下载大小
 
                 # 显示下载进度
                 if file_size > 0:
-                    progress = (downloaded_size / file_size) * 100  # 进度百分比
-                    print(f"\r下载进度: {filename} {progress:.2f}%", end='', flush=True)  # 实时刷新显示
+                    current_progress = (downloaded_size / file_size) * 100
+                    current_time = time.time()
+                    # 双重条件：间隔≥2秒 AND 进度变化≥0.1%
+                    if (current_time - last_print_time >= print_interval) and \
+                            (current_progress - last_progress >= min_progress_change):
+                        print(f"\r下载进度: {filename} {current_progress:.2f}%", end='', flush=True)
+                        last_print_time = current_time
+                        last_progress = current_progress  # 更新上次进度
 
             ftp.retrbinary(f'RETR {path}', callback)   # 二进制方式下载文件，每收到数据调用 callback
 
+        # 下载完成后，强制输出一次完整进度（100%）
         if file_size > 0:
+            print(f"\r下载进度: {filename} 100.00%", end='', flush=True)
             print()  # 换行
         ftp.quit()
         logger.info(f"成功下载: {filename}")

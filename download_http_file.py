@@ -2,6 +2,7 @@ import requests
 import urllib.parse
 from pathlib import Path
 import os
+import time
 
 
 def download_http_file(url1,save_dir):
@@ -46,6 +47,10 @@ def download_http_file(url1,save_dir):
             # 获取文件大小
             total_size = int(response.headers.get('content-length', 0))
 
+            # 新增：时间控制变量（控制进度输出频率）
+            last_print_time = time.time()  # 记录上次输出时间
+            print_interval = 0.25  # 输出间隔（0.25秒）
+
             # 写入文件
             with open(file_path, 'wb') as file:
                 if total_size == 0:
@@ -58,9 +63,13 @@ def download_http_file(url1,save_dir):
                             downloaded += len(chunk)
                             # 显示下载进度
                             if total_size > 0:
-                                progress = (downloaded / total_size) * 100
-                                print(f"\r下载进度: {progress:.2f}%", end='', flush=True)
-
+                                current_time = time.time()  # 当前时间
+                                if current_time - last_print_time >= print_interval:
+                                    progress = (downloaded / total_size) * 100
+                                    print(f"\r下载进度: {progress:.2f}%", end='', flush=True)
+            # 下载完成后，强制输出100%进度
+            if total_size > 0:
+                print(f"\r下载进度: {filename} 100.00%", end='', flush=True)
             print(f"\n文件下载完成: {file_path}")
             print(f"文件大小: {os.path.getsize(file_path)} 字节")
 
