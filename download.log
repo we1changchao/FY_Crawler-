@@ -3602,3 +3602,100 @@ Stacktrace:
 2025-10-30 11:51:59,826 - INFO - 登录成功：成功找到'我的订单'元素
 2025-10-30 11:52:00,594 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
 2025-10-30 11:52:00,982 - INFO - 订单状态为【准备中】，停止程序
+2025-10-30 14:49:05,078 - INFO - === 日志系统初始化测试 ===
+2025-10-30 14:49:05,078 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-10-30 14:49:05,078 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 14:49:05,078 - INFO - ===== 开始下载订单了 =====
+2025-10-30 14:49:06,373 - INFO - 浏览器初始化成功
+2025-10-30 14:49:06,374 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 14:49:11,156 - INFO - 开始登录流程
+2025-10-30 14:49:12,452 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-30 14:49:12,534 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 14:49:12,589 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 14:49:12,645 - INFO - 识别到验证码: zgmt
+2025-10-30 14:49:12,750 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 14:49:12,791 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-30 14:49:12,791 - INFO - 验证登录结果：尝试查找'我的订单'元素
+2025-10-30 14:49:13,981 - INFO - 登录成功：成功找到'我的订单'元素
+2025-10-30 14:49:14,847 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-10-30 14:49:15,207 - INFO - 订单状态为【准备中】，停止程序
+2025-10-30 15:02:00,089 - INFO - === 日志系统初始化测试 ===
+2025-10-30 15:02:00,089 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-10-30 15:02:00,089 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 15:02:00,089 - INFO - ===== 开始下载订单了 =====
+2025-10-30 15:02:01,359 - INFO - 浏览器初始化成功
+2025-10-30 15:02:01,360 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 15:02:05,817 - INFO - 开始登录流程
+2025-10-30 15:02:07,579 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-30 15:02:07,660 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 15:02:07,718 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 15:02:07,776 - INFO - 识别到验证码: tkl9
+2025-10-30 15:02:07,891 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 15:02:07,960 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-30 15:02:07,960 - INFO - 验证登录结果：尝试查找'我的订单'元素
+2025-10-30 15:02:25,369 - INFO - 登录成功：成功找到'我的订单'元素
+2025-10-30 15:02:26,375 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-10-30 15:02:26,774 - INFO - 订单状态为【准备中】，停止程序
+2025-10-30 15:08:37,687 - INFO - === 日志系统初始化测试 ===
+2025-10-30 15:08:37,687 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-10-30 15:08:37,687 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 15:08:37,687 - INFO - ===== 开始下载订单了 =====
+2025-10-30 15:08:38,959 - INFO - 浏览器初始化成功
+2025-10-30 15:08:38,959 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 15:08:43,759 - INFO - 开始登录流程
+2025-10-30 15:08:46,125 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-30 15:08:46,173 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 15:08:46,211 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 15:08:46,360 - INFO - 识别到验证码: vach
+2025-10-30 15:08:46,452 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 15:08:46,495 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-30 15:08:46,495 - INFO - 验证登录结果：尝试查找'我的订单'元素
+2025-10-30 15:08:47,474 - INFO - 登录成功：成功找到'我的订单'元素
+2025-10-30 15:08:48,638 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-10-30 15:08:48,857 - INFO - 订单状态为【准备中】，停止程序
+2025-10-30 15:18:50,380 - INFO - === 日志系统初始化测试 ===
+2025-10-30 15:18:50,380 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-10-30 15:18:50,380 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 15:18:50,380 - INFO - ===== 开始下载订单了 =====
+2025-10-30 15:18:51,643 - INFO - 浏览器初始化成功
+2025-10-30 15:18:51,643 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 15:18:55,975 - INFO - 开始登录流程
+2025-10-30 15:18:58,213 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-30 15:18:58,261 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 15:18:58,295 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 15:18:58,375 - INFO - 识别到验证码: 1cca
+2025-10-30 15:18:58,507 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 15:18:58,576 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-30 15:18:58,576 - INFO - 验证登录结果：尝试查找'我的订单'元素
+2025-10-30 15:18:59,917 - INFO - 登录成功：成功找到'我的订单'元素
+2025-10-30 15:19:00,769 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-10-30 15:19:00,941 - INFO - 订单状态为【准备中】，停止程序
+2025-10-30 15:24:13,026 - INFO - === 日志系统初始化测试 ===
+2025-10-30 15:24:13,026 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-10-30 15:24:13,026 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 15:24:13,026 - INFO - ===== 开始下载订单了 =====
+2025-10-30 15:24:14,331 - INFO - 浏览器初始化成功
+2025-10-30 15:24:14,331 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 15:24:19,862 - INFO - 开始登录流程
+2025-10-30 15:24:21,594 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-30 15:24:21,676 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 15:24:21,730 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 15:24:21,811 - INFO - 识别到验证码: ykar
+2025-10-30 15:24:21,926 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 15:24:21,968 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-30 15:24:21,968 - INFO - 验证登录结果：尝试查找'我的订单'元素
+2025-10-30 15:24:23,493 - INFO - 登录成功：成功找到'我的订单'元素
+2025-10-30 15:24:24,334 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-10-30 15:24:24,574 - INFO - 开始点击文件按钮并读取内容
+2025-10-30 15:24:26,675 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-10-30 15:24:26,755 - INFO - 检测到新窗口，它的URL为: http://clouddata.nsmc.org.cn:8089/ORDERFILELIST/C202510300718057179.txt?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762154462&Signature=iVNILbFxYUgKUh1Xp2TrK2BraoM%3D
+2025-10-30 15:24:26,755 - INFO - 新窗口是HTML页面，读取页面源码
+2025-10-30 15:24:26,757 - INFO - --------HTMl页面内容:<html><head><meta name="color-scheme" content="light dark"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/GNOS/L1/REL/2025/20251017/FY3E_GNOSR_ORBT_L1_20251017_2255_RFLG2_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762154461&amp;Signature=hBNgbteVqBJwAFWRTt%2BX1Bhsk5w%3D</pre></body></html>
+2025-10-30 15:24:26,776 - INFO - --------真实的页面内容:http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/GNOS/L1/REL/2025/20251017/FY3E_GNOSR_ORBT_L1_20251017_2255_RFLG2_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762154461&Signature=hBNgbteVqBJwAFWRTt%2BX1Bhsk5w%3D
+2025-10-30 15:24:26,776 - INFO - 识别到是页面了，并且拿到了页面内容
+2025-10-30 15:24:26,776 - INFO - 从页面中提取到1个HTTP格式HDF链接，开始下载...
+2025-10-30 15:24:26,776 - INFO - 正在下载第1/1个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/GNOS/L1/REL/2025/20251017/FY3E_GNOSR_ORBT_L1_20251017_2255_RFLG2_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762154461&Signature=hBNgbteVqBJwAFWRTt%2BX1Bhsk5w%3D
+2025-10-30 15:24:30,978 - INFO - ✅ 第1个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/GNOS/L1/REL/2025/20251017/FY3E_GNOSR_ORBT_L1_20251017_2255_RFLG2_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762154461&Signature=hBNgbteVqBJwAFWRTt%2BX1Bhsk5w%3D
+2025-10-30 15:24:30,978 - INFO - 页面链接处理完成：总计1个文件, 成功1个, 失败0个
+2025-10-30 15:24:30,978 - INFO - ✅ 成功下载1个HDF文件！
+2025-10-30 15:24:30,978 - INFO - ===== 订单下载完成了 =====
