@@ -625,87 +625,73 @@ class SatelliteDataDownloader:
             if failed > 0:
                 logger.error(f"❌ {failed}个HDF文件下载失败！")
 
-
     def _login(self):
-        """ 执行登录流程（增加验证码错误重试逻辑） """
         logger.info("开始登录流程")
-        max_login_retries = self.config.get_retry_attempts()  # 从配置文件获取最大重试次数（与原重试次数一致）
+        max_login_retries = self.config.get_retry_attempts()
 
-        # 1. 先点击登录按钮（仅需点击一次，弹出登录弹窗）
+        # 1. 点击登录按钮
         if not self.browser.safe_click_element(*self.locators['login_button']):
             return False
 
-
-        # 2. 循环重试验证码（直到登录成功或达到最大次数）
+        # 2. 循环重试登录
         for retry in range(max_login_retries):
             try:
-                # --------------------------
-                # 步骤1：输入用户名和密码（每次重试无需重复输入，但若页面刷新可保留）
-                # --------------------------
-                if retry == 0:  # 第一次重试时输入用户名密码，后续重试无需重复输入
+                # 步骤1：首次输入用户名密码
+                if retry == 0:
                     if not self.browser.safe_send_keys(*self.locators['username_input'], self.user_info['username']):
-                        continue  # 用户名输入失败，直接重试
+                        continue
                     if not self.browser.safe_send_keys(*self.locators['password_input'], self.user_info['password']):
-                        continue  # 密码输入失败，直接重试
+                        continue
 
-                # --------------------------
-                # 步骤2：识别并输入验证码（每次重试都需重新识别）
-                # --------------------------
-                # 清除原有的验证码（避免与新验证码叠加）
+                # 步骤2：处理验证码
                 captcha_input = self.browser.safe_find_element(*self.locators['captcha_input'])
                 if captcha_input:
                     captcha_input.clear()
+                    time.sleep(0.5)
 
-
-                # 识别新验证码
                 captcha_text = self.browser.solve_captcha(self.locators['captcha_image'][1])
                 if not captcha_text:
                     logger.warning(f"验证码识别失败，重试 {retry + 1}/{max_login_retries}")
-                    continue  # 识别失败，直接重试
+                    continue
 
-                # 输入新验证码
                 if not self.browser.safe_send_keys(*self.locators['captcha_input'], captcha_text):
                     logger.warning(f"验证码输入失败，重试 {retry + 1}/{max_login_retries}")
-                    continue  # 输入失败，直接重试
+                    continue
 
-                # --------------------------
-                # 步骤3：提交登录并判断是否成功
-                # --------------------------
+                # 步骤3：提交登录
                 if not self.browser.safe_click_element(*self.locators['submit_login']):
                     logger.warning(f"登录提交失败，重试 {retry + 1}/{max_login_retries}")
-                    continue  # 提交失败，直接重试
+                    continue
+                time.sleep(3)
 
-                # --------------------------
-                # 步骤4：验证登录是否成功（核心判定逻辑）
-                # 判定标准：能找到“风云极轨卫星”元素 → 登录成功；找不到 → 验证码错误
-                # --------------------------
-                logger.info("验证登录结果：尝试查找'我的订单'元素")
-                fengyun_element = self.browser.safe_find_element(
-                    *self.locators['my_order'])  # 注意key是'FengYun_satellite'（原代码中首字母大写）
-                if fengyun_element:
-                    logger.info("登录成功：成功找到'我的订单'元素")
-                    return True  # 登录成功，退出循环
-                else:
-                    raise Exception("验证码错误：未找到'我的订单'元素")  # 触发异常，进入重试流程
-
-            except Exception as e:
-                # 捕获“验证码错误”或其他登录异常，准备刷新验证码重试
-                if retry < max_login_retries - 1:  # 不是最后一次重试，刷新验证码
-                    logger.warning(f"登录失败（{str(e)}），刷新验证码重试 {retry + 2}/{max_login_retries}")
-                    # 关键：点击验证码图片，刷新新的验证码（触发页面重新生成验证码）
+                # 步骤4：验证登录成功（只查1次，不抛异常）
+                try:
+                    fengyun_element = WebDriverWait(self.browser.driver, 3).until(
+                        EC.presence_of_element_located(self.locators['my_order'])
+                    )
+                    logger.info("成功找到'我的订单'元素，登录成功")
+                    return True
+                except TimeoutException:
+                    # 未找到元素：刷新验证码，进入下一次重试
+                    logger.warning(f"未找到'风云极轨卫星'元素，本次登录失败，准备重试 {retry + 2}/{max_login_retries}")
                     captcha_image = self.browser.safe_find_element(*self.locators['captcha_image'])
                     if captcha_image:
-                        captcha_image.click()  # 点击验证码刷新
-                        time.sleep(1)  # 等待新验证码加载
-                    else:
-                        logger.error("无法找到验证码图片，无法刷新")
-                        continue
+                        captcha_image.click()
+                        time.sleep(1)
+                    continue  # 直接进入下一次循环，不触发外层except
+
+            # 处理其他异常（如元素定位失败、点击失败等）
+            except Exception as e:
+                if retry < max_login_retries - 1:
+                    logger.warning(f"登录发生其他错误（{str(e)}），重试 {retry + 2}/{max_login_retries}")
+                    captcha_image = self.browser.safe_find_element(*self.locators['captcha_image'])
+                    if captcha_image:
+                        captcha_image.click()
+                        time.sleep(1)
                 else:
-                    # 最后一次重试失败，返回登录失败
-                    logger.error(f"达到最大登录重试次数（{max_login_retries}次），登录失败")
+                    logger.error(f"达到最大重试次数（{max_login_retries}次），登录失败")
                     return False
 
-        # 所有重试都失败，返回False
         logger.error("登录流程全部重试失败")
         return False
 

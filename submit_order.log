@@ -5116,3 +5116,926 @@ Stacktrace:
 2025-10-30 16:38:30,066 - INFO - 下载操作完成
 2025-10-30 16:38:30,066 - INFO - 所有操作完成
 2025-10-30 16:38:30,066 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 19:23:16,658 - INFO - === 日志系统初始化 ===
+2025-10-30 19:23:16,658 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 19:23:16,658 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 19:23:16,658 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 19:23:16,701 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 19:23:17,961 - INFO - 浏览器初始化成功
+2025-10-30 19:23:17,961 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 19:23:26,385 - INFO - 开始登录流程
+2025-10-30 19:23:28,358 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 19:23:28,417 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 19:23:29,053 - INFO - 识别到验证码: balr
+2025-10-30 19:23:29,178 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 19:23:32,238 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 19:24:02,263 - WARNING - 查找元素失败，重试 1/3 - xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-30 19:24:33,305 - WARNING - 查找元素失败，重试 2/3 - xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-30 19:25:04,330 - WARNING - 查找元素失败，重试 3/3 - xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-30 19:26:05,868 - ERROR - 多次尝试后仍无法找到元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-30 19:26:05,869 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d37cd7]
+	(No symbol) [0x0x7ff775d37f9c]
+	(No symbol) [0x0x7ff775d8ba87]
+	(No symbol) [0x0x7ff775d603bf]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d37cd7]
+	(No symbol) [0x0x7ff775d37f9c]
+	(No symbol) [0x0x7ff775d8ba87]
+	(No symbol) [0x0x7ff775d603bf]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d37cd7]
+	(No symbol) [0x0x7ff775d37f9c]
+	(No symbol) [0x0x7ff775d8ba87]
+	(No symbol) [0x0x7ff775d603bf]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 112, in safe_find_element
+    return self.wait.until(EC.presence_of_element_located((by, value)))  # 使用创建的显式等待对象 self.wait等待元素「出现」
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d37cd7]
+	(No symbol) [0x0x7ff775d37f9c]
+	(No symbol) [0x0x7ff775d8ba87]
+	(No symbol) [0x0x7ff775d603bf]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-30 19:26:05,869 - WARNING - 登录失败（未找到'风云极轨卫星'元素，可能是因为验证码输入错误，未成功登录），刷新验证码重试 2/3
+2025-10-30 19:26:07,527 - INFO - 识别到验证码: zw4y
+2025-10-30 19:26:07,627 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 19:26:10,683 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 19:26:10,689 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 19:26:10,689 - INFO - 开始选择卫星数据
+2025-10-30 19:26:15,873 - INFO - 下拉菜单选项列表加载完成
+2025-10-30 19:26:15,910 - INFO - 卫星数据选择完成
+2025-10-30 19:26:15,910 - INFO - 开始选择空间范围
+2025-10-30 19:26:15,910 - WARNING - 下拉菜单关闭等待超时，继续执行
+2025-10-30 19:26:16,506 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 19:26:16,574 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 19:26:16,614 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 19:26:16,654 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 19:26:16,694 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 19:26:16,734 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 19:26:16,774 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 19:26:16,813 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 19:26:16,894 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 19:26:16,905 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 19:26:17,415 - INFO - 选择空间范围完成
+2025-10-30 19:26:17,415 - INFO - 开始提交订单
+2025-10-30 19:26:24,853 - INFO - 订单提交完成
+2025-10-30 19:26:24,853 - INFO - 查看订单
+2025-10-30 19:26:35,099 - WARNING - 点击元素失败，重试 1/3 - xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-30 19:26:46,424 - WARNING - 点击元素失败，重试 2/3 - xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-30 19:26:57,718 - WARNING - 点击元素失败，重试 3/3 - xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-30 19:26:58,928 - INFO - 使用JS点击成功
+2025-10-30 19:26:58,928 - INFO - 下载操作完成
+2025-10-30 19:26:58,928 - INFO - 所有操作完成
+2025-10-30 19:26:58,928 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 19:31:38,756 - INFO - === 日志系统初始化 ===
+2025-10-30 19:31:38,756 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 19:31:38,756 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 19:31:38,757 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 19:31:38,804 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 19:31:40,045 - INFO - 浏览器初始化成功
+2025-10-30 19:31:40,045 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 19:31:54,883 - INFO - 开始登录流程
+2025-10-30 19:31:58,157 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 19:31:58,207 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 19:31:58,773 - INFO - 识别到验证码: 5av1
+2025-10-30 19:31:58,891 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 19:32:01,948 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 19:32:01,954 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 19:32:01,954 - INFO - 开始选择卫星数据
+2025-10-30 19:32:07,152 - INFO - 下拉菜单选项列表加载完成
+2025-10-30 19:32:07,194 - INFO - 卫星数据选择完成
+2025-10-30 19:32:07,194 - INFO - 开始选择空间范围
+2025-10-30 19:32:07,194 - WARNING - 下拉菜单关闭等待超时，继续执行
+2025-10-30 19:32:07,896 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 19:32:07,997 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 19:32:08,064 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 19:32:08,142 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 19:32:08,208 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 19:32:08,280 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 19:32:08,366 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 19:32:08,458 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 19:32:08,584 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 19:32:08,600 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 19:32:09,114 - INFO - 选择空间范围完成
+2025-10-30 19:32:09,114 - INFO - 开始提交订单
+2025-10-30 19:32:17,973 - INFO - 订单提交完成
+2025-10-30 19:32:17,973 - INFO - 查看订单
+2025-10-30 19:40:42,604 - INFO - === 日志系统初始化 ===
+2025-10-30 19:40:42,604 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 19:40:42,604 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 19:40:42,604 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 19:40:42,658 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 19:40:43,908 - INFO - 浏览器初始化成功
+2025-10-30 19:40:43,908 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 19:40:49,722 - INFO - 开始登录流程
+2025-10-30 19:40:53,484 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 19:40:53,544 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 19:40:54,127 - INFO - 识别到验证码: gpac
+2025-10-30 19:40:54,250 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 19:40:57,306 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 19:41:25,796 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 19:41:25,796 - INFO - 开始选择卫星数据
+2025-10-30 19:41:31,000 - INFO - 下拉菜单已展开
+2025-10-30 19:41:31,000 - ERROR - 程序运行出错: element_to_be_clickable() takes 1 positional argument but 2 were given
+2025-10-30 19:41:31,000 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 324, in run
+    if not self._select_satellite_data(selected_text_comboBox):
+  File "D:/Pycharmcode/test/submit_order.py", line 475, in _select_satellite_data
+    EC.element_to_be_clickable(*self.locators['choose_MERSI_3e'])
+TypeError: element_to_be_clickable() takes 1 positional argument but 2 were given
+
+2025-10-30 19:41:31,001 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 19:43:25,835 - INFO - === 日志系统初始化 ===
+2025-10-30 19:43:25,835 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 19:43:25,835 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 19:43:25,835 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 19:43:25,888 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 19:43:27,136 - INFO - 浏览器初始化成功
+2025-10-30 19:43:27,136 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 19:43:33,758 - INFO - 开始登录流程
+2025-10-30 19:43:35,956 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 19:43:36,016 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 19:43:36,591 - INFO - 识别到验证码: k1oh
+2025-10-30 19:43:36,718 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 19:43:39,772 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 19:43:41,746 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 19:43:41,746 - INFO - 开始选择卫星数据
+2025-10-30 19:43:46,938 - INFO - 下拉菜单已展开
+2025-10-30 19:43:46,953 - INFO - 目标选项 MERSI 可点击
+2025-10-30 19:43:46,999 - INFO - 卫星数据选择完成
+2025-10-30 19:43:46,999 - INFO - 开始选择空间范围
+2025-10-30 19:43:46,999 - WARNING - 下拉菜单关闭等待超时，继续执行
+2025-10-30 19:43:47,635 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 19:43:47,696 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 19:43:47,784 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 19:43:47,862 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 19:43:47,916 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 19:43:47,971 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 19:43:48,031 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 19:43:48,110 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 19:43:48,216 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 19:43:48,228 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 19:43:48,743 - INFO - 选择空间范围完成
+2025-10-30 19:43:48,743 - INFO - 开始提交订单
+2025-10-30 19:43:56,158 - INFO - 订单提交完成
+2025-10-30 19:43:56,159 - INFO - 查看订单
+2025-10-30 19:44:26,222 - WARNING - 点击元素失败，重试 1/3 - xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-30 19:44:27,236 - WARNING - 点击元素失败，重试 2/3 - xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-30 19:44:28,243 - WARNING - 点击元素失败，重试 3/3 - xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-30 19:44:29,374 - ERROR - 多次尝试后仍无法点击元素: xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-30 19:44:29,374 - ERROR - Alert Text: 购物车中无数据
+Message: unexpected alert open: {Alert text : 购物车中无数据}
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d8926d]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-30 19:44:29,375 - ERROR - 查看订单失败，程序退出
+2025-10-30 19:44:29,375 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 19:49:42,950 - INFO - === 日志系统初始化 ===
+2025-10-30 19:49:42,950 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 19:49:42,950 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 19:49:42,950 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 19:49:43,003 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 19:49:44,256 - INFO - 浏览器初始化成功
+2025-10-30 19:49:44,256 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 19:49:52,260 - INFO - 开始登录流程
+2025-10-30 19:49:56,352 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 19:49:56,408 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 19:49:57,067 - INFO - 识别到验证码: fbu8
+2025-10-30 19:49:57,166 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 19:50:00,214 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 19:50:00,221 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 19:50:00,221 - INFO - 开始选择卫星数据
+2025-10-30 19:50:08,417 - INFO - 下拉菜单已展开
+2025-10-30 19:50:08,430 - INFO - 目标选项 MERSI 可点击
+2025-10-30 19:50:08,469 - INFO - 卫星数据选择完成
+2025-10-30 19:50:08,469 - INFO - 开始选择空间范围
+2025-10-30 19:50:08,469 - WARNING - 下拉菜单关闭等待超时，继续执行
+2025-10-30 19:50:09,109 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 19:50:09,179 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 19:50:09,254 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 19:50:09,329 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 19:50:09,387 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 19:50:09,440 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 19:50:09,512 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 19:50:09,585 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 19:50:09,679 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 19:50:09,692 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 19:50:10,205 - INFO - 选择空间范围完成
+2025-10-30 19:50:10,205 - INFO - 开始提交订单
+2025-10-30 19:50:21,154 - INFO - 订单提交完成
+2025-10-30 19:50:21,154 - INFO - 查看订单
+2025-10-30 19:50:22,586 - INFO - 下载操作完成
+2025-10-30 19:50:22,586 - INFO - 所有操作完成
+2025-10-30 19:50:22,586 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 19:54:36,992 - INFO - === 日志系统初始化 ===
+2025-10-30 19:54:36,993 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 19:54:36,993 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 19:54:36,993 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 19:54:37,052 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 19:54:38,311 - INFO - 浏览器初始化成功
+2025-10-30 19:54:38,311 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 19:54:46,725 - INFO - 开始登录流程
+2025-10-30 19:54:51,080 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 19:54:51,131 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 19:54:51,721 - INFO - 识别到验证码: 9fwt
+2025-10-30 19:54:51,815 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 19:54:54,858 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 19:54:54,865 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 19:54:54,865 - INFO - 开始选择卫星数据
+2025-10-30 19:55:03,138 - INFO - 下拉菜单已展开
+2025-10-30 19:55:03,149 - INFO - 目标选项 MERSI 可点击
+2025-10-30 19:55:03,149 - ERROR - 程序运行出错: 'SatelliteDataDownloader' object has no attribute 'driver'
+2025-10-30 19:55:03,149 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 336, in run
+    if not self._select_satellite_data(selected_text_comboBox):
+  File "D:/Pycharmcode/test/submit_order.py", line 503, in _select_satellite_data
+    wait_and_click(self.driver, By.XPATH, "/html/body/span/span/span[2]/ul/li[3]")
+AttributeError: 'SatelliteDataDownloader' object has no attribute 'driver'
+
+2025-10-30 19:55:03,149 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 19:56:49,794 - INFO - === 日志系统初始化 ===
+2025-10-30 19:56:49,794 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 19:56:49,794 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 19:56:49,794 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 19:56:49,863 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 19:56:51,161 - INFO - 浏览器初始化成功
+2025-10-30 19:56:51,161 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 19:57:04,745 - INFO - 开始登录流程
+2025-10-30 19:57:07,062 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 19:57:07,118 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 19:57:07,713 - INFO - 识别到验证码: DyhX
+2025-10-30 19:57:07,817 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 19:57:10,877 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 19:57:10,884 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 19:57:10,884 - INFO - 开始选择卫星数据
+2025-10-30 19:57:19,118 - INFO - 下拉菜单已展开
+2025-10-30 19:57:31,804 - INFO - 目标选项 MERSI 可点击
+2025-10-30 19:57:32,341 - INFO - 卫星数据选择完成
+2025-10-30 19:57:32,341 - INFO - 开始选择空间范围
+2025-10-30 19:57:32,341 - WARNING - 下拉菜单关闭等待超时，继续执行
+2025-10-30 19:57:39,452 - ERROR - 程序运行出错: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-30 19:57:39,453 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 341, in run
+    if not self._select_Range(time_param,time_param2,North,South,East,West):
+  File "D:/Pycharmcode/test/submit_order.py", line 526, in _select_Range
+    if not self.browser.safe_send_keys(*self.locators['N_degree'], South.split(".",1)[0]):   # 60
+  File "D:/Pycharmcode/test/submit_order.py", line 181, in safe_send_keys
+    element.send_keys(text)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webelement.py", line 231, in send_keys
+    self._execute(
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-30 19:57:39,453 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 19:57:44,889 - INFO - === 日志系统初始化 ===
+2025-10-30 19:57:44,889 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 19:57:44,889 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 19:57:44,889 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 19:57:44,943 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 19:57:46,253 - INFO - 浏览器初始化成功
+2025-10-30 19:57:46,253 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 19:57:53,904 - INFO - 开始登录流程
+2025-10-30 19:57:56,486 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 19:57:56,542 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 19:57:57,119 - INFO - 识别到验证码: zmaz
+2025-10-30 19:57:57,249 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 19:58:00,318 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 19:58:00,325 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 19:58:00,325 - INFO - 开始选择卫星数据
+2025-10-30 19:58:08,549 - INFO - 下拉菜单已展开
+2025-10-30 19:58:08,559 - INFO - 目标选项 MERSI 可点击
+2025-10-30 19:58:09,099 - INFO - 卫星数据选择完成
+2025-10-30 19:58:09,099 - INFO - 开始选择空间范围
+2025-10-30 19:58:09,099 - WARNING - 下拉菜单关闭等待超时，继续执行
+2025-10-30 19:58:09,729 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 19:58:09,793 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 19:58:09,854 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 19:58:09,911 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 19:58:09,971 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 19:58:10,075 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 19:58:10,151 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 19:58:10,223 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 19:58:10,350 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 19:58:10,364 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 19:58:10,865 - INFO - 选择空间范围完成
+2025-10-30 19:58:10,865 - INFO - 开始提交订单
+2025-10-30 19:58:19,155 - INFO - 订单提交完成
+2025-10-30 19:58:19,156 - INFO - 查看订单
+2025-10-30 19:58:19,359 - INFO - 下载操作完成
+2025-10-30 19:58:19,359 - INFO - 所有操作完成
+2025-10-30 19:58:19,359 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 19:59:28,443 - INFO - === 日志系统初始化 ===
+2025-10-30 19:59:28,443 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 19:59:28,443 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 19:59:28,443 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 19:59:28,493 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 19:59:29,736 - INFO - 浏览器初始化成功
+2025-10-30 19:59:29,736 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 19:59:40,388 - INFO - 开始登录流程
+2025-10-30 19:59:43,711 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 19:59:43,796 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 19:59:44,366 - INFO - 识别到验证码: 0mxx
+2025-10-30 19:59:44,493 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 19:59:47,550 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 19:59:47,556 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 19:59:47,557 - INFO - 开始选择卫星数据
+2025-10-30 19:59:55,760 - INFO - 下拉菜单已展开
+2025-10-30 19:59:55,771 - INFO - 目标选项 MERSI 可点击
+2025-10-30 19:59:56,313 - INFO - 卫星数据选择完成
+2025-10-30 19:59:56,313 - INFO - 开始选择空间范围
+2025-10-30 20:00:27,507 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 20:00:27,553 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 20:00:27,598 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 20:00:27,645 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 20:00:27,690 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 20:00:27,738 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 20:00:27,785 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 20:00:27,829 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 20:00:27,940 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 20:00:27,955 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 20:00:28,470 - INFO - 选择空间范围完成
+2025-10-30 20:00:28,470 - INFO - 开始提交订单
+2025-10-30 20:00:36,204 - INFO - 订单提交完成
+2025-10-30 20:00:36,204 - INFO - 查看订单
+2025-10-30 20:00:36,674 - INFO - 下载操作完成
+2025-10-30 20:00:36,675 - INFO - 所有操作完成
+2025-10-30 20:00:36,675 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 20:01:01,736 - INFO - === 日志系统初始化 ===
+2025-10-30 20:01:01,736 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 20:01:01,737 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 20:01:01,737 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 20:01:01,785 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 20:01:03,112 - INFO - 浏览器初始化成功
+2025-10-30 20:01:03,112 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 20:01:11,509 - INFO - 开始登录流程
+2025-10-30 20:01:13,038 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 20:01:13,082 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 20:01:13,653 - INFO - 识别到验证码: Nsqb
+2025-10-30 20:01:13,828 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 20:01:16,922 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 20:01:16,928 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 20:01:16,928 - INFO - 开始选择卫星数据
+2025-10-30 20:01:25,123 - INFO - 下拉菜单已展开
+2025-10-30 20:01:25,134 - INFO - 目标选项 MERSI 可点击
+2025-10-30 20:01:25,673 - INFO - 卫星数据选择完成
+2025-10-30 20:01:25,673 - INFO - 开始选择空间范围
+2025-10-30 20:01:56,854 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 20:01:56,913 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 20:01:56,961 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 20:01:57,009 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 20:01:57,063 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 20:01:57,112 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 20:01:57,161 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 20:01:57,208 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 20:01:57,305 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 20:01:57,316 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 20:01:57,827 - INFO - 选择空间范围完成
+2025-10-30 20:01:57,827 - INFO - 开始提交订单
+2025-10-30 20:02:05,219 - INFO - 订单提交完成
+2025-10-30 20:02:05,219 - INFO - 查看订单
+2025-10-30 20:02:05,981 - INFO - 下载操作完成
+2025-10-30 20:02:05,981 - INFO - 所有操作完成
+2025-10-30 20:02:05,981 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 20:04:40,800 - INFO - === 日志系统初始化 ===
+2025-10-30 20:04:40,801 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 20:04:40,801 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 20:04:40,801 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 20:04:40,849 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 20:04:42,098 - INFO - 浏览器初始化成功
+2025-10-30 20:04:42,098 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 20:04:58,785 - INFO - 开始登录流程
+2025-10-30 20:05:00,262 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 20:05:00,315 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 20:05:00,891 - INFO - 识别到验证码: udr3
+2025-10-30 20:05:00,998 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 20:05:04,066 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 20:05:04,075 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 20:05:04,075 - INFO - 开始选择卫星数据
+2025-10-30 20:05:12,270 - INFO - 下拉菜单已展开
+2025-10-30 20:05:12,832 - INFO - 卫星数据选择完成
+2025-10-30 20:05:12,832 - INFO - 开始选择空间范围
+2025-10-30 20:05:44,008 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 20:05:44,085 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 20:05:44,150 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 20:05:44,203 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 20:05:44,263 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 20:05:44,316 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 20:05:44,370 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 20:05:44,425 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 20:05:44,519 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 20:05:44,531 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 20:05:45,033 - INFO - 选择空间范围完成
+2025-10-30 20:05:45,033 - INFO - 开始提交订单
+2025-10-30 20:06:00,367 - WARNING - 点击元素失败，重试 1/3 - xpath: //*[@id="menuProNames"]
+2025-10-30 20:06:11,640 - WARNING - 点击元素失败，重试 2/3 - xpath: //*[@id="menuProNames"]
+2025-10-30 20:06:22,919 - WARNING - 点击元素失败，重试 3/3 - xpath: //*[@id="menuProNames"]
+2025-10-30 20:06:23,932 - INFO - 使用JS点击成功
+2025-10-30 20:06:34,219 - WARNING - 点击元素失败，重试 1/3 - xpath: //*[@id="fileListHead"]/th[3]/div/ul/li[3]/a/input
+2025-10-30 20:06:45,485 - WARNING - 点击元素失败，重试 2/3 - xpath: //*[@id="fileListHead"]/th[3]/div/ul/li[3]/a/input
+2025-10-30 20:06:56,787 - WARNING - 点击元素失败，重试 3/3 - xpath: //*[@id="fileListHead"]/th[3]/div/ul/li[3]/a/input
+2025-10-30 20:06:57,797 - INFO - 使用JS点击成功
+2025-10-30 20:07:00,112 - INFO - 订单提交完成
+2025-10-30 20:07:00,112 - INFO - 查看订单
+2025-10-30 20:07:10,400 - WARNING - 点击元素失败，重试 1/3 - xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-30 20:07:21,723 - WARNING - 点击元素失败，重试 2/3 - xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-30 20:07:33,011 - WARNING - 点击元素失败，重试 3/3 - xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-30 20:07:34,307 - INFO - 使用JS点击成功
+2025-10-30 20:07:34,307 - INFO - 下载操作完成
+2025-10-30 20:07:34,307 - INFO - 所有操作完成
+2025-10-30 20:07:34,307 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 20:07:53,495 - INFO - === 日志系统初始化 ===
+2025-10-30 20:07:53,496 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 20:07:53,496 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 20:07:53,496 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 20:07:53,539 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 20:07:54,805 - INFO - 浏览器初始化成功
+2025-10-30 20:07:54,806 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 20:08:05,051 - INFO - 开始登录流程
+2025-10-30 20:08:07,707 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 20:08:07,764 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 20:08:08,349 - INFO - 识别到验证码: zqa1
+2025-10-30 20:08:08,454 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 20:08:11,506 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 20:08:11,513 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 20:08:11,513 - INFO - 开始选择卫星数据
+2025-10-30 20:08:19,717 - INFO - 下拉菜单已展开
+2025-10-30 20:08:21,751 - INFO - 卫星数据选择完成
+2025-10-30 20:08:21,751 - INFO - 开始选择空间范围
+2025-10-30 20:08:52,932 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 20:08:52,987 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 20:08:53,029 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 20:08:53,073 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 20:08:53,117 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 20:08:53,163 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 20:08:53,212 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 20:08:53,258 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 20:08:53,344 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 20:08:53,357 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 20:08:53,858 - INFO - 选择空间范围完成
+2025-10-30 20:08:53,858 - INFO - 开始提交订单
+2025-10-30 20:09:02,554 - INFO - 订单提交完成
+2025-10-30 20:09:02,554 - INFO - 查看订单
+2025-10-30 20:09:02,860 - INFO - 下载操作完成
+2025-10-30 20:09:02,860 - INFO - 所有操作完成
+2025-10-30 20:09:02,860 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 20:18:07,271 - INFO - === 日志系统初始化 ===
+2025-10-30 20:18:07,271 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 20:18:07,271 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 20:18:07,271 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 20:18:07,325 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 20:18:08,585 - INFO - 浏览器初始化成功
+2025-10-30 20:18:08,585 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 20:18:18,955 - INFO - 开始登录流程
+2025-10-30 20:18:21,886 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 20:18:21,938 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 20:18:22,521 - INFO - 识别到验证码: ixsg
+2025-10-30 20:18:22,644 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 20:18:25,706 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 20:18:40,523 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 20:18:40,523 - INFO - 开始选择卫星数据
+2025-10-30 20:18:44,713 - INFO - 下拉框选项列表已展开
+2025-10-30 20:18:44,755 - INFO - 卫星数据选择完成
+2025-10-30 20:18:44,755 - INFO - 开始选择空间范围
+2025-10-30 20:19:15,936 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 20:19:16,002 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 20:19:16,049 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 20:19:16,092 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 20:19:16,133 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 20:19:16,175 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 20:19:16,215 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 20:19:16,253 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 20:19:16,348 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 20:19:16,366 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 20:19:16,877 - INFO - 选择空间范围完成
+2025-10-30 20:19:16,877 - INFO - 开始提交订单
+2025-10-30 20:19:25,232 - INFO - 订单提交完成
+2025-10-30 20:19:25,233 - INFO - 查看订单
+2025-10-30 20:19:27,143 - INFO - 下载操作完成
+2025-10-30 20:19:27,143 - INFO - 所有操作完成
+2025-10-30 20:19:27,143 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 20:22:06,729 - INFO - === 日志系统初始化 ===
+2025-10-30 20:22:06,730 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 20:22:06,730 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 20:22:06,730 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 20:22:06,782 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 20:22:08,079 - INFO - 浏览器初始化成功
+2025-10-30 20:22:08,079 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 20:22:17,092 - INFO - 开始登录流程
+2025-10-30 20:22:19,535 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 20:22:19,606 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 20:22:20,170 - INFO - 识别到验证码: 7idr
+2025-10-30 20:22:20,294 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 20:22:23,343 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 20:22:27,143 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 20:22:27,143 - INFO - 开始选择卫星数据
+2025-10-30 20:22:31,355 - INFO - 下拉框选项列表已展开
+2025-10-30 20:22:31,400 - INFO - 下拉框选项列表已完全展开并加载选项
+2025-10-30 20:22:31,438 - INFO - 卫星数据选择完成
+2025-10-30 20:22:31,438 - INFO - 开始选择空间范围
+2025-10-30 20:23:10,209 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 20:23:10,251 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 20:23:10,294 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 20:23:10,337 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 20:23:10,381 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 20:23:10,419 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 20:23:10,458 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 20:23:10,496 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 20:23:10,586 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 20:23:10,599 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 20:23:11,110 - INFO - 选择空间范围完成
+2025-10-30 20:23:11,110 - INFO - 开始提交订单
+2025-10-30 20:23:18,737 - INFO - 订单提交完成
+2025-10-30 20:23:18,737 - INFO - 查看订单
+2025-10-30 20:23:20,811 - INFO - 下载操作完成
+2025-10-30 20:23:20,811 - INFO - 所有操作完成
+2025-10-30 20:23:20,811 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 20:24:21,946 - INFO - === 日志系统初始化 ===
+2025-10-30 20:24:21,946 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 20:24:21,946 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 20:24:21,946 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 20:24:22,001 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 20:24:23,239 - INFO - 浏览器初始化成功
+2025-10-30 20:24:23,239 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 20:24:30,483 - INFO - 开始登录流程
+2025-10-30 20:24:34,764 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 20:24:34,821 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 20:24:35,395 - INFO - 识别到验证码: 8fcn
+2025-10-30 20:24:35,500 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 20:24:38,550 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 20:25:08,303 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 20:25:08,303 - INFO - 开始选择卫星数据
+2025-10-30 20:25:14,044 - INFO - 卫星数据选择完成
+2025-10-30 20:25:14,044 - INFO - 开始选择空间范围
+2025-10-30 20:25:45,186 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 20:25:45,245 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 20:25:45,304 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 20:25:45,355 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 20:25:45,409 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 20:25:45,459 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 20:25:45,514 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 20:25:45,564 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 20:25:45,652 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 20:25:45,663 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 20:25:46,168 - INFO - 选择空间范围完成
+2025-10-30 20:25:46,168 - INFO - 开始提交订单
+2025-10-30 20:25:51,218 - WARNING - 点击元素失败，重试 1/3 - xpath: //*[@id="menuProNames"]
+2025-10-30 20:33:14,224 - INFO - === 日志系统初始化 ===
+2025-10-30 20:33:14,224 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 20:33:14,224 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 20:33:14,224 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 20:33:14,282 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 20:33:15,517 - INFO - 浏览器初始化成功
+2025-10-30 20:33:15,517 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 20:33:30,506 - INFO - 开始登录流程
+2025-10-30 20:33:32,811 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 20:33:32,873 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 20:33:33,445 - INFO - 识别到验证码: bkvf
+2025-10-30 20:33:33,590 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 20:33:36,644 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 20:33:36,713 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 20:33:36,714 - INFO - 开始选择卫星数据
+2025-10-30 20:33:41,975 - INFO - 卫星数据选择完成
+2025-10-30 20:33:41,975 - INFO - 开始选择空间范围
+2025-10-30 20:33:52,344 - ERROR - 程序运行出错: Message: 
+
+2025-10-30 20:33:52,344 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 330, in run
+    if not self._select_Range(time_param,time_param2,North,South,East,West):
+  File "D:/Pycharmcode/test/submit_order.py", line 498, in _select_Range
+    WebDriverWait(self.browser.driver, 10).until_not(
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 128, in until_not
+    raise TimeoutException(message)
+selenium.common.exceptions.TimeoutException: Message: 
+
+
+2025-10-30 20:33:52,344 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 20:34:50,639 - INFO - === 日志系统初始化 ===
+2025-10-30 20:34:50,639 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 20:34:50,639 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 20:34:50,639 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 20:34:50,695 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 20:34:51,942 - INFO - 浏览器初始化成功
+2025-10-30 20:34:51,942 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 20:35:45,162 - INFO - 开始登录流程
+2025-10-30 20:35:48,167 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 20:35:48,226 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 20:35:48,836 - INFO - 识别到验证码: xqud
+2025-10-30 20:35:48,950 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 20:35:52,002 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 20:35:52,011 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 20:35:52,011 - INFO - 开始选择卫星数据
+2025-10-30 20:35:57,219 - INFO - 卫星数据选择完成
+2025-10-30 20:35:57,219 - INFO - 开始选择空间范围
+2025-10-30 20:35:58,354 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 20:35:58,412 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 20:35:58,469 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 20:35:58,520 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 20:35:58,573 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 20:35:58,640 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 20:35:58,699 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 20:35:58,817 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 20:35:58,923 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 20:35:58,934 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 20:35:59,446 - INFO - 选择空间范围完成
+2025-10-30 20:35:59,446 - INFO - 开始提交订单
+2025-10-30 20:36:04,509 - WARNING - 点击元素失败，重试 1/3 - xpath: //*[@id="menuProNames"]
+2025-10-30 20:36:05,522 - WARNING - 点击元素失败，重试 2/3 - xpath: //*[@id="menuProNames"]
+2025-10-30 20:36:06,531 - WARNING - 点击元素失败，重试 3/3 - xpath: //*[@id="menuProNames"]
+2025-10-30 20:36:07,541 - ERROR - 多次尝试后仍无法点击元素: xpath: //*[@id="menuProNames"]
+2025-10-30 20:36:07,542 - ERROR - Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce011c]
+	(No symbol) [0x0x7ff775d27c1d]
+	(No symbol) [0x0x7ff775d60242]
+	(No symbol) [0x0x7ff775d5ac14]
+	(No symbol) [0x0x7ff775d59cca]
+	(No symbol) [0x0x7ff775caa755]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	(No symbol) [0x0x7ff775ca9731]
+	GetHandleVerifier [0x0x7ff77634b568+4182008]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-30 20:36:07,542 - ERROR - 提交订单失败，程序退出
+2025-10-30 20:36:07,542 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 20:37:58,217 - INFO - === 日志系统初始化 ===
+2025-10-30 20:37:58,217 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 20:37:58,217 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 20:37:58,217 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 20:37:58,263 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 20:37:59,505 - INFO - 浏览器初始化成功
+2025-10-30 20:37:59,505 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 20:38:05,615 - INFO - 开始登录流程
+2025-10-30 20:38:08,056 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 20:38:08,113 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 20:38:08,698 - INFO - 识别到验证码: m6wb
+2025-10-30 20:38:08,819 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 20:38:11,875 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 20:38:11,883 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 20:38:11,883 - INFO - 开始选择卫星数据
+2025-10-30 20:38:27,182 - INFO - 卫星数据选择完成
+2025-10-30 20:38:27,182 - INFO - 开始选择空间范围
+2025-10-30 20:38:30,332 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 20:38:30,391 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 20:38:30,492 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 20:38:30,548 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 20:38:30,636 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 20:38:30,692 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 20:38:30,756 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 20:38:30,835 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 20:38:30,985 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 20:38:30,997 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 20:38:31,511 - INFO - 选择空间范围完成
+2025-10-30 20:38:31,511 - INFO - 开始提交订单
+2025-10-30 20:38:39,821 - INFO - 订单提交完成
+2025-10-30 20:38:39,821 - INFO - 查看订单
+2025-10-30 20:38:40,088 - INFO - 下载操作完成
+2025-10-30 20:38:40,088 - INFO - 所有操作完成
+2025-10-30 20:38:40,088 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 20:58:27,597 - INFO - === 日志系统初始化 ===
+2025-10-30 20:58:27,597 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 20:58:27,597 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 20:58:27,598 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 20:58:27,640 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 20:58:28,895 - INFO - 浏览器初始化成功
+2025-10-30 20:58:28,896 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 20:58:37,769 - INFO - 开始登录流程
+2025-10-30 20:58:43,874 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 20:58:43,935 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 20:58:44,527 - INFO - 识别到验证码: 3wq4
+2025-10-30 20:58:44,633 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 20:58:50,690 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 20:58:50,697 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 20:58:50,697 - INFO - 开始选择卫星数据
+2025-10-30 20:59:09,956 - INFO - 卫星数据选择完成
+2025-10-30 20:59:09,956 - INFO - 开始选择空间范围
+2025-10-30 20:59:15,594 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 20:59:15,687 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 20:59:15,770 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 20:59:15,836 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 20:59:15,897 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 20:59:15,972 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 20:59:16,043 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 20:59:16,096 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 20:59:22,253 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 20:59:22,265 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 20:59:22,779 - INFO - 选择空间范围完成
+2025-10-30 20:59:22,779 - INFO - 开始提交订单
+2025-10-30 20:59:53,793 - INFO - 订单提交完成
+2025-10-30 20:59:53,793 - INFO - 查看订单
+2025-10-30 20:59:57,412 - INFO - 下载操作完成
+2025-10-30 20:59:57,412 - INFO - 所有操作完成
+2025-10-30 20:59:57,412 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 21:20:35,868 - INFO - === 日志系统初始化 ===
+2025-10-30 21:20:35,868 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 21:20:35,868 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 21:20:35,868 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 21:20:35,914 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 21:20:37,178 - INFO - 浏览器初始化成功
+2025-10-30 21:20:37,178 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 21:20:40,387 - INFO - 开始登录流程
+2025-10-30 21:20:52,493 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 21:20:52,581 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 21:20:53,164 - INFO - 识别到验证码: 04n
+2025-10-30 21:20:53,292 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 21:21:29,423 - WARNING - 未找到'风云极轨卫星'元素，本次登录失败，准备重试 2/3
+2025-10-30 21:21:31,082 - INFO - 识别到验证码: ppy2
+2025-10-30 21:21:31,182 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 21:21:37,245 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 21:21:37,245 - INFO - 开始选择卫星数据
+2025-10-30 21:21:57,497 - INFO - 卫星数据选择完成
+2025-10-30 21:21:57,497 - INFO - 开始选择空间范围
+2025-10-30 21:22:03,137 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 21:22:03,203 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 21:22:03,261 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 21:22:03,316 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 21:22:03,372 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 21:22:03,421 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 21:22:03,480 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 21:22:03,534 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 21:22:09,637 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 21:22:09,650 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 21:22:10,151 - INFO - 选择空间范围完成
+2025-10-30 21:22:10,151 - INFO - 开始提交订单
+2025-10-30 21:22:41,052 - INFO - 订单提交完成
+2025-10-30 21:22:41,052 - INFO - 查看订单
+2025-10-30 21:22:44,262 - INFO - 下载操作完成
+2025-10-30 21:22:44,262 - INFO - 所有操作完成
+2025-10-30 21:22:44,262 - INFO - ===== 订单提交程序结束 =====

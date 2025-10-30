@@ -146,6 +146,7 @@ class SatelliteBrowser:
             try:
                 element = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((by, value)))
                 element.click()
+                time.sleep(3)
                 return True
             except Exception as e:
                 logger.warning(f"点击元素失败，重试 {i + 1}/{retries} - {by}: {value}")
@@ -214,29 +215,6 @@ class SatelliteBrowser:
             logger.error(traceback.format_exc())
             return None
 
-    def js_click(self, element, locator=None, retries=3):
-        """
-        用 JavaScript 点击元素，自动处理 StaleElementReferenceException
-        locator: 元素定位器 (By, value)，用于重新定位元素
-        retries: 重试次数
-        """
-        from selenium.common.exceptions import StaleElementReferenceException
-
-        for attempt in range(retries):
-            try:
-                self.driver.execute_script("arguments[0].click();", element)
-                return True
-            except StaleElementReferenceException:
-                if locator:
-                    # 如果提供了 locator，重新获取元素
-                    element = self.driver.find_element(*locator)
-                    logger.warning(f"元素过期，已重新定位（第 {attempt + 1} 次重试）")
-                else:
-                    logger.warning(f"元素过期（第 {attempt + 1} 次重试），但未提供 locator，无法重新查找")
-                time.sleep(1)
-        logger.error("点击失败：多次尝试后元素仍然失效")
-        return False
-
 
 # 主程序类
 class SatelliteDataDownloader:
@@ -264,6 +242,7 @@ class SatelliteDataDownloader:
             'data_type_select': (By.XPATH, '//*[@id="select2-sel-dataType-container"]'),     # 点击“数据名称”白框
             'choose_MERSI': (By.XPATH, '/html/body/span/span/span[2]/ul/li[1]'),  # 数据名称中选择MERSI
             'choose_MERSI_3e': (By.XPATH, '/html/body/span/span/span[2]/ul/li[3]'), # 数据名称中选择MERSI 3e里面的
+            'test': (By.XPATH,'//ul[contains(@id, "select2-sel-dataType-results")]//li[contains(text(), "中分辨率光谱成像仪(MERSI)")]'),
 
             'click_GeographicalRange': (By.XPATH, '//*[@id="txt-spaceArea"]'),     # 点击 空间范围
             # 输入空间范围数据
@@ -351,85 +330,72 @@ class SatelliteDataDownloader:
             pass
 
     def _login(self):
-        """ 执行登录流程（增加验证码错误重试逻辑） """
         logger.info("开始登录流程")
-        max_login_retries = self.config.get_retry_attempts()  # 从配置文件获取最大重试次数（与原重试次数一致）
+        max_login_retries = self.config.get_retry_attempts()
 
-        # 1. 先点击登录按钮（仅需点击一次，弹出登录弹窗）
+        # 1. 点击登录按钮
         if not self.browser.safe_click_element(*self.locators['login_button']):
             return False
-        # time.sleep(1)   # 等待登录弹窗弹出
 
-        # 2. 循环重试验证码（直到登录成功或达到最大次数）
+        # 2. 循环重试登录
         for retry in range(max_login_retries):
             try:
-                # --------------------------
-                # 步骤1：输入用户名和密码（每次重试无需重复输入，但若页面刷新可保留）
-                # --------------------------
-                if retry == 0:  # 第一次重试时输入用户名密码，后续重试无需重复输入
+                # 步骤1：首次输入用户名密码
+                if retry == 0:
                     if not self.browser.safe_send_keys(*self.locators['username_input'], self.user_info['username']):
-                        continue  # 用户名输入失败，直接重试
+                        continue
                     if not self.browser.safe_send_keys(*self.locators['password_input'], self.user_info['password']):
-                        continue  # 密码输入失败，直接重试
+                        continue
 
-                # --------------------------
-                # 步骤2：识别并输入验证码（每次重试都需重新识别）
-                # --------------------------
-                # 清除原有的验证码（避免与新验证码叠加）
-                captcha_input = self.browser.safe_find_element(*self.locators['captcha_input'])  # 找到验证码输入框
+                # 步骤2：处理验证码
+                captcha_input = self.browser.safe_find_element(*self.locators['captcha_input'])
                 if captcha_input:
                     captcha_input.clear()
                     time.sleep(0.5)
 
-                # 识别新验证码
-                captcha_text = self.browser.solve_captcha(self.locators['captcha_image'][1])  # 上面写的识别验证码的函数
+                captcha_text = self.browser.solve_captcha(self.locators['captcha_image'][1])
                 if not captcha_text:
                     logger.warning(f"验证码识别失败，重试 {retry + 1}/{max_login_retries}")
-                    continue  # 识别失败，直接重试
+                    continue
 
-                # 输入新验证码
                 if not self.browser.safe_send_keys(*self.locators['captcha_input'], captcha_text):
                     logger.warning(f"验证码输入失败，重试 {retry + 1}/{max_login_retries}")
-                    continue  # 输入失败，直接重试
+                    continue
 
-                # --------------------------
-                # 步骤3：提交登录并判断是否成功
-                # --------------------------
+                # 步骤3：提交登录
                 if not self.browser.safe_click_element(*self.locators['submit_login']):
                     logger.warning(f"登录提交失败，重试 {retry + 1}/{max_login_retries}")
-                    continue  # 提交失败，直接重试
-                time.sleep(3)  # 等待登录结果（关键：给页面足够时间判断登录状态）
+                    continue
+                time.sleep(3)
 
-                # --------------------------
-                # 步骤4：验证登录是否成功（核心判定逻辑）
-                # 判定标准：能找到“风云极轨卫星”元素 → 登录成功；找不到 → 验证码错误
-                # --------------------------
-                logger.info("验证登录结果：尝试查找'风云极轨卫星'元素")
-                fengyun_element = self.browser.safe_find_element(*self.locators['FengYun_satellite'])  # 注意key是'FengYun_satellite'（原代码中首字母大写）
-                if fengyun_element:
+                # 步骤4：验证登录成功（只查1次，不抛异常）
+                try:
+                    fengyun_element = WebDriverWait(self.browser.driver, 3).until(
+                        EC.presence_of_element_located(self.locators['FengYun_satellite'])
+                    )
                     logger.info("成功找到'风云极轨卫星'元素，登录成功")
-                    return True  # 登录成功，退出循环
-                else:
-                    raise Exception("未找到'风云极轨卫星'元素，可能是因为验证码输入错误，未成功登录")  # 触发异常，进入重试流程
-
-            except Exception as e:
-                # 捕获“验证码错误”或其他登录异常，准备刷新验证码重试
-                if retry < max_login_retries - 1:  # 不是最后一次重试，刷新验证码
-                    logger.warning(f"登录失败（{str(e)}），刷新验证码重试 {retry + 2}/{max_login_retries}")
-                    # 关键：点击验证码图片，刷新新的验证码（触发页面重新生成验证码）
+                    return True
+                except TimeoutException:
+                    # 未找到元素：刷新验证码，进入下一次重试
+                    logger.warning(f"未找到'风云极轨卫星'元素，本次登录失败，准备重试 {retry + 2}/{max_login_retries}")
                     captcha_image = self.browser.safe_find_element(*self.locators['captcha_image'])
                     if captcha_image:
-                        captcha_image.click()  # 点击验证码刷新
-                        time.sleep(1)  # 等待新验证码加载
-                    else:
-                        logger.error("无法找到验证码图片，无法刷新")
-                        continue
+                        captcha_image.click()
+                        time.sleep(1)
+                    continue  # 直接进入下一次循环，不触发外层except
+
+            # 处理其他异常（如元素定位失败、点击失败等）
+            except Exception as e:
+                if retry < max_login_retries - 1:
+                    logger.warning(f"登录发生其他错误（{str(e)}），重试 {retry + 2}/{max_login_retries}")
+                    captcha_image = self.browser.safe_find_element(*self.locators['captcha_image'])
+                    if captcha_image:
+                        captcha_image.click()
+                        time.sleep(1)
                 else:
-                    # 最后一次重试失败，返回登录失败
-                    logger.error(f"达到最大登录重试次数（{max_login_retries}次），登录失败")
+                    logger.error(f"达到最大重试次数（{max_login_retries}次），登录失败")
                     return False
 
-        # 所有重试都失败，返回False
         logger.error("登录流程全部重试失败")
         return False
 
@@ -441,47 +407,53 @@ class SatelliteDataDownloader:
         # 选择风云极轨卫星
         if not self.browser.safe_click_element(*self.locators['FengYun_satellite']):
             return False
-        self.browser.wait.until(
-            EC.presence_of_element_located(self.locators['fy3d_satellite'])
-        )
-        time.sleep(1)
+
 
         # 选择卫星 是3D还是3E
         if selected_text_comboBox.split(":",1)[0] == "FY-3D" :
             if not self.browser.safe_click_element(*self.locators['fy3d_satellite']):
                 return False
+
         elif selected_text_comboBox.split(":",1)[0] == "FY-3E":
             if not self.browser.safe_click_element(*self.locators['fy3e_satellite']):
                 return False
-        time.sleep(1)
+
         # 选择1级数据
         if not self.browser.safe_click_element(*self.locators['level1_data']):
             return False
-        self.browser.wait.until(
-            EC.presence_of_element_located(self.locators['data_type_select'])
-        )
-        # 点击数据名称框
+        # 等待数据名称 可见
         if not self.browser.safe_click_element(*self.locators['data_type_select']):
             return False
-        try:
-            # 在点击 MERSI 前确保下拉菜单完全可见
-            self.browser.wait.until(
-                EC.visibility_of_element_located((By.CSS_SELECTOR, "ul#select2-sel-dataType-results li"))
-            )
-            logger.info("下拉菜单选项列表加载完成")
-        except TimeoutException:
-            logger.error("下拉菜单加载超时，无法选择MERSI")
-            return False
+        # self.browser.wait.until(
+        #     EC.presence_of_element_located(self.locators['data_type_select'])
+        # )
+        # time.sleep(2)
+        # # 点击数据名称框
+        # # 定位触发按钮（通过容器 id 找子元素）
+        # trigger = WebDriverWait(self.browser.driver, 10).until(
+        #     EC.element_to_be_clickable(
+        #         (By.XPATH,'//*[@id="select2-sel-dataType-container"]')
+        #     )
+        # )
+        # trigger.click()
+        # # 等待下拉框展开（验证选项列表可见）
+        # WebDriverWait(self.browser.driver, 10).until(
+        #     EC.visibility_of_element_located(
+        #         (By.XPATH,'/html/body/span/span')
+        #     )
+        # )
+        time.sleep(2)  # 给下拉框展开动画留时间
+
         # 选择MERSI
         if selected_text_comboBox.split(":", 1)[0] == "FY-3D":
             if not self.browser.safe_click_element(*self.locators['choose_MERSI']):
                 return False
+
         elif selected_text_comboBox.split(":", 1)[0] == "FY-3E":
-            # if not self.browser.safe_click_element(*self.locators['choose_MERSI_3e']):
-            #     return False
-            WebDriverWait(self.browser.driver, 10).until(
-                EC.element_to_be_clickable((By.XPATH, "//li[contains(text(), '中分辨率光谱成像仪(MERSI)')]"))
-            ).click()
+            if not self.browser.safe_click_element(*self.locators['test']):
+                return False
+
+
 
         logger.info("卫星数据选择完成")
         return True
@@ -490,15 +462,9 @@ class SatelliteDataDownloader:
         """空间范围选择"""
         logger.info("开始选择空间范围")
         #点击 “空间范围”
-
+        time.sleep(2)
         # 等待下拉菜单消失
-        try:
-            WebDriverWait(self.driver, 10).until_not(
-                EC.presence_of_element_located((By.CSS_SELECTOR, ".select2-results__options"))
-            )
-            time.sleep(0.5)  # 给动画一点缓冲时间
-        except:
-            logger.warning("下拉菜单关闭等待超时，继续执行")
+        time.sleep(0.5)  # 给动画一点缓冲时间
 
         if not self.browser.safe_click_element(*self.locators['click_GeographicalRange']):
             return False
