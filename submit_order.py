@@ -119,26 +119,46 @@ class SatelliteBrowser:
             logger.error(traceback.format_exc())
             return None
 
-    def safe_click_element(self, by, value, retry=0):
-        """安全点击元素，带重试机制"""
+    # def safe_click_element(self, by, value, retry=0):
+    #     """安全点击元素，带重试机制"""
+    #     try:
+    #         element = self.wait.until(EC.element_to_be_clickable((by, value)))
+    #         element.click()
+    #         logger.info(f"成功点击元素: {by}: {value}")
+    #         return True
+    #     except (TimeoutException, ElementClickInterceptedException, StaleElementReferenceException) as e:  # 捕获三种异常：超时异常 元素点击被拦截异常 元素过时异常
+    #         if retry < self.retry_attempts:
+    #             logger.warning(f"点击元素失败，重试 {retry + 1}/{self.retry_attempts} - {by}: {value}")
+    #             # 尝试滚动到元素
+    #             try:
+    #                 element = self.driver.find_element(by, value)  # 简单的查找元素 不是自己写的safe查找
+    #                 self.driver.execute_script("arguments[0].scrollIntoView();", element)  # 这段代码可以确保元素进入视野，再进行后续操作
+    #                 time.sleep(1)
+    #             except:
+    #                 pass
+    #             return self.safe_click_element(by, value, retry + 1)
+    #         logger.error(f"多次尝试后仍无法点击元素: {by}: {value}")
+    #         logger.error(traceback.format_exc())
+    #         return False
+
+    def safe_click_element(self, by, value, retries=3, wait=1):
+        for i in range(retries):
+            try:
+                element = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((by, value)))
+                element.click()
+                return True
+            except Exception as e:
+                logger.warning(f"点击元素失败，重试 {i + 1}/{retries} - {by}: {value}")
+                time.sleep(wait)
+        # 尝试JS点击
         try:
-            element = self.wait.until(EC.element_to_be_clickable((by, value)))
-            element.click()
-            logger.info(f"成功点击元素: {by}: {value}")
+            element = self.driver.find_element(by, value)
+            self.driver.execute_script("arguments[0].click();", element)
+            logger.info("使用JS点击成功")
             return True
-        except (TimeoutException, ElementClickInterceptedException, StaleElementReferenceException) as e:  # 捕获三种异常：超时异常 元素点击被拦截异常 元素过时异常
-            if retry < self.retry_attempts:
-                logger.warning(f"点击元素失败，重试 {retry + 1}/{self.retry_attempts} - {by}: {value}")
-                # 尝试滚动到元素
-                try:
-                    element = self.driver.find_element(by, value)  # 简单的查找元素 不是自己写的safe查找
-                    self.driver.execute_script("arguments[0].scrollIntoView();", element)  # 这段代码可以确保元素进入视野，再进行后续操作
-                    time.sleep(1)
-                except:
-                    pass
-                return self.safe_click_element(by, value, retry + 1)
+        except Exception as e:
             logger.error(f"多次尝试后仍无法点击元素: {by}: {value}")
-            logger.error(traceback.format_exc())
+            logger.error(e)
             return False
 
     def safe_send_keys(self, by, value, text, retry=0):
@@ -193,6 +213,29 @@ class SatelliteBrowser:
             logger.error(f"验证码识别失败: {str(e)}")
             logger.error(traceback.format_exc())
             return None
+
+    def js_click(self, element, locator=None, retries=3):
+        """
+        用 JavaScript 点击元素，自动处理 StaleElementReferenceException
+        locator: 元素定位器 (By, value)，用于重新定位元素
+        retries: 重试次数
+        """
+        from selenium.common.exceptions import StaleElementReferenceException
+
+        for attempt in range(retries):
+            try:
+                self.driver.execute_script("arguments[0].click();", element)
+                return True
+            except StaleElementReferenceException:
+                if locator:
+                    # 如果提供了 locator，重新获取元素
+                    element = self.driver.find_element(*locator)
+                    logger.warning(f"元素过期，已重新定位（第 {attempt + 1} 次重试）")
+                else:
+                    logger.warning(f"元素过期（第 {attempt + 1} 次重试），但未提供 locator，无法重新查找")
+                time.sleep(1)
+        logger.error("点击失败：多次尝试后元素仍然失效")
+        return False
 
 
 # 主程序类
@@ -421,9 +464,9 @@ class SatelliteDataDownloader:
         if not self.browser.safe_click_element(*self.locators['data_type_select']):
             return False
         try:
-            # 等待父元素ul可见，确保选项已渲染
+            # 在点击 MERSI 前确保下拉菜单完全可见
             self.browser.wait.until(
-                EC.visibility_of_element_located((By.ID, "select2-sel-dataType-results"))
+                EC.visibility_of_element_located((By.CSS_SELECTOR, "ul#select2-sel-dataType-results li"))
             )
             logger.info("下拉菜单选项列表加载完成")
         except TimeoutException:
@@ -434,8 +477,11 @@ class SatelliteDataDownloader:
             if not self.browser.safe_click_element(*self.locators['choose_MERSI']):
                 return False
         elif selected_text_comboBox.split(":", 1)[0] == "FY-3E":
-            if not self.browser.safe_click_element(*self.locators['choose_MERSI_3e']):
-                return False
+            # if not self.browser.safe_click_element(*self.locators['choose_MERSI_3e']):
+            #     return False
+            WebDriverWait(self.browser.driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//li[contains(text(), '中分辨率光谱成像仪(MERSI)')]"))
+            ).click()
 
         logger.info("卫星数据选择完成")
         return True
@@ -444,6 +490,16 @@ class SatelliteDataDownloader:
         """空间范围选择"""
         logger.info("开始选择空间范围")
         #点击 “空间范围”
+
+        # 等待下拉菜单消失
+        try:
+            WebDriverWait(self.driver, 10).until_not(
+                EC.presence_of_element_located((By.CSS_SELECTOR, ".select2-results__options"))
+            )
+            time.sleep(0.5)  # 给动画一点缓冲时间
+        except:
+            logger.warning("下拉菜单关闭等待超时，继续执行")
+
         if not self.browser.safe_click_element(*self.locators['click_GeographicalRange']):
             return False
         # 输入坐标

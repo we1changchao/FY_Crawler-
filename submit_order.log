@@ -4473,3 +4473,646 @@ Stacktrace:
 2025-10-30 15:18:42,534 - INFO - 下载操作完成
 2025-10-30 15:18:42,534 - INFO - 所有操作完成
 2025-10-30 15:18:42,534 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 15:38:01,599 - INFO - === 日志系统初始化 ===
+2025-10-30 15:38:01,599 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 15:38:01,599 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 15:38:01,599 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 15:38:01,644 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 15:38:02,900 - INFO - 浏览器初始化成功
+2025-10-30 15:38:02,900 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 15:38:11,848 - INFO - 开始登录流程
+2025-10-30 15:38:11,849 - ERROR - 程序运行出错: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-30 15:38:11,850 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 276, in run
+    if not self._login():
+  File "D:/Pycharmcode/test/submit_order.py", line 316, in _login
+    if not self.browser.safe_click_element(*self.locators['login_button']):
+  File "D:/Pycharmcode/test/submit_order.py", line 125, in safe_click_element
+    element = self.wait.until(EC.element_to_be_clickable((by, value)))
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 96, in until
+    value = method(self._driver)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 363, in _predicate
+    target = driver.find_element(*target)  # grab element at locator
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 770, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775cb82a1]
+	(No symbol) [0x0x7ff775d6799e]
+	(No symbol) [0x0x7ff775d88132]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-30 15:38:11,850 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 15:38:16,737 - INFO - === 日志系统初始化 ===
+2025-10-30 15:38:16,737 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 15:38:16,737 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 15:38:16,737 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 15:38:16,789 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 15:38:18,038 - INFO - 浏览器初始化成功
+2025-10-30 15:38:18,038 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 15:38:28,635 - INFO - 开始登录流程
+2025-10-30 15:38:33,509 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-30 15:38:33,591 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 15:38:33,641 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 15:38:34,237 - INFO - 识别到验证码: nvms
+2025-10-30 15:38:34,330 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 15:38:34,375 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-30 15:38:37,379 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 15:39:06,398 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 15:39:06,398 - INFO - 开始选择卫星数据
+2025-10-30 15:39:09,457 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-30 15:39:10,535 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[3]
+2025-10-30 15:39:11,601 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-30 15:39:11,657 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-30 15:39:11,666 - INFO - 下拉菜单选项列表加载完成
+2025-10-30 15:39:11,726 - INFO - 成功点击元素: xpath: /html/body/span/span/span[2]/ul/li[3]
+2025-10-30 15:39:11,726 - INFO - 卫星数据选择完成
+2025-10-30 15:39:11,726 - INFO - 开始选择空间范围
+2025-10-30 15:39:11,830 - INFO - 成功点击元素: xpath: //*[@id="txt-spaceArea"]
+2025-10-30 15:39:12,475 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 15:39:12,580 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 15:39:12,659 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 15:39:12,745 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 15:39:12,829 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 15:39:12,920 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 15:39:12,998 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 15:39:13,073 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 15:39:13,130 - INFO - 成功点击元素: xpath: //*[@id="other-GISWebLocation"]/input
+2025-10-30 15:39:13,200 - INFO - 成功点击元素: xpath: //*[@id="btn-space-area-confirm"]
+2025-10-30 15:39:13,231 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 15:39:13,258 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 15:39:13,759 - INFO - 选择空间范围完成
+2025-10-30 15:39:13,759 - INFO - 开始提交订单
+2025-10-30 15:39:15,808 - INFO - 成功点击元素: xpath: //*[@id="btn-search"]
+2025-10-30 15:39:18,861 - INFO - 成功点击元素: xpath: //*[@id="menuProNames"]
+2025-10-30 15:39:18,926 - INFO - 成功点击元素: xpath: //*[@id="fileListHead"]/th[3]/div/ul/li[3]/a/input
+2025-10-30 15:39:18,976 - INFO - 成功点击元素: xpath: //*[@id="searchId"]
+2025-10-30 15:39:19,436 - INFO - 成功点击元素: xpath: /html/body/div[9]/div/div[2]/div/div[2]/div[2]/div/table/tbody/tr[2]/td[1]/input
+2025-10-30 15:39:20,006 - INFO - 成功点击元素: xpath: //*[@id="commitEdit"]
+2025-10-30 15:39:20,264 - INFO - 成功点击元素: xpath: //*[@id="chkIsSendMail"]
+2025-10-30 15:39:20,336 - INFO - 成功点击元素: xpath: /html/body/div[4]/div/div[3]/div[2]/div[2]/div[4]/button
+2025-10-30 15:39:21,352 - INFO - 订单提交完成
+2025-10-30 15:39:21,352 - INFO - 查看订单
+2025-10-30 15:39:21,625 - INFO - 成功点击元素: xpath: //*[@id="submit-order"]/div[2]/div/div[3]/button[1]
+2025-10-30 15:39:21,625 - INFO - 下载操作完成
+2025-10-30 15:39:21,625 - INFO - 所有操作完成
+2025-10-30 15:39:21,625 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 15:46:56,499 - INFO - === 日志系统初始化 ===
+2025-10-30 15:46:56,499 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 15:46:56,499 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 15:46:56,499 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 15:46:56,552 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 15:46:57,785 - INFO - 浏览器初始化成功
+2025-10-30 15:46:57,785 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 15:47:04,262 - INFO - 开始登录流程
+2025-10-30 15:47:06,511 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-30 15:47:06,595 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 15:47:06,640 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 15:47:07,233 - INFO - 识别到验证码: 7i35
+2025-10-30 15:47:07,372 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 15:47:07,435 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-30 15:47:10,442 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 15:47:10,449 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 15:47:10,449 - INFO - 开始选择卫星数据
+2025-10-30 15:47:13,493 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-30 15:47:14,538 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[3]
+2025-10-30 15:47:15,592 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-30 15:47:15,637 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-30 15:47:15,646 - INFO - 下拉菜单选项列表加载完成
+2025-10-30 15:47:15,670 - ERROR - 程序运行出错: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=140.0.7339.81); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775ce7e5a]
+	(No symbol) [0x0x7ff775ceb2b1]
+	(No symbol) [0x0x7ff775d89b7b]
+	(No symbol) [0x0x7ff775d6037a]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-30 15:47:15,671 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 285, in run
+    if not self._select_satellite_data(selected_text_comboBox):
+  File "D:/Pycharmcode/test/submit_order.py", line 446, in _select_satellite_data
+    self.browser.js_click(element)
+  File "D:/Pycharmcode/test/submit_order.py", line 200, in js_click
+    self.driver.execute_script("arguments[0].click();", element)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 444, in execute_script
+    return self.execute(command, {"script": script, "args": converted_args})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=140.0.7339.81); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775ce7e5a]
+	(No symbol) [0x0x7ff775ceb2b1]
+	(No symbol) [0x0x7ff775d89b7b]
+	(No symbol) [0x0x7ff775d6037a]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-30 15:47:15,671 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 15:50:17,120 - INFO - === 日志系统初始化 ===
+2025-10-30 15:50:17,120 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 15:50:17,120 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 15:50:17,120 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 15:50:17,168 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 15:50:18,406 - INFO - 浏览器初始化成功
+2025-10-30 15:50:18,406 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 15:50:21,561 - INFO - 开始登录流程
+2025-10-30 15:50:25,002 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-10-30 15:50:25,088 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 15:50:25,162 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 15:50:25,735 - INFO - 识别到验证码: yyul
+2025-10-30 15:50:25,845 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 15:50:25,883 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-10-30 15:50:28,896 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 15:50:28,903 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 15:50:28,903 - INFO - 开始选择卫星数据
+2025-10-30 15:50:31,943 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]
+2025-10-30 15:50:32,993 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[3]/ul/li[3]
+2025-10-30 15:50:34,031 - INFO - 成功点击元素: xpath: /html/body/div[4]/div[4]/div[1]/div/div[1]/div[4]/ul/li[1]
+2025-10-30 15:50:34,085 - INFO - 成功点击元素: xpath: //*[@id="select2-sel-dataType-container"]
+2025-10-30 15:50:34,093 - INFO - 下拉菜单选项列表加载完成
+2025-10-30 15:50:34,109 - INFO - 卫星数据选择完成
+2025-10-30 15:50:34,109 - INFO - 开始选择空间范围
+2025-10-30 15:50:35,191 - WARNING - 点击元素失败，重试 1/3 - xpath: //*[@id="txt-spaceArea"]
+2025-10-30 15:50:37,270 - WARNING - 点击元素失败，重试 2/3 - xpath: //*[@id="txt-spaceArea"]
+2025-10-30 15:50:39,350 - WARNING - 点击元素失败，重试 3/3 - xpath: //*[@id="txt-spaceArea"]
+2025-10-30 15:50:41,438 - ERROR - 多次尝试后仍无法点击元素: xpath: //*[@id="txt-spaceArea"]
+2025-10-30 15:50:41,440 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 126, in safe_click_element
+    element.click()
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <input class="form-control" autocomplete="off" type="text" value="请点击选择空间范围" id="txt-spaceArea" placeholder="请点击选择空间范围" readonly=""> is not clickable at point (654, 675). Other element would receive the click: <li class="select2-results__option" id="select2-sel-dataType-result-zdlx-MERSI" role="treeitem" aria-selected="false">...</li>
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d3fe69]
+	(No symbol) [0x0x7ff775d3d7ee]
+	(No symbol) [0x0x7ff775d3a731]
+	(No symbol) [0x0x7ff775d39620]
+	(No symbol) [0x0x7ff775d2abc8]
+	(No symbol) [0x0x7ff775d6037a]
+	(No symbol) [0x0x7ff775d2a456]
+	(No symbol) [0x0x7ff775d60590]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 126, in safe_click_element
+    element.click()
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <input class="form-control" autocomplete="off" type="text" value="请点击选择空间范围" id="txt-spaceArea" placeholder="请点击选择空间范围" readonly=""> is not clickable at point (654, 115). Other element would receive the click: <li class="select2-results__option" id="select2-sel-dataType-result-zdlx-MERSI" role="treeitem" aria-selected="false">...</li>
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d3fe69]
+	(No symbol) [0x0x7ff775d3d7ee]
+	(No symbol) [0x0x7ff775d3a731]
+	(No symbol) [0x0x7ff775d39620]
+	(No symbol) [0x0x7ff775d2abc8]
+	(No symbol) [0x0x7ff775d6037a]
+	(No symbol) [0x0x7ff775d2a456]
+	(No symbol) [0x0x7ff775d60590]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 126, in safe_click_element
+    element.click()
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <input class="form-control" autocomplete="off" type="text" value="请点击选择空间范围" id="txt-spaceArea" placeholder="请点击选择空间范围" readonly=""> is not clickable at point (654, 115). Other element would receive the click: <li class="select2-results__option" id="select2-sel-dataType-result-zdlx-MERSI" role="treeitem" aria-selected="false">...</li>
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d3fe69]
+	(No symbol) [0x0x7ff775d3d7ee]
+	(No symbol) [0x0x7ff775d3a731]
+	(No symbol) [0x0x7ff775d39620]
+	(No symbol) [0x0x7ff775d2abc8]
+	(No symbol) [0x0x7ff775d6037a]
+	(No symbol) [0x0x7ff775d2a456]
+	(No symbol) [0x0x7ff775d60590]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 126, in safe_click_element
+    element.click()
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <input class="form-control" autocomplete="off" type="text" value="请点击选择空间范围" id="txt-spaceArea" placeholder="请点击选择空间范围" readonly=""> is not clickable at point (654, 115). Other element would receive the click: <li class="select2-results__option" id="select2-sel-dataType-result-zdlx-MERSI" role="treeitem" aria-selected="false">...</li>
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775d3fe69]
+	(No symbol) [0x0x7ff775d3d7ee]
+	(No symbol) [0x0x7ff775d3a731]
+	(No symbol) [0x0x7ff775d39620]
+	(No symbol) [0x0x7ff775d2abc8]
+	(No symbol) [0x0x7ff775d6037a]
+	(No symbol) [0x0x7ff775d2a456]
+	(No symbol) [0x0x7ff775d60590]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-30 15:50:41,440 - ERROR - 选择地理范围失败，程序退出
+2025-10-30 15:50:41,440 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 15:58:44,875 - INFO - === 日志系统初始化 ===
+2025-10-30 15:58:44,876 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 15:58:44,876 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 15:58:44,876 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 15:58:44,934 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 15:58:46,217 - INFO - 浏览器初始化成功
+2025-10-30 15:58:46,217 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 15:58:52,039 - INFO - 开始登录流程
+2025-10-30 15:58:53,270 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 15:58:53,315 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 15:58:53,935 - INFO - 识别到验证码: wouz
+2025-10-30 15:58:54,080 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 15:58:57,140 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 15:58:57,147 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 15:58:57,147 - INFO - 开始选择卫星数据
+2025-10-30 15:59:02,353 - INFO - 下拉菜单选项列表加载完成
+2025-10-30 15:59:02,368 - INFO - 卫星数据选择完成
+2025-10-30 15:59:02,369 - INFO - 开始选择空间范围
+2025-10-30 15:59:02,369 - WARNING - 下拉菜单关闭等待超时，继续执行
+2025-10-30 15:59:03,412 - WARNING - 点击元素失败，重试 1/3 - xpath: //*[@id="txt-spaceArea"]
+2025-10-30 15:59:05,485 - WARNING - 点击元素失败，重试 2/3 - xpath: //*[@id="txt-spaceArea"]
+2025-10-30 15:59:07,577 - WARNING - 点击元素失败，重试 3/3 - xpath: //*[@id="txt-spaceArea"]
+2025-10-30 15:59:08,592 - INFO - 使用JS点击成功
+2025-10-30 15:59:09,160 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 15:59:09,215 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 15:59:09,273 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 15:59:09,345 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 15:59:09,420 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 15:59:09,472 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 15:59:09,552 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 15:59:09,640 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 15:59:09,748 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 15:59:09,760 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 15:59:10,269 - INFO - 选择空间范围完成
+2025-10-30 15:59:10,269 - INFO - 开始提交订单
+2025-10-30 15:59:17,603 - INFO - 订单提交完成
+2025-10-30 15:59:17,604 - INFO - 查看订单
+2025-10-30 15:59:17,799 - INFO - 下载操作完成
+2025-10-30 15:59:17,799 - INFO - 所有操作完成
+2025-10-30 15:59:17,799 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 16:11:27,400 - INFO - === 日志系统初始化 ===
+2025-10-30 16:11:27,400 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 16:11:27,400 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 16:11:27,400 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 16:11:27,448 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 16:11:28,699 - INFO - 浏览器初始化成功
+2025-10-30 16:11:28,699 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 16:11:35,340 - INFO - 开始登录流程
+2025-10-30 16:11:37,582 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 16:11:37,640 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 16:11:38,233 - INFO - 识别到验证码: f1zk
+2025-10-30 16:11:38,340 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 16:11:41,410 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 16:11:41,417 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 16:11:41,417 - INFO - 开始选择卫星数据
+2025-10-30 16:11:46,601 - INFO - 下拉菜单选项列表加载完成
+2025-10-30 16:11:46,604 - ERROR - 程序运行出错: Message: javascript error: Cannot read properties of null (reading 'click')
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775ce7e5a]
+	(No symbol) [0x0x7ff775ceb2b1]
+	(No symbol) [0x0x7ff775d89b7b]
+	(No symbol) [0x0x7ff775d6037a]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+2025-10-30 16:11:46,605 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/submit_order.py", line 324, in run
+    if not self._select_satellite_data(selected_text_comboBox):
+  File "D:/Pycharmcode/test/submit_order.py", line 482, in _select_satellite_data
+    self.browser.driver.execute_script("document.getElementById('select2 - sel - dataType - result - k7xe - MERSI').click()")
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 444, in execute_script
+    return self.execute(command, {"script": script, "args": converted_args})["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.JavascriptException: Message: javascript error: Cannot read properties of null (reading 'click')
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff775f61eb5+80197]
+	GetHandleVerifier [0x0x7ff775f61f10+80288]
+	(No symbol) [0x0x7ff775ce02fa]
+	(No symbol) [0x0x7ff775ce7e5a]
+	(No symbol) [0x0x7ff775ceb2b1]
+	(No symbol) [0x0x7ff775d89b7b]
+	(No symbol) [0x0x7ff775d6037a]
+	(No symbol) [0x0x7ff775d887fb]
+	(No symbol) [0x0x7ff775d60153]
+	(No symbol) [0x0x7ff775d28b02]
+	(No symbol) [0x0x7ff775d298d3]
+	GetHandleVerifier [0x0x7ff77621e83d+2949837]
+	GetHandleVerifier [0x0x7ff776218c6a+2926330]
+	GetHandleVerifier [0x0x7ff7762386c7+3055959]
+	GetHandleVerifier [0x0x7ff775f7cfee+191102]
+	GetHandleVerifier [0x0x7ff775f850af+224063]
+	GetHandleVerifier [0x0x7ff775f6af64+117236]
+	GetHandleVerifier [0x0x7ff775f6b119+117673]
+	GetHandleVerifier [0x0x7ff775f510a8+11064]
+	BaseThreadInitThunk [0x0x7ffa27f2e8d7+23]
+	RtlUserThreadStart [0x0x7ffa2972c53c+44]
+
+
+2025-10-30 16:11:46,605 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 16:19:09,658 - INFO - === 日志系统初始化 ===
+2025-10-30 16:19:09,658 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 16:19:09,658 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 16:19:09,658 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 16:19:09,711 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 16:19:10,965 - INFO - 浏览器初始化成功
+2025-10-30 16:19:10,965 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 16:19:21,092 - INFO - 开始登录流程
+2025-10-30 16:19:24,681 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 16:19:24,736 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 16:19:25,298 - INFO - 识别到验证码: qfx8
+2025-10-30 16:19:25,424 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 16:19:28,505 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 16:19:31,696 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 16:19:31,697 - INFO - 开始选择卫星数据
+2025-10-30 16:19:36,885 - INFO - 下拉菜单选项列表加载完成
+2025-10-30 16:19:36,930 - INFO - 卫星数据选择完成
+2025-10-30 16:19:36,930 - INFO - 开始选择空间范围
+2025-10-30 16:19:36,930 - WARNING - 下拉菜单关闭等待超时，继续执行
+2025-10-30 16:19:37,544 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 16:19:37,619 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 16:19:37,677 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 16:19:37,729 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 16:19:37,782 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 16:19:37,868 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 16:19:37,926 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 16:19:37,984 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 16:19:38,094 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 16:19:38,108 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 16:19:38,616 - INFO - 选择空间范围完成
+2025-10-30 16:19:38,616 - INFO - 开始提交订单
+2025-10-30 16:19:49,417 - INFO - 订单提交完成
+2025-10-30 16:19:49,417 - INFO - 查看订单
+2025-10-30 16:19:49,940 - INFO - 下载操作完成
+2025-10-30 16:19:49,940 - INFO - 所有操作完成
+2025-10-30 16:19:49,940 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 16:23:33,778 - INFO - === 日志系统初始化 ===
+2025-10-30 16:23:33,779 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 16:23:33,779 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 16:23:33,779 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 16:23:33,826 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 16:23:35,135 - INFO - 浏览器初始化成功
+2025-10-30 16:23:35,135 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 16:23:43,131 - INFO - 开始登录流程
+2025-10-30 16:23:45,373 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 16:23:45,426 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 16:23:46,043 - INFO - 识别到验证码: I9dm
+2025-10-30 16:23:46,120 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 16:23:49,178 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 16:23:52,468 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 16:23:52,469 - INFO - 开始选择卫星数据
+2025-10-30 16:23:57,703 - INFO - 下拉菜单选项列表加载完成
+2025-10-30 16:23:57,752 - INFO - 卫星数据选择完成
+2025-10-30 16:23:57,752 - INFO - 开始选择空间范围
+2025-10-30 16:23:57,752 - WARNING - 下拉菜单关闭等待超时，继续执行
+2025-10-30 16:23:58,403 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 16:23:58,468 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 16:23:58,527 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 16:23:58,582 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 16:23:58,660 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 16:23:58,714 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 16:23:58,828 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 16:23:58,885 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 16:23:59,012 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 16:23:59,026 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 16:23:59,532 - INFO - 选择空间范围完成
+2025-10-30 16:23:59,532 - INFO - 开始提交订单
+2025-10-30 16:24:07,858 - INFO - 订单提交完成
+2025-10-30 16:24:07,858 - INFO - 查看订单
+2025-10-30 16:24:08,047 - INFO - 下载操作完成
+2025-10-30 16:24:08,047 - INFO - 所有操作完成
+2025-10-30 16:24:08,047 - INFO - ===== 订单提交程序结束 =====
+2025-10-30 16:37:29,296 - INFO - === 日志系统初始化 ===
+2025-10-30 16:37:29,296 - INFO - 日志文件路径: D:\Pycharmcode\test\submit_order.log
+2025-10-30 16:37:29,296 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-10-30 16:37:29,296 - INFO - ===== 订单提交程序启动 =====
+2025-10-30 16:37:29,348 - INFO - 已将配置文件中的下载目录更新为：D:\FYData
+2025-10-30 16:37:30,612 - INFO - 浏览器初始化成功
+2025-10-30 16:37:30,612 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-10-30 16:38:07,524 - INFO - 开始登录流程
+2025-10-30 16:38:09,541 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-10-30 16:38:09,586 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-10-30 16:38:10,172 - INFO - 识别到验证码: xzap
+2025-10-30 16:38:10,286 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-10-30 16:38:13,342 - INFO - 验证登录结果：尝试查找'风云极轨卫星'元素
+2025-10-30 16:38:13,349 - INFO - 成功找到'风云极轨卫星'元素，登录成功
+2025-10-30 16:38:13,349 - INFO - 开始选择卫星数据
+2025-10-30 16:38:18,585 - INFO - 下拉菜单选项列表加载完成
+2025-10-30 16:38:18,633 - INFO - 卫星数据选择完成
+2025-10-30 16:38:18,633 - INFO - 开始选择空间范围
+2025-10-30 16:38:18,633 - WARNING - 下拉菜单关闭等待超时，继续执行
+2025-10-30 16:38:19,253 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_D"]
+2025-10-30 16:38:19,300 - INFO - 成功输入文本到元素: xpath: //*[@id="other-North_M"]
+2025-10-30 16:38:19,361 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_D"]
+2025-10-30 16:38:19,405 - INFO - 成功输入文本到元素: xpath: //*[@id="other-West_M"]
+2025-10-30 16:38:19,449 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_D"]
+2025-10-30 16:38:19,494 - INFO - 成功输入文本到元素: xpath: //*[@id="other-East_M"]
+2025-10-30 16:38:19,544 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_D"]
+2025-10-30 16:38:19,587 - INFO - 成功输入文本到元素: xpath: //*[@id="other-South_M"]
+2025-10-30 16:38:19,700 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-beginDate"]
+2025-10-30 16:38:19,712 - INFO - 成功通过JS设置文本到元素: xpath: //*[@id="c-endDate"]
+2025-10-30 16:38:20,219 - INFO - 选择空间范围完成
+2025-10-30 16:38:20,219 - INFO - 开始提交订单
+2025-10-30 16:38:29,790 - INFO - 订单提交完成
+2025-10-30 16:38:29,790 - INFO - 查看订单
+2025-10-30 16:38:30,066 - INFO - 下载操作完成
+2025-10-30 16:38:30,066 - INFO - 所有操作完成
+2025-10-30 16:38:30,066 - INFO - ===== 订单提交程序结束 =====
