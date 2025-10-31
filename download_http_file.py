@@ -47,32 +47,31 @@ def download_http_file(url1,save_dir):
             # 获取文件大小
             total_size = int(response.headers.get('content-length', 0))
 
-            # 新增：时间控制变量（控制进度输出频率）
-            last_print_time = time.time()  # 记录上次输出时间
-            print_interval = 0.25  # 输出间隔（0.25秒）
 
             # 写入文件
             with open(file_path, 'wb') as file:
                 if total_size == 0:
                     file.write(response.content)
                 else:
+                    # 进度控制变量（核心修改）
                     downloaded = 0
+                    last_reported_percent = -5  # 上次报告的进度（初始值设为-5，确保0%能触发首次输出）
                     for chunk in response.iter_content(chunk_size=8192):
                         if chunk:
                             file.write(chunk)
                             downloaded += len(chunk)
-                            # 显示下载进度
-                            if total_size > 0:
-                                current_time = time.time()  # 当前时间
-                                if current_time - last_print_time >= print_interval:
-                                    progress = (downloaded / total_size) * 100
-                                    print(f"\r下载进度: {progress:.2f}%", end='', flush=True)
-            # 下载完成后，强制输出100%进度
-            if total_size > 0:
-                print(f"\r下载进度: {filename} 100.00%", end='', flush=True)
+                            # 计算当前进度百分比
+                            current_percent = (downloaded / total_size) * 100
+                            # 当进度跨越5%的整数倍时，才输出（例如：5%、10%、15%...）
+                            if current_percent - last_reported_percent >= 5:
+                                # 取整数百分比（避免浮点数精度问题）
+                                reported_percent = int(current_percent // 5 * 5)
+                                print(f"\r下载进度: {reported_percent}%", end='', flush=True)
+                                last_reported_percent = reported_percent  # 更新上次报告的进度
+            # 下载完成后强制输出100%
+            print(f"\r下载进度: 100%", end='', flush=True)
             print(f"\n文件下载完成: {file_path}")
             print(f"文件大小: {os.path.getsize(file_path)} 字节")
-
             return True
         else:
             print(f"下载失败，状态码: {response.status_code}")
@@ -82,7 +81,6 @@ def download_http_file(url1,save_dir):
     except requests.exceptions.SSLError as e:
         print(f"SSL错误: {e}")
         print("尝试使用验证...")
-        # 如果SSL验证失败，尝试使用验证
         try:
             response = requests.get(url, stream=True, verify=True, headers=headers, timeout=30)
             if response.status_code == 200:

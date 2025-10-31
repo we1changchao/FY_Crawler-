@@ -276,8 +276,8 @@ class SatelliteDataDownloader:
             # 全部选择
             'click_AllChoose': (By.XPATH, '//*[@id="allSele1"]'),  # 点击"全部选择"
 
-            'beginDate': (By.XPATH, '//*[@id="c-beginDate"]'),
-            'endDate': (By.XPATH, '//*[@id="c-endDate"]'),
+            'beginDate': (By.XPATH, '//*[@id="c-beginDate"]'),  # 开始时间
+            'endDate': (By.XPATH, '//*[@id="c-endDate"]'),  # 结束时间
 
         }
 
@@ -286,42 +286,42 @@ class SatelliteDataDownloader:
         try:
             # 初始化浏览器
             if not self.browser.init_browser():
-                logger.error("无法初始化浏览器，程序退出")
+                logger.error("[错误]无法初始化浏览器，程序退出")
                 return
 
             # 打开网站
-            logger.info(f"打开网站: {self.base_url}")
+            logger.info(f"正在打开网站，网址为： {self.base_url}")
             self.browser.driver.get(self.base_url)
             time.sleep(3)  # 初始加载等待
 
             # 执行登录流程
             if not self._login():
-                logger.error("登录失败，程序退出")
+                logger.error("[错误]登录失败，程序退出")
                 return
 
             # 选择卫星数据
             if not self._select_satellite_data(selected_text_comboBox):
-                logger.error("选择卫星数据失败，程序退出")
+                logger.error("[错误]选择卫星数据失败，程序退出")
                 return
 
             # 选择地理范围
             if not self._select_Range(time_param,time_param2,North,South,East,West):
-                logger.error("选择地理范围失败，程序退出")
+                logger.error("[错误]选择地理范围失败，程序退出")
                 return
 
             # 提交订单
             if not self._submit_order():
-                logger.error("提交订单失败，程序退出")
+                logger.error("[错误]提交订单失败，程序退出")
                 return
 
             # 查看订单
             if not self._check_order():
-                logger.error("查看订单失败，程序退出")
+                logger.error("[错误]查看订单失败，程序退出")
                 return
             logger.info("所有操作完成")
 
         except Exception as e:
-            logger.error(f"程序运行出错: {str(e)}")
+            logger.error(f"[错误]程序运行出错: {str(e)}")
             logger.error(traceback.format_exc())
         finally:
             # 可以根据需要决定是否关闭浏览器
