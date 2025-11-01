@@ -4337,3 +4337,348 @@ Stacktrace:
 2025-11-01 10:55:50,688 - INFO - 页面链接处理完成：总计1个文件, 成功1个, 失败0个
 2025-11-01 10:55:50,688 - INFO - ✅ 成功下载1个HDF文件！
 2025-11-01 10:55:50,688 - INFO - ===== 订单下载完成了 =====
+2025-11-01 19:18:00,185 - INFO - === 日志系统初始化测试 ===
+2025-11-01 19:18:00,186 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-01 19:18:00,186 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-01 19:18:00,186 - INFO - ===== 开始下载订单了 =====
+2025-11-01 19:19:00,926 - INFO - === 日志系统初始化测试 ===
+2025-11-01 19:19:00,926 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-01 19:19:00,926 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-01 19:19:00,926 - INFO - ===== 开始下载订单了 =====
+2025-11-01 19:19:02,370 - INFO - 浏览器初始化成功
+2025-11-01 19:19:02,370 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-11-01 19:19:11,357 - INFO - 开始登录流程
+2025-11-01 19:19:17,611 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-01 19:19:17,659 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-01 19:19:17,705 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-01 19:19:18,333 - INFO - 识别到验证码: c6ib
+2025-11-01 19:19:18,437 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-01 19:19:18,481 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-01 19:19:50,146 - INFO - 成功找到'我的订单'元素，登录成功
+2025-11-01 19:19:50,972 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-01 19:19:51,216 - INFO - 所有订单均未处于【准备中】状态
+2025-11-01 19:19:51,216 - INFO - 开始点击文件按钮并读取内容
+2025-11-01 19:19:53,261 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-01 19:19:53,675 - INFO - 文件创建: C:\Users\Lenovo\Downloads\4b082e2d-26a9-456d-abb6-39e5b66b939d.tmp
+2025-11-01 19:19:53,709 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\4b082e2d-26a9-456d-abb6-39e5b66b939d.tmp → C:\Users\Lenovo\Downloads\A202511010956066258.txt.crdownload
+2025-11-01 19:19:53,709 - INFO - 记录中间临时文件: C:\Users\Lenovo\Downloads\A202511010956066258.txt.crdownload
+2025-11-01 19:19:53,729 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\A202511010956066258.txt.crdownload → C:\Users\Lenovo\Downloads\A202511010956066258.txt
+2025-11-01 19:19:53,730 - INFO - 检测到最终txt文件: C:\Users\Lenovo\Downloads\A202511010956066258.txt
+2025-11-01 19:19:54,276 - INFO - 捕获到直接下载的TXT文件
+2025-11-01 19:19:54,276 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-11-01 19:19:54,277 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-11-01 19:19:54,277 - INFO - 成功获取下载的txt文件内容
+2025-11-01 19:19:54,277 - INFO - 从txt文件中提取到1个FTP格式HDF链接，开始下载...
+2025-11-01 19:19:54,277 - INFO - 正在下载第1/1个FTP链接: ftp://A202511010956066258:xac_vG0t@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251101_0740_GEO1K_MS.HDF
+2025-11-01 19:29:48,997 - INFO - 成功下载: FY3D_MERSI_GBAL_L1_20251101_0740_GEO1K_MS.HDF
+2025-11-01 19:29:48,997 - INFO - ✅ 第1个FTP链接下载成功: ftp://A202511010956066258:xac_vG0t@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251101_0740_GEO1K_MS.HDF
+2025-11-01 19:29:48,997 - INFO - 已清理临时TXT文件：C:\Users\Lenovo\Downloads\A202511010956066258.txt
+2025-11-01 19:29:48,997 - INFO - 下载完成统计: 总计1个文件, 成功1个, 失败0个
+2025-11-01 19:29:48,997 - INFO - ✅ 成功下载1个HDF文件！
+2025-11-01 19:29:48,997 - INFO - ===== 订单下载完成了 =====
+2025-11-01 19:35:24,358 - INFO - === 日志系统初始化测试 ===
+2025-11-01 19:35:24,358 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-01 19:35:24,358 - INFO - 当前工作目录: D:\Pycharmcode\test
+2025-11-01 19:35:24,358 - INFO - ===== 开始下载订单了 =====
+2025-11-01 19:35:40,004 - INFO - === 日志系统初始化测试 ===
+2025-11-01 19:35:40,004 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-01 19:35:40,004 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-01 19:35:40,004 - INFO - ===== 开始下载订单了 =====
+2025-11-01 19:35:41,319 - INFO - 浏览器初始化成功
+2025-11-01 19:35:41,319 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-11-01 19:35:56,871 - INFO - 开始登录流程
+2025-11-01 19:36:00,181 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-01 19:36:00,250 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-01 19:36:00,290 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-01 19:36:00,914 - INFO - 识别到验证码: yae8
+2025-11-01 19:36:01,003 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-01 19:36:01,040 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-01 19:36:04,056 - INFO - 成功找到'我的订单'元素，登录成功
+2025-11-01 19:36:05,229 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-01 19:36:05,600 - INFO - 所有订单均未处于【准备中】状态
+2025-11-01 19:36:05,600 - INFO - txt文件共2行，将执行2次下载操作
+2025-11-01 19:36:05,600 - INFO - 开始第1/2次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')
+2025-11-01 19:36:07,647 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-01 19:36:09,091 - INFO - 文件创建: C:\Users\Lenovo\Downloads\a6c155f5-2f21-4ce8-9f68-be71f844a494.tmp
+2025-11-01 19:36:09,114 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\a6c155f5-2f21-4ce8-9f68-be71f844a494.tmp → C:\Users\Lenovo\Downloads\A202511010956066258.txt.crdownload
+2025-11-01 19:36:09,114 - INFO - 记录中间临时文件: C:\Users\Lenovo\Downloads\A202511010956066258.txt.crdownload
+2025-11-01 19:36:09,132 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\A202511010956066258.txt.crdownload → C:\Users\Lenovo\Downloads\A202511010956066258.txt
+2025-11-01 19:36:09,132 - INFO - 检测到最终txt文件: C:\Users\Lenovo\Downloads\A202511010956066258.txt
+2025-11-01 19:36:09,668 - INFO - 捕获到直接下载的TXT文件
+2025-11-01 19:36:09,669 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-11-01 19:36:09,669 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-11-01 19:36:09,669 - INFO - 成功获取下载的txt文件内容
+2025-11-01 19:36:09,669 - INFO - 从txt文件中提取到1个FTP格式HDF链接，开始下载...
+2025-11-01 19:36:09,669 - INFO - 正在下载第1/1个FTP链接: ftp://A202511010956066258:xac_vG0t@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251101_0740_GEO1K_MS.HDF
+2025-11-01 19:36:41,280 - INFO - 成功下载: FY3D_MERSI_GBAL_L1_20251101_0740_GEO1K_MS.HDF
+2025-11-01 19:36:41,280 - INFO - ✅ 第1个FTP链接下载成功: ftp://A202511010956066258:xac_vG0t@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251101_0740_GEO1K_MS.HDF
+2025-11-01 19:36:41,280 - INFO - 已清理临时TXT文件：C:\Users\Lenovo\Downloads\A202511010956066258.txt
+2025-11-01 19:36:41,280 - INFO - 下载完成统计: 总计1个文件, 成功1个, 失败0个
+2025-11-01 19:36:41,280 - INFO - ✅ 成功下载1个HDF文件！
+2025-11-01 19:36:43,286 - INFO - 开始第2/2次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[2]/td[8]/a/span')
+2025-11-01 19:36:46,019 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[2]/td[8]/a/span
+2025-11-01 19:36:46,101 - INFO - 检测到新窗口，它的URL为: http://clouddata.nsmc.org.cn:8089/ORDERFILELIST/C202511010956066165.txt?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762336862&Signature=VZyXCGhlU1POsIMj2gM5HBom1F8%3D
+2025-11-01 19:36:46,101 - INFO - 新窗口是HTML页面，读取页面源码
+2025-11-01 19:36:46,102 - INFO - --------HTMl页面内容:<html><head><meta name="color-scheme" content="light dark"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251018/FY3E_MERSI_GRAN_L1_20251018_2230_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762336861&amp;Signature=2L0oZfEEM%2Fyix56BjL9J6ndXp8U%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251101/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251101093000_20251101094459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762336861&amp;Signature=eUJoxo82eN77oIxF09LkSdOd%2FJo%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3F/MERSI/L1/GEO1K/2025/20251101/FY3F_MERSI_GRAN_L1_20251101_0815_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762336861&amp;Signature=A%2B%2BJ2pJcHv2xSgaWizRZftBdTWM%3D</pre></body></html>
+2025-11-01 19:36:46,118 - INFO - --------真实的页面内容:http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251018/FY3E_MERSI_GRAN_L1_20251018_2230_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762336861&Signature=2L0oZfEEM%2Fyix56BjL9J6ndXp8U%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251101/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251101093000_20251101094459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762336861&Signature=eUJoxo82eN77oIxF09LkSdOd%2FJo%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3F/MERSI/L1/GEO1K/2025/20251101/FY3F_MERSI_GRAN_L1_20251101_0815_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762336861&Signature=A%2B%2BJ2pJcHv2xSgaWizRZftBdTWM%3D
+2025-11-01 19:36:46,118 - INFO - 识别到是页面了，并且拿到了页面内容
+2025-11-01 19:36:46,118 - INFO - 从页面中提取到3个HTTP格式HDF链接，开始下载...
+2025-11-01 19:36:46,118 - INFO - 正在下载第1/3个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251018/FY3E_MERSI_GRAN_L1_20251018_2230_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762336861&Signature=2L0oZfEEM%2Fyix56BjL9J6ndXp8U%3D
+2025-11-01 19:36:49,265 - INFO - ✅ 第1个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251018/FY3E_MERSI_GRAN_L1_20251018_2230_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762336861&Signature=2L0oZfEEM%2Fyix56BjL9J6ndXp8U%3D
+2025-11-01 19:36:49,265 - INFO - 正在下载第2/3个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251101/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251101093000_20251101094459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762336861&Signature=eUJoxo82eN77oIxF09LkSdOd%2FJo%3D
+2025-11-01 19:36:58,032 - INFO - ✅ 第2个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251101/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251101093000_20251101094459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762336861&Signature=eUJoxo82eN77oIxF09LkSdOd%2FJo%3D
+2025-11-01 19:36:58,033 - INFO - 正在下载第3/3个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3F/MERSI/L1/GEO1K/2025/20251101/FY3F_MERSI_GRAN_L1_20251101_0815_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762336861&Signature=A%2B%2BJ2pJcHv2xSgaWizRZftBdTWM%3D
+2025-11-01 19:37:02,493 - INFO - ✅ 第3个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3F/MERSI/L1/GEO1K/2025/20251101/FY3F_MERSI_GRAN_L1_20251101_0815_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762336861&Signature=A%2B%2BJ2pJcHv2xSgaWizRZftBdTWM%3D
+2025-11-01 19:37:02,493 - INFO - 页面链接处理完成：总计3个文件, 成功3个, 失败0个
+2025-11-01 19:37:02,493 - INFO - ✅ 成功下载3个HDF文件！
+2025-11-01 19:37:04,493 - INFO - ===== 订单下载完成了 =====
+2025-11-01 20:08:34,419 - INFO - === 日志系统初始化测试 ===
+2025-11-01 20:08:34,420 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-01 20:08:34,420 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-01 20:08:34,420 - INFO - ===== 开始下载订单了 =====
+2025-11-01 20:08:35,659 - INFO - 浏览器初始化成功
+2025-11-01 20:08:35,659 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-11-01 20:08:40,696 - INFO - 开始登录流程
+2025-11-01 20:08:42,341 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-01 20:08:42,425 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-01 20:08:42,478 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-01 20:08:43,072 - INFO - 识别到验证码: Dzlt
+2025-11-01 20:08:43,174 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-01 20:08:43,238 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-01 20:08:46,256 - INFO - 成功找到'我的订单'元素，登录成功
+2025-11-01 20:08:46,450 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-01 20:08:46,679 - INFO - 订单 C202511011208069577 状态为【准备中】，停止程序
+2025-11-01 20:18:22,466 - INFO - === 日志系统初始化测试 ===
+2025-11-01 20:18:22,466 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-01 20:18:22,466 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-01 20:18:22,466 - INFO - ===== 开始下载订单了 =====
+2025-11-01 20:18:23,690 - INFO - 浏览器初始化成功
+2025-11-01 20:18:23,690 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-11-01 20:18:54,900 - INFO - 开始登录流程
+2025-11-01 20:19:00,051 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-01 20:19:00,135 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-01 20:19:00,182 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-01 20:19:00,780 - INFO - 识别到验证码: NDrp
+2025-11-01 20:19:00,890 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-01 20:19:00,925 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-01 20:19:03,936 - INFO - 成功找到'我的订单'元素，登录成功
+2025-11-01 20:19:06,123 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-01 20:19:07,278 - INFO - 订单 C202511011218069893 订单状态为【准备中】，停止程序
+2025-11-01 20:24:32,039 - INFO - === 日志系统初始化测试 ===
+2025-11-01 20:24:32,039 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-01 20:24:32,039 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-01 20:24:32,039 - INFO - ===== 开始下载订单了 =====
+2025-11-01 20:24:33,349 - INFO - 浏览器初始化成功
+2025-11-01 20:24:33,349 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-11-01 20:24:40,325 - INFO - 开始登录流程
+2025-11-01 20:24:44,446 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-01 20:24:44,494 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-01 20:24:44,529 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-01 20:24:45,173 - INFO - 识别到验证码: ifaw
+2025-11-01 20:24:45,275 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-01 20:24:45,321 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-01 20:24:48,341 - INFO - 成功找到'我的订单'元素，登录成功
+2025-11-01 20:24:48,893 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-01 20:24:50,726 - INFO - 所有订单均未处于【准备中】状态
+2025-11-01 20:24:50,727 - INFO - txt文件共1行，将执行1次下载操作
+2025-11-01 20:24:50,727 - INFO - 开始第1/1次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')
+2025-11-01 20:24:52,825 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-01 20:24:52,920 - INFO - 检测到新窗口，它的URL为: http://clouddata.nsmc.org.cn:8089/ORDERFILELIST/C202511011218069893.txt?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762345261&Signature=Ve8KmeSLO5m%2Fqxe30JcFgmUhw0I%3D
+2025-11-01 20:24:52,920 - INFO - 新窗口是HTML页面，读取页面源码
+2025-11-01 20:24:52,922 - INFO - --------HTMl页面内容:<html><head><meta name="color-scheme" content="light dark"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251017/FY3E_MERSI_GRAN_L1_20251017_2250_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762345261&amp;Signature=yjAuVBb4jvrExhMvuxdSK3fjDvs%3D</pre></body></html>
+2025-11-01 20:24:52,937 - INFO - --------真实的页面内容:http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251017/FY3E_MERSI_GRAN_L1_20251017_2250_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762345261&Signature=yjAuVBb4jvrExhMvuxdSK3fjDvs%3D
+2025-11-01 20:24:52,937 - INFO - 识别到是页面了，并且拿到了页面内容
+2025-11-01 20:24:52,937 - INFO - 从页面中提取到1个HTTP格式HDF链接，开始下载...
+2025-11-01 20:24:52,937 - INFO - 正在下载第1/1个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251017/FY3E_MERSI_GRAN_L1_20251017_2250_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762345261&Signature=yjAuVBb4jvrExhMvuxdSK3fjDvs%3D
+2025-11-01 20:24:56,435 - INFO - ✅ 第1个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251017/FY3E_MERSI_GRAN_L1_20251017_2250_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762345261&Signature=yjAuVBb4jvrExhMvuxdSK3fjDvs%3D
+2025-11-01 20:24:56,435 - INFO - 页面链接处理完成：总计1个文件, 成功1个, 失败0个
+2025-11-01 20:24:56,435 - INFO - ✅ 成功下载1个HDF文件！
+2025-11-01 20:24:58,446 - INFO - ===== 订单下载完成了 =====
+2025-11-01 20:37:46,541 - INFO - === 日志系统初始化测试 ===
+2025-11-01 20:37:46,541 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-01 20:37:46,541 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-01 20:37:46,541 - INFO - ===== 开始下载订单了 =====
+2025-11-01 20:37:47,767 - INFO - 浏览器初始化成功
+2025-11-01 20:37:47,767 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-11-01 20:38:37,473 - INFO - 开始登录流程
+2025-11-01 20:38:39,249 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-01 20:38:39,325 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-01 20:38:39,388 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-01 20:38:40,040 - INFO - 识别到验证码: LEwf
+2025-11-01 20:38:40,134 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-01 20:38:40,174 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-01 20:38:43,196 - INFO - 成功找到'我的订单'元素，登录成功
+2025-11-01 20:38:43,668 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-01 20:38:44,669 - ERROR - 查询订单状态失败: Message: stale element reference: stale element not found
+  (Session info: chrome=140.0.7339.81); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7c7a81eb5+80197]
+	GetHandleVerifier [0x0x7ff7c7a81f10+80288]
+	(No symbol) [0x0x7ff7c78002fa]
+	(No symbol) [0x0x7ff7c7816b15]
+	(No symbol) [0x0x7ff7c7815603]
+	(No symbol) [0x0x7ff7c7808bc7]
+	(No symbol) [0x0x7ff7c7806a70]
+	(No symbol) [0x0x7ff7c780af6f]
+	(No symbol) [0x0x7ff7c780b02f]
+	(No symbol) [0x0x7ff7c7857587]
+	(No symbol) [0x0x7ff7c7857f9c]
+	(No symbol) [0x0x7ff7c784aa9c]
+	(No symbol) [0x0x7ff7c78803bf]
+	(No symbol) [0x0x7ff7c784a456]
+	(No symbol) [0x0x7ff7c7880590]
+	(No symbol) [0x0x7ff7c78a87fb]
+	(No symbol) [0x0x7ff7c7880153]
+	(No symbol) [0x0x7ff7c7848b02]
+	(No symbol) [0x0x7ff7c78498d3]
+	GetHandleVerifier [0x0x7ff7c7d3e83d+2949837]
+	GetHandleVerifier [0x0x7ff7c7d38c6a+2926330]
+	GetHandleVerifier [0x0x7ff7c7d586c7+3055959]
+	GetHandleVerifier [0x0x7ff7c7a9cfee+191102]
+	GetHandleVerifier [0x0x7ff7c7aa50af+224063]
+	GetHandleVerifier [0x0x7ff7c7a8af64+117236]
+	GetHandleVerifier [0x0x7ff7c7a8b119+117673]
+	GetHandleVerifier [0x0x7ff7c7a710a8+11064]
+	BaseThreadInitThunk [0x0x7fff6151e8d7+23]
+	RtlUserThreadStart [0x0x7fff624cc53c+44]
+
+2025-11-01 20:38:44,670 - WARNING - 未找到订单 C202511011218069893
+2025-11-01 20:38:44,670 - INFO - 所有订单均未处于【准备中】状态
+2025-11-01 20:38:44,670 - INFO - txt文件共1行，将执行1次下载操作
+2025-11-01 20:38:44,670 - INFO - 开始第1/1次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')
+2025-11-01 20:39:16,712 - WARNING - 点击元素失败，重试 1/3 - xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-01 20:40:16,788 - WARNING - 点击元素失败，重试 2/3 - xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-01 20:41:16,855 - WARNING - 点击元素失败，重试 3/3 - xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-01 20:42:16,943 - ERROR - 多次尝试后仍无法点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-01 20:42:16,945 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/download.py", line 303, in safe_click_element
+    element = self.wait.until(EC.element_to_be_clickable((by, value)))
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7c7a81eb5+80197]
+	GetHandleVerifier [0x0x7ff7c7a81f10+80288]
+	(No symbol) [0x0x7ff7c78002fa]
+	(No symbol) [0x0x7ff7c7857cd7]
+	(No symbol) [0x0x7ff7c7857f9c]
+	(No symbol) [0x0x7ff7c78aba87]
+	(No symbol) [0x0x7ff7c78803bf]
+	(No symbol) [0x0x7ff7c78a87fb]
+	(No symbol) [0x0x7ff7c7880153]
+	(No symbol) [0x0x7ff7c7848b02]
+	(No symbol) [0x0x7ff7c78498d3]
+	GetHandleVerifier [0x0x7ff7c7d3e83d+2949837]
+	GetHandleVerifier [0x0x7ff7c7d38c6a+2926330]
+	GetHandleVerifier [0x0x7ff7c7d586c7+3055959]
+	GetHandleVerifier [0x0x7ff7c7a9cfee+191102]
+	GetHandleVerifier [0x0x7ff7c7aa50af+224063]
+	GetHandleVerifier [0x0x7ff7c7a8af64+117236]
+	GetHandleVerifier [0x0x7ff7c7a8b119+117673]
+	GetHandleVerifier [0x0x7ff7c7a710a8+11064]
+	BaseThreadInitThunk [0x0x7fff6151e8d7+23]
+	RtlUserThreadStart [0x0x7fff624cc53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/download.py", line 303, in safe_click_element
+    element = self.wait.until(EC.element_to_be_clickable((by, value)))
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7c7a81eb5+80197]
+	GetHandleVerifier [0x0x7ff7c7a81f10+80288]
+	(No symbol) [0x0x7ff7c78002fa]
+	(No symbol) [0x0x7ff7c7857cd7]
+	(No symbol) [0x0x7ff7c7857f9c]
+	(No symbol) [0x0x7ff7c78aba87]
+	(No symbol) [0x0x7ff7c78803bf]
+	(No symbol) [0x0x7ff7c78a87fb]
+	(No symbol) [0x0x7ff7c7880153]
+	(No symbol) [0x0x7ff7c7848b02]
+	(No symbol) [0x0x7ff7c78498d3]
+	GetHandleVerifier [0x0x7ff7c7d3e83d+2949837]
+	GetHandleVerifier [0x0x7ff7c7d38c6a+2926330]
+	GetHandleVerifier [0x0x7ff7c7d586c7+3055959]
+	GetHandleVerifier [0x0x7ff7c7a9cfee+191102]
+	GetHandleVerifier [0x0x7ff7c7aa50af+224063]
+	GetHandleVerifier [0x0x7ff7c7a8af64+117236]
+	GetHandleVerifier [0x0x7ff7c7a8b119+117673]
+	GetHandleVerifier [0x0x7ff7c7a710a8+11064]
+	BaseThreadInitThunk [0x0x7fff6151e8d7+23]
+	RtlUserThreadStart [0x0x7fff624cc53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/download.py", line 303, in safe_click_element
+    element = self.wait.until(EC.element_to_be_clickable((by, value)))
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7c7a81eb5+80197]
+	GetHandleVerifier [0x0x7ff7c7a81f10+80288]
+	(No symbol) [0x0x7ff7c78002fa]
+	(No symbol) [0x0x7ff7c7857cd7]
+	(No symbol) [0x0x7ff7c7857f9c]
+	(No symbol) [0x0x7ff7c78aba87]
+	(No symbol) [0x0x7ff7c78803bf]
+	(No symbol) [0x0x7ff7c78a87fb]
+	(No symbol) [0x0x7ff7c7880153]
+	(No symbol) [0x0x7ff7c7848b02]
+	(No symbol) [0x0x7ff7c78498d3]
+	GetHandleVerifier [0x0x7ff7c7d3e83d+2949837]
+	GetHandleVerifier [0x0x7ff7c7d38c6a+2926330]
+	GetHandleVerifier [0x0x7ff7c7d586c7+3055959]
+	GetHandleVerifier [0x0x7ff7c7a9cfee+191102]
+	GetHandleVerifier [0x0x7ff7c7aa50af+224063]
+	GetHandleVerifier [0x0x7ff7c7a8af64+117236]
+	GetHandleVerifier [0x0x7ff7c7a8b119+117673]
+	GetHandleVerifier [0x0x7ff7c7a710a8+11064]
+	BaseThreadInitThunk [0x0x7fff6151e8d7+23]
+	RtlUserThreadStart [0x0x7fff624cc53c+44]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:/Pycharmcode/test/download.py", line 303, in safe_click_element
+    element = self.wait.until(EC.element_to_be_clickable((by, value)))
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7c7a81eb5+80197]
+	GetHandleVerifier [0x0x7ff7c7a81f10+80288]
+	(No symbol) [0x0x7ff7c78002fa]
+	(No symbol) [0x0x7ff7c7857cd7]
+	(No symbol) [0x0x7ff7c7857f9c]
+	(No symbol) [0x0x7ff7c78aba87]
+	(No symbol) [0x0x7ff7c78803bf]
+	(No symbol) [0x0x7ff7c78a87fb]
+	(No symbol) [0x0x7ff7c7880153]
+	(No symbol) [0x0x7ff7c7848b02]
+	(No symbol) [0x0x7ff7c78498d3]
+	GetHandleVerifier [0x0x7ff7c7d3e83d+2949837]
+	GetHandleVerifier [0x0x7ff7c7d38c6a+2926330]
+	GetHandleVerifier [0x0x7ff7c7d586c7+3055959]
+	GetHandleVerifier [0x0x7ff7c7a9cfee+191102]
+	GetHandleVerifier [0x0x7ff7c7aa50af+224063]
+	GetHandleVerifier [0x0x7ff7c7a8af64+117236]
+	GetHandleVerifier [0x0x7ff7c7a8b119+117673]
+	GetHandleVerifier [0x0x7ff7c7a710a8+11064]
+	BaseThreadInitThunk [0x0x7fff6151e8d7+23]
+	RtlUserThreadStart [0x0x7fff624cc53c+44]
+
+
+2025-11-01 20:42:16,945 - ERROR - 无法点击文件按钮
+2025-11-01 20:42:16,945 - WARNING - 无有效结果可处理

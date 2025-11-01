@@ -453,7 +453,18 @@ class SatelliteDataDownloader:
             'submit_login': (By.XPATH, '//*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button'),  # 提交登录
             # 添加文件按钮定位符（请根据实际页面更新）
             'my_order': (By.XPATH, '//*[@id="u-myorder"]'),  # 点击我的订单
-            'file_button': (By.XPATH, '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')  #
+            'file_buttons': [
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span'),  # 第1个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[2]/td[8]/a/span'),  # 第2个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第3个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第4个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第5个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第6个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第7个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第8个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第9个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第10个按钮
+            ]
         }
 
     def run(self,content):
@@ -462,7 +473,7 @@ class SatelliteDataDownloader:
             # 初始化浏览器
             if not self.browser.init_browser():
                 logger.error("无法初始化浏览器，程序退出")
-                return
+                sys.exit(1)  # 非0退出码（1表示浏览器初始化失败）
 
             # 打开网站
             logger.info(f"打开网站: {self.base_url}")
@@ -472,33 +483,63 @@ class SatelliteDataDownloader:
             # 执行登录流程
             if not self._login():
                 logger.error("登录失败，程序退出")
-                return
+                sys.exit(2)  # 2表示登录失败
 
             # 登录成功后， 点击我的订单  跳转页面
             if not self.browser.safe_click_element(*self.locators['my_order']):
-                return False
-
-            order_status = get_order_status(self.browser, content)
-            if order_status:
-                print(f"!!!!!!!!!!!订单的状态是：{order_status}")
-                # 判断状态：准备成功则继续，准备中则退出程序
-                if order_status == "准备中":
-                    logger.info("订单状态为【准备中】，停止程序")
-                    sys.exit(0)  # 正常退出程序
-            else:
-                print(f"未找到订单")
-                logger.error("未找到目标订单，停止程序")
+                logger.error("无法点击'我的订单'，程序终止")
                 if self.browser.driver:
                     self.browser.driver.quit()
-                sys.exit(1)  # 异常退出
+                sys.exit(3)  # 明确退出码，表示导航失败
 
 
-            # 点击文件按钮并读取内容
-            logger.info("开始点击文件按钮并读取内容")
-            result = self.browser.click_and_read_content(self.locators['file_button'])
+            # 遍历每个订单号检查状态
+            for order_number in content:
+                print(f"正在查询订单号：{order_number}")
+                order_status = get_order_status(self.browser, order_number)
 
-            # 调用封装后的函数处理结果
-            self.process_result(result)
+                if order_status:
+                    print(f"订单 {order_number} 的状态是：{order_status}")
+                    # 若当前订单状态为“准备中”，立即退出程序
+                    if order_status == "准备中":
+                        logger.info(f"订单 {order_number} 订单状态为【准备中】，停止程序")
+                        # 关闭浏览器并退出
+                        if self.browser.driver:
+                            self.browser.driver.quit()
+                        sys.exit(0)  # 正常退出（表示需要重试）
+                else:
+                    logger.warning(f"未找到订单 {order_number}")
+
+            # 所有订单均查询完毕，且均未出现“准备中”状态
+            logger.info("所有订单均未处于【准备中】状态")
+
+            # 核心修改：根据txt行数（content长度）循环点击对应按钮
+            line_count = len(content)  # 获取txt有效行数
+            logger.info(f"txt文件共{line_count}行，将执行{line_count}次下载操作")
+
+            # 循环执行：次数 = 行数，每次点击第i个按钮（索引从0开始）
+            for i in range(line_count):
+                # 检查是否有对应的按钮定位符（避免索引越界）
+                if i >= len(self.locators['file_buttons']):
+                    logger.error(f"未定义第{i + 1}个按钮的定位符，请补充locators['file_buttons']")
+                    continue
+
+                # 获取当前行对应的按钮定位符
+                current_button = self.locators['file_buttons'][i]
+                logger.info(f"开始第{i + 1}/{line_count}次下载，点击按钮：{current_button}")
+
+                # 点击按钮并处理结果
+                result = self.browser.click_and_read_content(current_button)
+                self.process_result(result)
+
+                # 每次操作后等待1-2秒，避免页面未响应
+                time.sleep(2)
+
+            # # 点击文件按钮并读取内容
+            # logger.info("开始点击文件按钮并读取内容")
+            # result = self.browser.click_and_read_content(self.locators['file_button1'])
+            # # 调用封装后的函数处理结果
+            # self.process_result(result)
 
         except Exception as e:
             logger.error(f"程序运行出错: {str(e)}")
@@ -718,14 +759,21 @@ if __name__ == "__main__":
 
     txt_order_path = sys.argv[1]
 
+    # 读取文件中的所有订单号（每行一个）
     with open(txt_order_path, 'r', encoding='utf-8') as f:
-        content = f.read()  # 读取全部内容
-        # 可选：去除首尾空白（如换行符、空格）
-        content = content.strip()
-        print("从txt里面读取的内容："+content)
+        # 读取所有行，去除空行和首尾空白
+        content = [line.strip() for line in f.readlines() if line.strip()]
+        # 有效行数 = 订单号列表的长度
+        valid_line_count = len(content)
+
+    # with open(txt_order_path, 'r', encoding='utf-8') as f:
+    #     content = f.read()  # 读取全部内容
+    #     # 可选：去除首尾空白（如换行符、空格）
+    #     content = content.strip()
+        print(content)
     downloader = SatelliteDataDownloader()
     downloader.run(content)
-    logger.info("===== 订单下载完成了 =====")
+
 
 
 

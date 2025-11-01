@@ -269,7 +269,7 @@ class SatelliteDataDownloader:
             'click_filter': (By.XPATH, '//*[@id="searchId"]'),  # 点击"筛选”
 
             'second_data_row': (By.XPATH, '/html/body/div[9]/div/div[2]/div/div[2]/div[2]/div/table/tbody/tr[2]/td[1]/input'),  # 第二个多选框
-
+            'page_all_choose':(By.XPATH,'//*[@id="seleCurrentPage1"]'),
             'commit_edit': (By.XPATH, '//*[@id="commitEdit"]'),   # 去购物车
             'send_email_checkbox': (By.XPATH, '//*[@id="chkIsSendMail"]'),   # 发邮件
             'submit_order': (By.XPATH, '/html/body/div[4]/div/div[3]/div[2]/div[2]/div[4]/button'),  # 提交订单
@@ -528,6 +528,8 @@ class SatelliteDataDownloader:
         # 选中第二个数据
         if not self.browser.safe_click_element(*self.locators['second_data_row']):
             return False
+        # if not self.browser.safe_click_element(*self.locators['page_all_choose']):
+        #     return False
         # 去购物车
         if not self.browser.safe_click_element(*self.locators['commit_edit']):
             return False
