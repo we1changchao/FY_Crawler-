@@ -479,8 +479,6 @@ class SatelliteDataDownloader:
                 return False
 
             order_status = get_order_status(self.browser, content)
-            print("!!!!!!!!!!")
-            print(content)
             if order_status:
                 print(f"!!!!!!!!!!!订单的状态是：{order_status}")
                 # 判断状态：准备成功则继续，准备中则退出程序

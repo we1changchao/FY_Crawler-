@@ -77,6 +77,9 @@ class SatelliteBrowser:
             chrome_options.add_argument('--ignore-certificate-errors')  # 忽略 SSL 证书错误。
             chrome_options.add_experimental_option('detach', True)  # # 保持浏览器打开状态,让Chrome浏览器在自动化脚本执行完毕后不自动关闭。
 
+            # # 关键：启用无头模式（不显示浏览器窗口）
+            # chrome_options.add_argument('--headless=new')  # Chrome 112+ 推荐的新无头模式
+            # # 兼容旧版本 Chrome 可加：chrome_options.add_argument('--headless')
 
             # 设置Chrome驱动
             driver_path = self.config.get_chrome_driver_path()   # 从配置文件中获取驱动文件的path
@@ -242,7 +245,7 @@ class SatelliteDataDownloader:
             'data_type_select': (By.XPATH, '//*[@id="select2-sel-dataType-container"]'),     # 点击“数据名称”白框
             'choose_MERSI': (By.XPATH, '/html/body/span/span/span[2]/ul/li[1]'),  # 数据名称中选择MERSI
             'choose_MERSI_3e': (By.XPATH, '/html/body/span/span/span[2]/ul/li[3]'), # 数据名称中选择MERSI 3e里面的
-            'test': (By.XPATH,'//ul[contains(@id, "select2-sel-dataType-results")]//li[contains(text(), "中分辨率光谱成像仪(MERSI)")]'),
+            'choose_MERSI_3e1': (By.XPATH,'//ul[contains(@id, "select2-sel-dataType-results")]//li[contains(text(), "中分辨率光谱成像仪(MERSI)")]'),
 
             'click_GeographicalRange': (By.XPATH, '//*[@id="txt-spaceArea"]'),     # 点击 空间范围
             # 输入空间范围数据
@@ -287,7 +290,7 @@ class SatelliteDataDownloader:
             # 初始化浏览器
             if not self.browser.init_browser():
                 logger.error("[错误]无法初始化浏览器，程序退出")
-                return
+                sys.exit(1)  # 非0退出码（1表示浏览器初始化失败）
 
             # 打开网站
             logger.info(f"正在打开网站，网址为： {self.base_url}")
@@ -297,28 +300,30 @@ class SatelliteDataDownloader:
             # 执行登录流程
             if not self._login():
                 logger.error("[错误]登录失败，程序退出")
-                return
+                sys.exit(2)  # 2表示登录失败
 
             # 选择卫星数据
             if not self._select_satellite_data(selected_text_comboBox):
                 logger.error("[错误]选择卫星数据失败，程序退出")
-                return
+                sys.exit(3)  # 3表示卫星选择失败
 
             # 选择地理范围
             if not self._select_Range(time_param,time_param2,North,South,East,West):
                 logger.error("[错误]选择地理范围失败，程序退出")
-                return
+                sys.exit(4)  # 4表示地理范围选择失败
 
             # 提交订单
             if not self._submit_order():
                 logger.error("[错误]提交订单失败，程序退出")
-                return
+                sys.exit(5)  # 5表示订单提交失败
 
             # 查看订单
             if not self._check_order():
                 logger.error("[错误]查看订单失败，程序退出")
-                return
-            logger.info("所有操作完成")
+                sys.exit(6)  # 6表示查看订单失败
+            logger.info("[流程]=====提交订单所有操作完成=====")
+
+            sys.exit(0)  # 全部成功，显式返回0
 
         except Exception as e:
             logger.error(f"[错误]程序运行出错: {str(e)}")
@@ -330,10 +335,10 @@ class SatelliteDataDownloader:
             pass
 
     def _login(self):
-        logger.info("开始登录流程")
+        logger.info("[流程]======开始登录流程=======")
         max_login_retries = self.config.get_retry_attempts()
 
-        # 1. 点击登录按钮
+        # 1. 在主网页寻找并点击登录按钮
         if not self.browser.safe_click_element(*self.locators['login_button']):
             return False
 
@@ -373,7 +378,7 @@ class SatelliteDataDownloader:
                     fengyun_element = WebDriverWait(self.browser.driver, 3).until(
                         EC.presence_of_element_located(self.locators['FengYun_satellite'])
                     )
-                    logger.info("成功找到'风云极轨卫星'元素，登录成功")
+                    logger.info("[流程]成功找到'风云极轨卫星'元素，登录成功")
                     return True
                 except TimeoutException:
                     # 未找到元素：刷新验证码，进入下一次重试
@@ -396,13 +401,13 @@ class SatelliteDataDownloader:
                     logger.error(f"达到最大重试次数（{max_login_retries}次），登录失败")
                     return False
 
-        logger.error("登录流程全部重试失败")
+        logger.error("[错误]登录流程全部重试失败")  # 所有登录重试次数耗尽且均未成功时触发
         return False
 
 
     def _select_satellite_data(self,selected_text_comboBox):
         """选择卫星数据"""
-        logger.info("开始选择卫星数据")
+        logger.info("[流程]======开始选择卫星数据=======")
         time.sleep(3)
         # 选择风云极轨卫星
         if not self.browser.safe_click_element(*self.locators['FengYun_satellite']):
@@ -450,17 +455,17 @@ class SatelliteDataDownloader:
                 return False
 
         elif selected_text_comboBox.split(":", 1)[0] == "FY-3E":
-            if not self.browser.safe_click_element(*self.locators['test']):
+            if not self.browser.safe_click_element(*self.locators['choose_MERSI_3e1']):
                 return False
 
 
 
-        logger.info("卫星数据选择完成")
+        logger.info("[流程]=====卫星数据选择完成=====")
         return True
 
     def _select_Range(self,time_param,time_param2,North,South,East,West):
         """空间范围选择"""
-        logger.info("开始选择空间范围")
+        logger.info("[流程]=====开始选择空间范围=====")
         #点击 “空间范围”
         time.sleep(2)
         # 等待下拉菜单消失
@@ -499,19 +504,17 @@ class SatelliteDataDownloader:
         time.sleep(0.5)
 
 
-        logger.info("选择空间范围完成")
+        logger.info("[流程]=====空间范围选择完成=====")
         return True
 
     def _submit_order(self):
         """提交订单"""
-        logger.info("开始提交订单")
+        logger.info("[流程]=====开始筛选数据提交订单=====")
         time.sleep(2)
         # 点击检索
         if not self.browser.safe_click_element(*self.locators['search_button']):
             return False
         time.sleep(3)  # 等待搜索结果
-
-
         #  筛选数据
         # 点击”产品名“
         if not self.browser.safe_click_element(*self.locators['click_productName']):
@@ -554,23 +557,23 @@ class SatelliteDataDownloader:
                 for order_id in all_order_ids:
                     f.write(f"{order_id}\n")
 
-            print(f"成功写入{len(all_order_ids)}个订单号到download.txt")
+            logger.info(f"成功写入{len(all_order_ids)}个订单号到download.txt")
 
         except Exception as e:
-            print(f"获取订单号失败：{e}")
+            logger.error(f"获取订单号失败：{e}")
 
 
-        logger.info("订单提交完成")
+        logger.info("[流程]=====筛选数据提交订单完成=====")
         return True
 
     def _check_order(self):
         """检查订单"""
-        logger.info("查看订单")
+        logger.info("[流程]=====开始查看订单=====")
 
         if not self.browser.safe_click_element(*self.locators['check_order']):
             return False
 
-        logger.info("下载操作完成")
+        logger.info("[流程]=====查看订单完成=====")
         return True
 
     def update_ini_from_external(self, external_save_dir):
@@ -615,7 +618,7 @@ if __name__  ==  "__main__":
 
     # 获取传递的参数（sys.argv[1] 对应 time_param）
     if len(sys.argv) < 2:
-        print("错误：未收到时间参数")
+        logger.info("错误：未收到时间参数")
         sys.exit(1)
     #   开始时间
     time_param = sys.argv[1]
@@ -628,15 +631,14 @@ if __name__  ==  "__main__":
     external_save_dir=sys.argv[8]
 
 
-    logger.info("===== 订单提交程序启动 =====")
+    logger.info("[流程]===== 订单提交程序启动 =====")
     downloader = SatelliteDataDownloader()
 
     if not downloader.update_ini_from_external(external_save_dir):
-        logger.error("INI文件更新失败，程序退出")
+        logger.error("[错误]INI文件更新失败，程序退出")
         sys.exit(1)
 
     downloader.run(time_param,time_param2,North,South,East,West,selected_text_comboBox)
-    logger.info("===== 订单提交程序结束 =====")
 
 
 
