@@ -4682,3 +4682,441 @@ Stacktrace:
 
 2025-11-01 20:42:16,945 - ERROR - 无法点击文件按钮
 2025-11-01 20:42:16,945 - WARNING - 无有效结果可处理
+2025-11-06 21:43:26,239 - INFO - === 日志系统初始化测试 ===
+2025-11-06 21:43:26,239 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-06 21:43:26,239 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-06 21:43:26,239 - INFO - ===== 开始下载订单了 =====
+2025-11-06 21:43:27,458 - INFO - 浏览器初始化成功
+2025-11-06 21:43:27,458 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-11-06 21:43:33,366 - INFO - 开始登录流程
+2025-11-06 21:43:36,688 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-06 21:43:36,765 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-06 21:43:36,825 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-06 21:43:37,430 - INFO - 识别到验证码: Nuys
+2025-11-06 21:43:37,511 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 21:43:37,549 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 21:43:40,565 - INFO - 成功找到'我的订单'元素，登录成功
+2025-11-06 21:43:41,076 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-06 21:43:41,229 - INFO - 订单 C202511061343113981 订单状态为【准备中】，停止程序
+2025-11-06 21:49:01,463 - INFO - === 日志系统初始化测试 ===
+2025-11-06 21:49:01,463 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-06 21:49:01,463 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-06 21:49:01,463 - INFO - ===== 开始下载订单了 =====
+2025-11-06 21:49:02,682 - INFO - 浏览器初始化成功
+2025-11-06 21:49:02,682 - INFO - 打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-11-06 21:49:08,197 - INFO - 开始登录流程
+2025-11-06 21:49:11,607 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-06 21:49:11,657 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-06 21:49:11,698 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-06 21:49:12,337 - INFO - 识别到验证码: Qbsq
+2025-11-06 21:49:12,478 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 21:49:12,547 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 21:49:45,734 - WARNING - 未找到'风云极轨卫星'元素，本次登录失败，准备重试 2/3
+2025-11-06 21:49:47,403 - INFO - 识别到验证码: 3kmc
+2025-11-06 21:49:47,511 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 21:49:47,557 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 21:49:50,571 - INFO - 成功找到'我的订单'元素，登录成功
+2025-11-06 21:49:50,873 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-06 21:49:51,025 - INFO - 所有订单均未处于【准备中】状态
+2025-11-06 21:49:51,025 - INFO - txt文件共1行，将执行1次下载操作
+2025-11-06 21:49:51,025 - INFO - 开始第1/1次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')
+2025-11-06 21:49:53,101 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-06 21:49:53,269 - INFO - 检测到新窗口，它的URL为: http://clouddata.nsmc.org.cn:8089/ORDERFILELIST/C202511061343113981.txt?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782362&Signature=hggivGsl9Jf6XcMdsubE7vdurDs%3D
+2025-11-06 21:49:53,269 - INFO - 新窗口是HTML页面，读取页面源码
+2025-11-06 21:49:53,272 - INFO - --------HTMl页面内容:<html><head><meta name="color-scheme" content="light dark"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106104500_20251106105959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762782361&amp;Signature=pORhHvqmVGweVmTxG%2B5CscyxGxo%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106110000_20251106111459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762782361&amp;Signature=D1kvcQadGNxhb0mc8uHfLlsm%2FV0%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106111500_20251106112959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762782361&amp;Signature=oJfJLimlsyOwzBwV3v0xPzaCQ1c%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106113000_20251106114459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762782361&amp;Signature=cuScARGVeLybwOxeUiyPSwi54IY%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106114500_20251106115959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762782361&amp;Signature=jOUadnySKTdD1QpExXdYXVPDgPs%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106120000_20251106121459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762782361&amp;Signature=fpwjJoWpfh2BfBLaoPq92CqOzgE%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106121500_20251106122959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762782361&amp;Signature=8EVyCvKX5b6H4BK9RzJEA9Nrf9A%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106123000_20251106124459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762782361&amp;Signature=YA9POd5%2BZtWZsZ%2BQdjZYJY1JbB4%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106124500_20251106125959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762782361&amp;Signature=iLWHVsP4M5t1sOJ87WZRuHe1bic%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106130000_20251106131459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762782361&amp;Signature=ovxWkID9WOwqORoHstQfv6I97gE%3D</pre></body></html>
+2025-11-06 21:49:53,285 - INFO - --------真实的页面内容:http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106104500_20251106105959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=pORhHvqmVGweVmTxG%2B5CscyxGxo%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106110000_20251106111459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=D1kvcQadGNxhb0mc8uHfLlsm%2FV0%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106111500_20251106112959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=oJfJLimlsyOwzBwV3v0xPzaCQ1c%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106113000_20251106114459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=cuScARGVeLybwOxeUiyPSwi54IY%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106114500_20251106115959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=jOUadnySKTdD1QpExXdYXVPDgPs%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106120000_20251106121459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=fpwjJoWpfh2BfBLaoPq92CqOzgE%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106121500_20251106122959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=8EVyCvKX5b6H4BK9RzJEA9Nrf9A%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106123000_20251106124459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=YA9POd5%2BZtWZsZ%2BQdjZYJY1JbB4%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106124500_20251106125959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=iLWHVsP4M5t1sOJ87WZRuHe1bic%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106130000_20251106131459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=ovxWkID9WOwqORoHstQfv6I97gE%3D
+2025-11-06 21:49:53,285 - INFO - 识别到是页面了，并且拿到了页面内容
+2025-11-06 21:49:53,286 - INFO - 从页面中提取到10个HTTP格式HDF链接，开始下载...
+2025-11-06 21:49:53,286 - INFO - 正在下载第1/10个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106104500_20251106105959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=pORhHvqmVGweVmTxG%2B5CscyxGxo%3D
+2025-11-06 21:50:06,202 - INFO - ✅ 第1个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106104500_20251106105959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=pORhHvqmVGweVmTxG%2B5CscyxGxo%3D
+2025-11-06 21:50:06,202 - INFO - 正在下载第2/10个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106110000_20251106111459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=D1kvcQadGNxhb0mc8uHfLlsm%2FV0%3D
+2025-11-06 21:50:16,911 - INFO - ✅ 第2个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106110000_20251106111459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=D1kvcQadGNxhb0mc8uHfLlsm%2FV0%3D
+2025-11-06 21:50:16,911 - INFO - 正在下载第3/10个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106111500_20251106112959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=oJfJLimlsyOwzBwV3v0xPzaCQ1c%3D
+2025-11-06 21:50:31,457 - INFO - ✅ 第3个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106111500_20251106112959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=oJfJLimlsyOwzBwV3v0xPzaCQ1c%3D
+2025-11-06 21:50:31,457 - INFO - 正在下载第4/10个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106113000_20251106114459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=cuScARGVeLybwOxeUiyPSwi54IY%3D
+2025-11-06 21:50:44,095 - INFO - ✅ 第4个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106113000_20251106114459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=cuScARGVeLybwOxeUiyPSwi54IY%3D
+2025-11-06 21:50:44,095 - INFO - 正在下载第5/10个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106114500_20251106115959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=jOUadnySKTdD1QpExXdYXVPDgPs%3D
+2025-11-06 21:51:43,037 - INFO - ✅ 第5个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106114500_20251106115959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=jOUadnySKTdD1QpExXdYXVPDgPs%3D
+2025-11-06 21:51:43,037 - INFO - 正在下载第6/10个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106120000_20251106121459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=fpwjJoWpfh2BfBLaoPq92CqOzgE%3D
+2025-11-06 21:52:25,960 - INFO - ✅ 第6个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106120000_20251106121459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=fpwjJoWpfh2BfBLaoPq92CqOzgE%3D
+2025-11-06 21:52:25,960 - INFO - 正在下载第7/10个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106121500_20251106122959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=8EVyCvKX5b6H4BK9RzJEA9Nrf9A%3D
+2025-11-06 21:52:40,492 - INFO - ✅ 第7个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106121500_20251106122959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=8EVyCvKX5b6H4BK9RzJEA9Nrf9A%3D
+2025-11-06 21:52:40,492 - INFO - 正在下载第8/10个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106123000_20251106124459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=YA9POd5%2BZtWZsZ%2BQdjZYJY1JbB4%3D
+2025-11-06 21:52:53,867 - INFO - ✅ 第8个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106123000_20251106124459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=YA9POd5%2BZtWZsZ%2BQdjZYJY1JbB4%3D
+2025-11-06 21:52:53,867 - INFO - 正在下载第9/10个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106124500_20251106125959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=iLWHVsP4M5t1sOJ87WZRuHe1bic%3D
+2025-11-06 21:53:04,225 - INFO - ✅ 第9个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106124500_20251106125959_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=iLWHVsP4M5t1sOJ87WZRuHe1bic%3D
+2025-11-06 21:53:04,225 - INFO - 正在下载第10/10个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106130000_20251106131459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=ovxWkID9WOwqORoHstQfv6I97gE%3D
+2025-11-06 21:53:19,156 - INFO - ✅ 第10个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106130000_20251106131459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762782361&Signature=ovxWkID9WOwqORoHstQfv6I97gE%3D
+2025-11-06 21:53:19,156 - INFO - 页面链接处理完成：总计10个文件, 成功10个, 失败0个
+2025-11-06 21:53:19,156 - INFO - ✅ 成功下载10个HDF文件！
+2025-11-06 21:56:41,038 - INFO - === 日志系统初始化测试 ===
+2025-11-06 21:56:41,038 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-06 21:56:41,043 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-06 21:56:41,043 - INFO - [流程]开始下载订单数据......
+2025-11-06 21:56:42,250 - INFO - 浏览器初始化成功
+2025-11-06 21:56:42,250 - INFO - [流程]打开网站: https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html
+2025-11-06 21:56:53,787 - INFO - [流程]开始登录流程
+2025-11-06 21:56:55,865 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-06 21:56:55,939 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-06 21:56:56,004 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-06 21:56:56,585 - INFO - 识别到验证码: f7r7
+2025-11-06 21:56:56,698 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 21:56:56,768 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 21:56:59,777 - INFO - 成功找到'我的订单'元素，登录成功
+2025-11-06 21:57:00,535 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-06 21:57:00,687 - INFO - 订单 C202511061356115752 订单状态为【准备中】，停止程序
+2025-11-06 22:02:10,817 - INFO - === 日志系统初始化测试 ===
+2025-11-06 22:02:10,817 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-06 22:02:10,817 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-06 22:02:10,818 - INFO - [流程]开始下载订单数据......
+2025-11-06 22:02:12,056 - INFO - 浏览器初始化成功
+2025-11-06 22:02:12,056 - INFO - [流程]打开风云卫星数据网站......
+2025-11-06 22:02:17,323 - INFO - [流程]开始登录流程
+2025-11-06 22:02:18,972 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-06 22:02:19,037 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-06 22:02:19,089 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-06 22:02:19,754 - INFO - 识别到验证码: fbiy
+2025-11-06 22:02:19,873 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 22:02:19,917 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 22:02:22,929 - INFO - 成功找到'我的订单'元素，登录成功
+2025-11-06 22:02:23,235 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-06 22:02:23,435 - INFO - [流程]订单 A202511061356115843 订单状态为【准备中】，停止程序
+2025-11-06 22:16:53,985 - INFO - === 日志系统初始化测试 ===
+2025-11-06 22:16:53,985 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-06 22:16:53,985 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-06 22:16:53,985 - INFO - [流程]开始下载订单数据......
+2025-11-06 22:16:55,287 - INFO - 浏览器初始化成功
+2025-11-06 22:16:55,288 - INFO - [流程]打开风云卫星数据网站......
+2025-11-06 22:17:00,731 - INFO - [流程]开始登录流程
+2025-11-06 22:17:02,565 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-06 22:17:02,623 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-06 22:17:02,659 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-06 22:17:03,305 - INFO - 识别到验证码: d01b
+2025-11-06 22:17:03,395 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 22:17:03,435 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 22:17:06,448 - INFO - 成功找到'我的订单'元素
+2025-11-06 22:17:06,448 - INFO - [流程]登录成功
+2025-11-06 22:17:06,860 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-06 22:17:07,036 - INFO - [流程]订单 A202511061356115843 订单状态为【准备中】，停止程序
+2025-11-06 22:23:34,725 - INFO - === 日志系统初始化测试 ===
+2025-11-06 22:23:34,725 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-06 22:23:34,725 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-06 22:23:34,725 - INFO - [流程]开始下载订单数据......
+2025-11-06 22:23:35,965 - INFO - 浏览器初始化成功
+2025-11-06 22:23:35,965 - INFO - [流程]打开风云卫星数据网站......
+2025-11-06 22:23:42,210 - INFO - [流程]开始登录流程......
+2025-11-06 22:23:44,751 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-06 22:23:44,849 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-06 22:23:44,905 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-06 22:23:45,510 - INFO - 识别到验证码: qjn6
+2025-11-06 22:23:45,601 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 22:23:45,641 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 22:23:48,651 - INFO - 成功找到'我的订单'元素
+2025-11-06 22:23:48,651 - INFO - [流程]登录成功
+2025-11-06 22:23:48,894 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-06 22:23:49,273 - INFO - [流程]订单 A202511061356115843 订单状态为【准备中】，停止程序
+2025-11-06 22:31:12,182 - INFO - === 日志系统初始化测试 ===
+2025-11-06 22:31:12,182 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-06 22:31:12,182 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-06 22:31:12,182 - INFO - [流程]开始下载订单数据......
+2025-11-06 22:31:13,434 - INFO - 浏览器初始化成功
+2025-11-06 22:31:13,434 - INFO - [流程]打开风云卫星数据网站......
+2025-11-06 22:31:18,971 - INFO - [流程]开始登录流程......
+2025-11-06 22:31:20,551 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-06 22:31:20,604 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-06 22:31:20,642 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-06 22:31:21,273 - INFO - 识别到验证码: nelg
+2025-11-06 22:31:21,378 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 22:31:21,435 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 22:31:54,476 - WARNING - 未找到'风云极轨卫星'元素，本次登录失败，准备重试 2/3
+2025-11-06 22:31:56,133 - INFO - 识别到验证码: lhYI
+2025-11-06 22:31:56,223 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 22:31:56,261 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 22:31:59,275 - INFO - 成功找到'我的订单'元素
+2025-11-06 22:31:59,275 - INFO - [流程]登录成功
+2025-11-06 22:31:59,913 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-06 22:32:00,095 - INFO - [流程]订单 A202511061356115843 订单状态为【准备中】，停止程序
+2025-11-06 22:36:26,223 - INFO - === 日志系统初始化测试 ===
+2025-11-06 22:36:26,223 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-06 22:36:26,223 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-06 22:36:26,223 - INFO - [流程]开始下载订单数据......
+2025-11-06 22:36:27,467 - INFO - 浏览器初始化成功
+2025-11-06 22:36:27,467 - INFO - [流程]打开风云卫星数据网站......
+2025-11-06 22:36:32,813 - INFO - [流程]开始登录流程......
+2025-11-06 22:36:34,008 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-06 22:36:34,055 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-06 22:36:34,096 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-06 22:36:34,691 - INFO - 识别到验证码: srbq
+2025-11-06 22:36:34,783 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 22:36:34,838 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 22:36:37,854 - INFO - 成功找到'我的订单'元素
+2025-11-06 22:36:37,854 - INFO - [流程]登录成功
+2025-11-06 22:36:38,093 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-06 22:36:38,284 - INFO - [流程]所有订单均处于准备成功状态，执行数据下载
+2025-11-06 22:36:38,284 - INFO - [流程]共有2个订单，将执行2次下载操作......
+2025-11-06 22:36:38,284 - INFO - [流程]开始第1/2次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')
+2025-11-06 22:36:40,370 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-06 22:36:40,459 - INFO - 检测到新窗口，它的URL为: http://clouddata.nsmc.org.cn:8089/ORDERFILELIST/C202511061356115752.txt?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=Oo%2BEz%2FS8DkweG%2B1XDwhLUKkP7ZI%3D
+2025-11-06 22:36:40,459 - INFO - 新窗口是HTML页面，读取页面源码
+2025-11-06 22:36:40,463 - INFO - --------HTMl页面内容:<html><head><meta name="color-scheme" content="light dark"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762783261&amp;Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762783261&amp;Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D</pre></body></html>
+2025-11-06 22:36:40,479 - INFO - --------真实的页面内容:http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:36:40,479 - INFO - 识别到是页面了，并且拿到了页面内容
+2025-11-06 22:36:40,479 - INFO - [流程]从页面中提取到2个HTTP格式HDF链接，开始下载...
+2025-11-06 22:36:40,479 - INFO - [流程]正在下载第1/2个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+2025-11-06 22:36:44,944 - INFO - [流程]✅ 第1个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+2025-11-06 22:36:44,944 - INFO - [流程]正在下载第2/2个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:36:55,738 - INFO - [流程]✅ 第2个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:36:55,738 - INFO - [流程]页面链接处理完成：总计2个文件, 成功2个, 失败0个
+2025-11-06 22:36:55,738 - INFO - [流程]✅ 成功下载2个HDF文件！
+2025-11-06 22:36:57,742 - INFO - [流程]开始第2/2次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[2]/td[8]/a/span')
+2025-11-06 22:37:29,778 - WARNING - 点击元素失败，重试 1/3 - xpath: //*[@id="displayOrderBody"]/tr[2]/td[8]/a/span
+2025-11-06 22:38:29,802 - WARNING - 点击元素失败，重试 2/3 - xpath: //*[@id="displayOrderBody"]/tr[2]/td[8]/a/span
+2025-11-06 22:39:43,645 - ERROR - 点击并读取内容时出错: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2025-11-06 22:39:43,645 - WARNING - 无有效结果可处理
+2025-11-06 22:51:41,125 - INFO - === 日志系统初始化测试 ===
+2025-11-06 22:51:41,125 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-06 22:51:41,125 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-06 22:51:41,125 - INFO - [流程]开始下载订单数据......
+2025-11-06 22:51:42,422 - INFO - 浏览器初始化成功
+2025-11-06 22:51:42,422 - INFO - [流程]打开风云卫星数据网站......
+2025-11-06 22:51:47,529 - INFO - [流程]开始登录流程......
+2025-11-06 22:51:49,015 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-06 22:51:49,084 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-06 22:51:49,136 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-06 22:51:49,778 - INFO - 识别到验证码: oz6s
+2025-11-06 22:51:49,884 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 22:51:49,924 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 22:51:52,937 - INFO - 成功找到'我的订单'元素
+2025-11-06 22:51:52,937 - INFO - [流程]登录成功
+2025-11-06 22:51:53,177 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-06 22:51:56,180 - INFO - [流程]成功跳转至我的订单页面，主窗口句柄：526C8E03EEF35DA62E75A43D7F3558CF，URL：https://satellite.nsmc.org.cn/DataPortal/cn/data/order.html
+2025-11-06 22:51:56,232 - INFO - [流程]所有订单均处于准备成功状态，执行数据下载
+2025-11-06 22:51:56,232 - INFO - [流程]共有2个订单，将执行2次下载操作......
+2025-11-06 22:51:56,232 - INFO - [流程]开始第1/2次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')
+2025-11-06 22:51:58,304 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-06 22:51:58,393 - INFO - 检测到新窗口，它的URL为: http://clouddata.nsmc.org.cn:8089/ORDERFILELIST/C202511061356115752.txt?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=Oo%2BEz%2FS8DkweG%2B1XDwhLUKkP7ZI%3D
+2025-11-06 22:51:58,393 - INFO - 新窗口是HTML页面，读取页面源码
+2025-11-06 22:51:58,398 - INFO - --------HTMl页面内容:<html><head><meta name="color-scheme" content="light dark"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762783261&amp;Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762783261&amp;Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D</pre></body></html>
+2025-11-06 22:51:58,419 - INFO - --------真实的页面内容:http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:51:58,419 - INFO - 识别到是页面了，并且拿到了页面内容
+2025-11-06 22:51:58,420 - INFO - [流程]从页面中提取到2个HTTP格式HDF链接，开始下载...
+2025-11-06 22:51:58,420 - INFO - [流程]正在下载第1/2个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+2025-11-06 22:52:01,421 - INFO - [流程]✅ 第1个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+2025-11-06 22:52:01,421 - INFO - [流程]正在下载第2/2个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:52:10,837 - INFO - [流程]✅ 第2个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:52:10,837 - INFO - [流程]页面链接处理完成：总计2个文件, 成功2个, 失败0个
+2025-11-06 22:52:10,837 - INFO - [流程]✅ 成功下载2个HDF文件！
+2025-11-06 22:52:10,839 - INFO - ❌ 当前在非主窗口（句柄：CF770A7E2836C385647AF69DEFA2B870），关闭并返回我的订单页面
+2025-11-06 22:52:13,914 - INFO - ✅ 成功关闭非主窗口并返回我的订单页面
+2025-11-06 22:52:15,916 - INFO - [流程]开始第2/2次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[2]/td[8]/a/span')
+2025-11-06 22:52:17,970 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[2]/td[8]/a/span
+2025-11-06 22:52:18,271 - INFO - 文件创建: C:\Users\Lenovo\Downloads\1d6206d0-84a9-4f2d-a0c5-2e2e7e2819d7.tmp
+2025-11-06 22:52:18,297 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\1d6206d0-84a9-4f2d-a0c5-2e2e7e2819d7.tmp → C:\Users\Lenovo\Downloads\A202511061356115843.txt.crdownload
+2025-11-06 22:52:18,297 - INFO - 记录中间临时文件: C:\Users\Lenovo\Downloads\A202511061356115843.txt.crdownload
+2025-11-06 22:52:18,324 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\A202511061356115843.txt.crdownload → C:\Users\Lenovo\Downloads\A202511061356115843.txt
+2025-11-06 22:52:18,324 - INFO - 检测到最终txt文件: C:\Users\Lenovo\Downloads\A202511061356115843.txt
+2025-11-06 22:52:18,975 - INFO - 捕获到直接下载的TXT文件
+2025-11-06 22:52:18,976 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-11-06 22:52:18,976 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-11-06 22:52:18,976 - INFO - 成功获取下载的txt文件内容
+2025-11-06 22:52:18,976 - INFO - [流程]从txt文件中提取到1个FTP格式HDF链接，开始下载...
+2025-11-06 22:52:18,976 - INFO - [流程]正在下载第1/1个FTP链接: ftp://A202511061356115843:Z2vF2d_Y@ftp.nsmc.org.cn/FY3C_MERSI_GBAL_L1_20150530_2000_GEO1K_MS.HDF
+2025-11-06 22:52:31,594 - INFO - 成功下载: FY3C_MERSI_GBAL_L1_20150530_2000_GEO1K_MS.HDF
+2025-11-06 22:52:31,594 - INFO - [流程]✅ 第1个FTP链接下载成功: ftp://A202511061356115843:Z2vF2d_Y@ftp.nsmc.org.cn/FY3C_MERSI_GBAL_L1_20150530_2000_GEO1K_MS.HDF
+2025-11-06 22:52:31,596 - INFO - 已清理临时TXT文件：C:\Users\Lenovo\Downloads\A202511061356115843.txt
+2025-11-06 22:52:31,596 - INFO - [流程]下载完成统计: 总计1个文件, 成功1个, 失败0个
+2025-11-06 22:52:31,596 - INFO - [流程]✅ 成功下载1个HDF文件！
+2025-11-06 22:52:31,600 - WARNING - 当前窗口是主窗口，但页面不是我的订单页面，重新加载...
+2025-11-06 22:53:34,786 - INFO - === 日志系统初始化测试 ===
+2025-11-06 22:53:34,786 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-06 22:53:34,786 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-06 22:53:34,786 - INFO - [流程]开始下载订单数据......
+2025-11-06 22:53:36,099 - INFO - 浏览器初始化成功
+2025-11-06 22:53:36,099 - INFO - [流程]打开风云卫星数据网站......
+2025-11-06 22:53:41,442 - INFO - [流程]开始登录流程......
+2025-11-06 22:53:43,036 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-06 22:53:43,105 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-06 22:53:43,175 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-06 22:53:43,756 - INFO - 识别到验证码: 1L6j
+2025-11-06 22:53:43,860 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 22:53:43,903 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 22:53:52,019 - INFO - 成功找到'我的订单'元素
+2025-11-06 22:53:52,019 - INFO - [流程]登录成功
+2025-11-06 22:53:53,225 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-06 22:53:56,239 - INFO - [流程]成功跳转至我的订单页面，主窗口句柄：68110DBDEA37977D1D7E7A8A0D375DD1，URL：https://satellite.nsmc.org.cn/DataPortal/cn/data/order.html
+2025-11-06 22:53:56,290 - INFO - [流程]所有订单均处于准备成功状态，执行数据下载
+2025-11-06 22:53:56,290 - INFO - [流程]共有2个订单，将执行2次下载操作......
+2025-11-06 22:53:56,290 - INFO - [流程]开始第1/2次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')
+2025-11-06 22:53:58,379 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-06 22:53:58,456 - INFO - 检测到新窗口，它的URL为: http://clouddata.nsmc.org.cn:8089/ORDERFILELIST/C202511061356115752.txt?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=Oo%2BEz%2FS8DkweG%2B1XDwhLUKkP7ZI%3D
+2025-11-06 22:53:58,456 - INFO - 新窗口是HTML页面，读取页面源码
+2025-11-06 22:53:58,461 - INFO - --------HTMl页面内容:<html><head><meta name="color-scheme" content="light dark"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762783261&amp;Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762783261&amp;Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D</pre></body></html>
+2025-11-06 22:53:58,477 - INFO - --------真实的页面内容:http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:53:58,477 - INFO - 识别到是页面了，并且拿到了页面内容
+2025-11-06 22:53:58,477 - INFO - [流程]从页面中提取到2个HTTP格式HDF链接，开始下载...
+2025-11-06 22:53:58,477 - INFO - [流程]正在下载第1/2个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+2025-11-06 22:54:01,586 - INFO - [流程]✅ 第1个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+2025-11-06 22:54:01,586 - INFO - [流程]正在下载第2/2个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:54:11,984 - INFO - [流程]✅ 第2个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:54:11,984 - INFO - [流程]页面链接处理完成：总计2个文件, 成功2个, 失败0个
+2025-11-06 22:54:11,984 - INFO - [流程]✅ 成功下载2个HDF文件！
+2025-11-06 22:54:11,984 - INFO - ❌ 当前在非主窗口（句柄：B10F7676B91306D00AEC0196BE1CC767），关闭并返回我的订单页面
+2025-11-06 22:54:15,053 - INFO - ✅ 成功关闭非主窗口并返回我的订单页面
+2025-11-06 22:54:17,054 - INFO - [流程]开始第2/2次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[2]/td[8]/a/span')
+2025-11-06 22:54:19,104 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[2]/td[8]/a/span
+2025-11-06 22:54:19,195 - INFO - 文件创建: C:\Users\Lenovo\Downloads\549a8b5d-0103-490e-9c15-0cc02906f285.tmp
+2025-11-06 22:54:19,221 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\549a8b5d-0103-490e-9c15-0cc02906f285.tmp → C:\Users\Lenovo\Downloads\A202511061356115843.txt.crdownload
+2025-11-06 22:54:19,221 - INFO - 记录中间临时文件: C:\Users\Lenovo\Downloads\A202511061356115843.txt.crdownload
+2025-11-06 22:54:19,243 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\A202511061356115843.txt.crdownload → C:\Users\Lenovo\Downloads\A202511061356115843.txt
+2025-11-06 22:54:19,244 - INFO - 检测到最终txt文件: C:\Users\Lenovo\Downloads\A202511061356115843.txt
+2025-11-06 22:54:20,109 - INFO - 捕获到直接下载的TXT文件
+2025-11-06 22:54:20,109 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-11-06 22:54:20,109 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-11-06 22:54:20,109 - INFO - 成功获取下载的txt文件内容
+2025-11-06 22:54:20,109 - INFO - [流程]从txt文件中提取到1个FTP格式HDF链接，开始下载...
+2025-11-06 22:54:20,109 - INFO - [流程]正在下载第1/1个FTP链接: ftp://A202511061356115843:Z2vF2d_Y@ftp.nsmc.org.cn/FY3C_MERSI_GBAL_L1_20150530_2000_GEO1K_MS.HDF
+2025-11-06 22:54:22,269 - ERROR - FTP下载失败: [Errno 22] Invalid argument
+2025-11-06 22:54:22,270 - ERROR - ❌ 第1个FTP链接下载失败: ftp://A202511061356115843:Z2vF2d_Y@ftp.nsmc.org.cn/FY3C_MERSI_GBAL_L1_20150530_2000_GEO1K_MS.HDF
+2025-11-06 22:54:22,270 - INFO - 已清理临时TXT文件：C:\Users\Lenovo\Downloads\A202511061356115843.txt
+2025-11-06 22:54:22,270 - INFO - [流程]下载完成统计: 总计1个文件, 成功0个, 失败1个
+2025-11-06 22:54:22,270 - ERROR - [流程]❌ 1个HDF文件下载失败！
+2025-11-06 22:54:22,270 - ERROR - 返回我的订单页面时出错：Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff696d81eb5+80197]
+	GetHandleVerifier [0x0x7ff696d81f10+80288]
+	(No symbol) [0x0x7ff696b002fa]
+	(No symbol) [0x0x7ff696aec0a5]
+	(No symbol) [0x0x7ff696b1144a]
+	(No symbol) [0x0x7ff696b87be6]
+	(No symbol) [0x0x7ff696b91200]
+	(No symbol) [0x0x7ff696b80340]
+	(No symbol) [0x0x7ff696b48b02]
+	(No symbol) [0x0x7ff696b498d3]
+	GetHandleVerifier [0x0x7ff69703e83d+2949837]
+	GetHandleVerifier [0x0x7ff697038c6a+2926330]
+	GetHandleVerifier [0x0x7ff6970586c7+3055959]
+	GetHandleVerifier [0x0x7ff696d9cfee+191102]
+	GetHandleVerifier [0x0x7ff696da50af+224063]
+	GetHandleVerifier [0x0x7ff696d8af64+117236]
+	GetHandleVerifier [0x0x7ff696d8b119+117673]
+	GetHandleVerifier [0x0x7ff696d710a8+11064]
+	BaseThreadInitThunk [0x0x7fff3a2ee8d7+23]
+	RtlUserThreadStart [0x0x7fff3c00c53c+44]
+
+2025-11-06 22:54:22,272 - ERROR - Traceback (most recent call last):
+  File "D:/Pycharmcode/test/download.py", line 785, in back_to_main_page
+    current_window = driver.current_window_handle
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 520, in current_window_handle
+    return self.execute(Command.W3C_GET_CURRENT_WINDOW_HANDLE)["value"]
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Lenovo\.conda\envs\pyqt\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=140.0.7339.81)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff696d81eb5+80197]
+	GetHandleVerifier [0x0x7ff696d81f10+80288]
+	(No symbol) [0x0x7ff696b002fa]
+	(No symbol) [0x0x7ff696aec0a5]
+	(No symbol) [0x0x7ff696b1144a]
+	(No symbol) [0x0x7ff696b87be6]
+	(No symbol) [0x0x7ff696b91200]
+	(No symbol) [0x0x7ff696b80340]
+	(No symbol) [0x0x7ff696b48b02]
+	(No symbol) [0x0x7ff696b498d3]
+	GetHandleVerifier [0x0x7ff69703e83d+2949837]
+	GetHandleVerifier [0x0x7ff697038c6a+2926330]
+	GetHandleVerifier [0x0x7ff6970586c7+3055959]
+	GetHandleVerifier [0x0x7ff696d9cfee+191102]
+	GetHandleVerifier [0x0x7ff696da50af+224063]
+	GetHandleVerifier [0x0x7ff696d8af64+117236]
+	GetHandleVerifier [0x0x7ff696d8b119+117673]
+	GetHandleVerifier [0x0x7ff696d710a8+11064]
+	BaseThreadInitThunk [0x0x7fff3a2ee8d7+23]
+	RtlUserThreadStart [0x0x7fff3c00c53c+44]
+
+
+2025-11-06 22:54:29,232 - INFO - === 日志系统初始化测试 ===
+2025-11-06 22:54:29,232 - INFO - 日志文件路径: D:\Pycharmcode\test\download.log
+2025-11-06 22:54:29,232 - INFO - 当前工作目录: D:\Pycharmcode\myqt
+2025-11-06 22:54:29,232 - INFO - [流程]开始下载订单数据......
+2025-11-06 22:54:30,470 - INFO - 浏览器初始化成功
+2025-11-06 22:54:30,470 - INFO - [流程]打开风云卫星数据网站......
+2025-11-06 22:54:36,343 - INFO - [流程]开始登录流程......
+2025-11-06 22:54:37,821 - INFO - 成功点击元素: xpath: //*[@id="common-login"]
+2025-11-06 22:54:37,901 - INFO - 成功输入文本到元素: xpath: //*[@id="inputUserNameCN"]
+2025-11-06 22:54:37,950 - INFO - 成功输入文本到元素: xpath: //*[@id="inputPasswordCN"]
+2025-11-06 22:54:38,536 - INFO - 识别到验证码: iwbt
+2025-11-06 22:54:38,642 - INFO - 成功输入文本到元素: xpath: //*[@id="inputValidateCodeCN"]
+2025-11-06 22:54:38,680 - INFO - 成功点击元素: xpath: //*[@id="logincn"]/div[2]/div/div/div[2]/div[2]/div[6]/button
+2025-11-06 22:54:41,688 - INFO - 成功找到'我的订单'元素
+2025-11-06 22:54:41,688 - INFO - [流程]登录成功
+2025-11-06 22:54:42,107 - INFO - 成功点击元素: xpath: //*[@id="u-myorder"]
+2025-11-06 22:54:45,109 - INFO - [流程]成功跳转至我的订单页面，主窗口句柄：1F09B2585C5C9F3BA98F4832F8267365，URL：https://satellite.nsmc.org.cn/DataPortal/cn/data/order.html
+2025-11-06 22:54:45,161 - INFO - [流程]所有订单均处于准备成功状态，执行数据下载
+2025-11-06 22:54:45,161 - INFO - [流程]共有2个订单，将执行2次下载操作......
+2025-11-06 22:54:45,161 - INFO - [流程]开始第1/2次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span')
+2025-11-06 22:54:47,252 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[1]/td[8]/a/span
+2025-11-06 22:54:47,468 - INFO - 检测到新窗口，它的URL为: http://clouddata.nsmc.org.cn:8089/ORDERFILELIST/C202511061356115752.txt?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=Oo%2BEz%2FS8DkweG%2B1XDwhLUKkP7ZI%3D
+2025-11-06 22:54:47,468 - INFO - 新窗口是HTML页面，读取页面源码
+2025-11-06 22:54:47,473 - INFO - --------HTMl页面内容:<html><head><meta name="color-scheme" content="light dark"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762783261&amp;Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&amp;Expires=1762783261&amp;Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D</pre></body></html>
+2025-11-06 22:54:47,489 - INFO - --------真实的页面内容:http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:54:47,489 - INFO - 识别到是页面了，并且拿到了页面内容
+2025-11-06 22:54:47,490 - INFO - [流程]从页面中提取到2个HTTP格式HDF链接，开始下载...
+2025-11-06 22:54:47,490 - INFO - [流程]正在下载第1/2个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+2025-11-06 22:54:51,142 - INFO - [流程]✅ 第1个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251105/FY3E_MERSI_GRAN_L1_20251105_2335_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=tZgc6AynETytSoupAKVHTN50Z6c%3D
+2025-11-06 22:54:51,142 - INFO - [流程]正在下载第2/2个HTTP链接: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:54:59,760 - INFO - [流程]✅ 第2个HTTP链接下载成功: http://clouddata.nsmc.org.cn:8089/DATA/FY4/FY4B/AGRI/L1/FDI/DISK/GEO/2025/20251106/FY4B-_AGRI--_N_DISK_1050E_L1-_GEO-_MULT_NOM_20251106133000_20251106134459_4000M_V0001.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762783261&Signature=E2cGtA3vu2c3z%2FH4%2FKq%2F6OaGx8k%3D
+2025-11-06 22:54:59,760 - INFO - [流程]页面链接处理完成：总计2个文件, 成功2个, 失败0个
+2025-11-06 22:54:59,760 - INFO - [流程]✅ 成功下载2个HDF文件！
+2025-11-06 22:54:59,760 - INFO - ❌ 当前在非主窗口（句柄：C695616487BC4AB1EF2A4A7F70D658FF），关闭并返回我的订单页面
+2025-11-06 22:55:02,794 - INFO - ✅ 成功关闭非主窗口并返回我的订单页面
+2025-11-06 22:55:04,804 - INFO - [流程]开始第2/2次下载，点击按钮：('xpath', '//*[@id="displayOrderBody"]/tr[2]/td[8]/a/span')
+2025-11-06 22:55:06,853 - INFO - 成功点击元素: xpath: //*[@id="displayOrderBody"]/tr[2]/td[8]/a/span
+2025-11-06 22:55:06,962 - INFO - 文件创建: C:\Users\Lenovo\Downloads\2702262d-4772-43a1-95d8-b689c26cb01f.tmp
+2025-11-06 22:55:06,986 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\2702262d-4772-43a1-95d8-b689c26cb01f.tmp → C:\Users\Lenovo\Downloads\A202511061356115843.txt.crdownload
+2025-11-06 22:55:06,986 - INFO - 记录中间临时文件: C:\Users\Lenovo\Downloads\A202511061356115843.txt.crdownload
+2025-11-06 22:55:07,007 - INFO - 文件重命名: C:\Users\Lenovo\Downloads\A202511061356115843.txt.crdownload → C:\Users\Lenovo\Downloads\A202511061356115843.txt
+2025-11-06 22:55:07,007 - INFO - 检测到最终txt文件: C:\Users\Lenovo\Downloads\A202511061356115843.txt
+2025-11-06 22:55:07,858 - INFO - 捕获到直接下载的TXT文件
+2025-11-06 22:55:07,858 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-11-06 22:55:07,858 - INFO - 成功读取txt内容（编码：utf-8，97字符）
+2025-11-06 22:55:07,858 - INFO - 成功获取下载的txt文件内容
+2025-11-06 22:55:07,858 - INFO - [流程]从txt文件中提取到1个FTP格式HDF链接，开始下载...
+2025-11-06 22:55:07,858 - INFO - [流程]正在下载第1/1个FTP链接: ftp://A202511061356115843:Z2vF2d_Y@ftp.nsmc.org.cn/FY3C_MERSI_GBAL_L1_20150530_2000_GEO1K_MS.HDF
+2025-11-06 22:55:14,962 - INFO - 成功下载: FY3C_MERSI_GBAL_L1_20150530_2000_GEO1K_MS.HDF
+2025-11-06 22:55:14,962 - INFO - [流程]✅ 第1个FTP链接下载成功: ftp://A202511061356115843:Z2vF2d_Y@ftp.nsmc.org.cn/FY3C_MERSI_GBAL_L1_20150530_2000_GEO1K_MS.HDF
+2025-11-06 22:55:14,962 - INFO - 已清理临时TXT文件：C:\Users\Lenovo\Downloads\A202511061356115843.txt
+2025-11-06 22:55:14,962 - INFO - [流程]下载完成统计: 总计1个文件, 成功1个, 失败0个
+2025-11-06 22:55:14,962 - INFO - [流程]✅ 成功下载1个HDF文件！
+2025-11-06 22:55:14,969 - WARNING - 当前窗口是主窗口，但页面不是我的订单页面，重新加载...

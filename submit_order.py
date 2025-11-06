@@ -321,7 +321,7 @@ class SatelliteDataDownloader:
             if not self._check_order():
                 logger.error("[错误]查看订单失败，程序退出")
                 sys.exit(6)  # 6表示查看订单失败
-            logger.info("[流程]=====提交订单所有操作完成=====")
+            logger.info("[流程]提交订单所有操作完成")
 
             sys.exit(0)  # 全部成功，显式返回0
 
@@ -335,7 +335,7 @@ class SatelliteDataDownloader:
             pass
 
     def _login(self):
-        logger.info("[流程]======开始登录流程=======")
+        logger.info("[流程]开始登录流程......")
         max_login_retries = self.config.get_retry_attempts()
 
         # 1. 在主网页寻找并点击登录按钮
@@ -407,7 +407,7 @@ class SatelliteDataDownloader:
 
     def _select_satellite_data(self,selected_text_comboBox):
         """选择卫星数据"""
-        logger.info("[流程]======开始选择卫星数据=======")
+        logger.info("[流程]开始选择卫星数据......")
         time.sleep(3)
         # 选择风云极轨卫星
         if not self.browser.safe_click_element(*self.locators['FengYun_satellite']):
@@ -460,12 +460,12 @@ class SatelliteDataDownloader:
 
 
 
-        logger.info("[流程]=====卫星数据选择完成=====")
+        logger.info("[流程卫星数据选择完成")
         return True
 
     def _select_Range(self,time_param,time_param2,North,South,East,West):
         """空间范围选择"""
-        logger.info("[流程]=====开始选择空间范围=====")
+        logger.info("[流程]开始选择空间范围......")
         #点击 “空间范围”
         time.sleep(2)
         # 等待下拉菜单消失
@@ -504,12 +504,12 @@ class SatelliteDataDownloader:
         time.sleep(0.5)
 
 
-        logger.info("[流程]=====空间范围选择完成=====")
+        logger.info("[流程]空间范围选择完成")
         return True
 
     def _submit_order(self):
         """提交订单"""
-        logger.info("[流程]=====开始筛选数据提交订单=====")
+        logger.info("[流程]开始筛选数据提交订单......")
         time.sleep(2)
         # 点击检索
         if not self.browser.safe_click_element(*self.locators['search_button']):
@@ -565,17 +565,17 @@ class SatelliteDataDownloader:
             logger.error(f"获取订单号失败：{e}")
 
 
-        logger.info("[流程]=====筛选数据提交订单完成=====")
+        logger.info("[流程]筛选数据提交订单完成")
         return True
 
     def _check_order(self):
         """检查订单"""
-        logger.info("[流程]=====开始查看订单=====")
+        logger.info("[流程]开始查看订单......")
 
         if not self.browser.safe_click_element(*self.locators['check_order']):
             return False
 
-        logger.info("[流程]=====查看订单完成=====")
+        logger.info("[流程]查看订单完成")
         return True
 
     def update_ini_from_external(self, external_save_dir):
@@ -633,7 +633,7 @@ if __name__  ==  "__main__":
     external_save_dir=sys.argv[8]
 
 
-    logger.info("[流程]===== 订单提交程序启动 =====")
+    logger.info("[流程]订单提交程序启动......")
     downloader = SatelliteDataDownloader()
 
     if not downloader.update_ini_from_external(external_save_dir):

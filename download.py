@@ -229,6 +229,8 @@ class SatelliteBrowser:
         self.download_dir = config.get_download_dir()  # 下载目录
         self.listen_dir = config.get_listen_dir()
 
+
+
     def init_browser(self):
         """初始化浏览器"""
         try:
@@ -443,6 +445,15 @@ class SatelliteDataDownloader:
         self.user_info = self.config.get_user_info()
         self.base_url = 'https://satellite.nsmc.org.cn/DataPortal/cn/home/index.html'
 
+        # 新增：主页面配置（改为「我的订单」页面）
+        self.main_page_config = {
+            'url_keyword': '/myOrder',  # 我的订单页面URL特征（根据实际URL调整，比如URL包含/myOrder）
+            'identifier': (By.ID, 'displayOrderBody')  # 我的订单页面唯一元素（订单表格tbody，必存在）
+        }
+        self.main_window_handle = None  # 存储「我的订单」页面的主窗口句柄
+        self.main_page_url = None  # 存储实际的我的订单页面URL（跳转后记录）
+
+
         # 页面元素定位符
         self.locators = {
             'login_button': (By.XPATH, '//*[@id="common-login"]'),  # 点击登录
@@ -476,7 +487,7 @@ class SatelliteDataDownloader:
                 sys.exit(1)  # 非0退出码（1表示浏览器初始化失败）
 
             # 打开网站
-            logger.info(f"打开网站: {self.base_url}")
+            logger.info("[流程]打开风云卫星数据网站......")
             self.browser.driver.get(self.base_url)
             time.sleep(2)  # 初始加载等待
 
@@ -492,6 +503,12 @@ class SatelliteDataDownloader:
                     self.browser.driver.quit()
                 sys.exit(3)  # 明确退出码，表示导航失败
 
+            # 新增：等待跳转完成，并记录主窗口句柄和URL
+            time.sleep(3)  # 等待页面跳转加载
+            self.main_window_handle = self.browser.driver.current_window_handle  # 记录当前窗口（我的订单页面）
+            self.main_page_url = self.browser.driver.current_url  # 记录我的订单页面实际URL
+            logger.info(
+                f"[流程]成功跳转至我的订单页面，主窗口句柄：{self.main_window_handle}，URL：{self.main_page_url}")
 
             # 遍历每个订单号检查状态
             for order_number in content:
@@ -502,7 +519,7 @@ class SatelliteDataDownloader:
                     print(f"订单 {order_number} 的状态是：{order_status}")
                     # 若当前订单状态为“准备中”，立即退出程序
                     if order_status == "准备中":
-                        logger.info(f"订单 {order_number} 订单状态为【准备中】，停止程序")
+                        logger.info(f"[流程]订单 {order_number} 订单状态为【准备中】，停止程序")
                         # 关闭浏览器并退出
                         if self.browser.driver:
                             self.browser.driver.quit()
@@ -511,11 +528,11 @@ class SatelliteDataDownloader:
                     logger.warning(f"未找到订单 {order_number}")
 
             # 所有订单均查询完毕，且均未出现“准备中”状态
-            logger.info("所有订单均未处于【准备中】状态")
+            logger.info("[流程]所有订单均处于准备成功状态，执行数据下载")
 
             # 核心修改：根据txt行数（content长度）循环点击对应按钮
             line_count = len(content)  # 获取txt有效行数
-            logger.info(f"txt文件共{line_count}行，将执行{line_count}次下载操作")
+            logger.info(f"[流程]共有{line_count}个订单，将执行{line_count}次下载操作......")
 
             # 循环执行：次数 = 行数，每次点击第i个按钮（索引从0开始）
             for i in range(line_count):
@@ -526,11 +543,14 @@ class SatelliteDataDownloader:
 
                 # 获取当前行对应的按钮定位符
                 current_button = self.locators['file_buttons'][i]
-                logger.info(f"开始第{i + 1}/{line_count}次下载，点击按钮：{current_button}")
+                logger.info(f"[流程]开始第{i + 1}/{line_count}次下载，点击按钮：{current_button}")
 
                 # 点击按钮并处理结果
                 result = self.browser.click_and_read_content(current_button)
                 self.process_result(result)
+
+                # 核心调用：处理完成后返回「我的订单」主页面
+                self.back_to_main_page()
 
                 # 每次操作后等待1-2秒，避免页面未响应
                 time.sleep(2)
@@ -590,11 +610,11 @@ class SatelliteDataDownloader:
         # 输出下载统计（仅文件类型需要）
         if result['type'] == 'file':
             logger.info(
-                f"下载完成统计: 总计{total_downloads}个文件, 成功{successful_downloads}个, 失败{failed_downloads}个")
+                f"[流程]下载完成统计: 总计{total_downloads}个文件, 成功{successful_downloads}个, 失败{failed_downloads}个")
             if successful_downloads > 0:
-                logger.info(f"✅ 成功下载{successful_downloads}个HDF文件！")
+                logger.info(f"[流程]✅ 成功下载{successful_downloads}个HDF文件！")
             if failed_downloads > 0:
-                logger.error(f"❌ {failed_downloads}个HDF文件下载失败！")
+                logger.error(f"[流程]❌ {failed_downloads}个HDF文件下载失败！")
 
     def extract_links(self, raw_text):
         """提取文本中的HTTP和FTP链接（复用正则逻辑）"""
@@ -614,24 +634,24 @@ class SatelliteDataDownloader:
 
         # 下载HTTP链接
         if http_matches:
-            logger.info(f"从txt文件中提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
+            logger.info(f"[流程]从txt文件中提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
             for i, hdf_url in enumerate(http_matches, 1):
-                logger.info(f"正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
+                logger.info(f"[流程]正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
                 if download_http_file(hdf_url, save_dir):
                     success += 1
-                    logger.info(f"✅ 第{i}个HTTP链接下载成功: {hdf_url}")
+                    logger.info(f"[流程]✅ 第{i}个HTTP链接下载成功: {hdf_url}")
                 else:
                     failed += 1
                     logger.error(f"❌ 第{i}个HTTP链接下载失败: {hdf_url}")
 
         # 下载FTP链接
         if ftp_matches:
-            logger.info(f"从txt文件中提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
+            logger.info(f"[流程]从txt文件中提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
             for i, hdf_url in enumerate(ftp_matches, 1):
-                logger.info(f"正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
+                logger.info(f"[流程]正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
                 if download_ftp_with_progress(hdf_url, save_dir):
                     success += 1
-                    logger.info(f"✅ 第{i}个FTP链接下载成功: {hdf_url}")
+                    logger.info(f"[流程]✅ 第{i}个FTP链接下载成功: {hdf_url}")
                 else:
                     failed += 1
                     logger.error(f"❌ 第{i}个FTP链接下载失败: {hdf_url}")
@@ -648,23 +668,23 @@ class SatelliteDataDownloader:
         failed = 0
 
         if http_matches:
-            logger.info(f"从页面中提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
+            logger.info(f"[流程]从页面中提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
             for i, hdf_url in enumerate(http_matches, 1):
-                logger.info(f"正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
+                logger.info(f"[流程]正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
                 if download_http_file(hdf_url, save_dir):
                     success += 1
-                    logger.info(f"✅ 第{i}个HTTP链接下载成功: {hdf_url}")
+                    logger.info(f"[流程]✅ 第{i}个HTTP链接下载成功: {hdf_url}")
                 else:
                     failed += 1
                     logger.error(f"❌ 第{i}个HTTP链接下载失败: {hdf_url}")
 
         if ftp_matches:
-            logger.info(f"从页面中提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
+            logger.info(f"[流程]从页面中提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
             for i, hdf_url in enumerate(ftp_matches, 1):
-                logger.info(f"正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
+                logger.info(f"[流程]正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
                 if download_ftp_with_progress(hdf_url, save_dir):
                     success += 1
-                    logger.info(f"✅ 第{i}个FTP链接下载成功: {hdf_url}")
+                    logger.info(f"[流程]✅ 第{i}个FTP链接下载成功: {hdf_url}")
                 else:
                     failed += 1
                     logger.error(f"❌ 第{i}个FTP链接下载失败: {hdf_url}")
@@ -673,14 +693,14 @@ class SatelliteDataDownloader:
         if total == 0:
             logger.error("页面中未找到有效HDF链接")
         else:
-            logger.info(f"页面链接处理完成：总计{total}个文件, 成功{success}个, 失败{failed}个")
+            logger.info(f"[流程]页面链接处理完成：总计{total}个文件, 成功{success}个, 失败{failed}个")
             if success > 0:
-                logger.info(f"✅ 成功下载{success}个HDF文件！")
+                logger.info(f"[流程]✅ 成功下载{success}个HDF文件！")
             if failed > 0:
                 logger.error(f"❌ {failed}个HDF文件下载失败！")
 
     def _login(self):
-        logger.info("开始登录流程")
+        logger.info("[流程]开始登录流程......")
         max_login_retries = self.config.get_retry_attempts()
 
         # 1. 点击登录按钮
@@ -723,7 +743,8 @@ class SatelliteDataDownloader:
                     fengyun_element = WebDriverWait(self.browser.driver, 3).until(
                         EC.presence_of_element_located(self.locators['my_order'])
                     )
-                    logger.info("成功找到'我的订单'元素，登录成功")
+                    logger.info("成功找到'我的订单'元素")
+                    logger.info("[流程]登录成功")
                     return True
                 except TimeoutException:
                     # 未找到元素：刷新验证码，进入下一次重试
@@ -749,10 +770,65 @@ class SatelliteDataDownloader:
         logger.error("登录流程全部重试失败")
         return False
 
+    def back_to_main_page(self):
+        """
+        检查当前页面是否是「我的订单」主页面，若不是则关闭当前窗口并返回
+        :return: bool - 是否成功返回主页面
+        """
+        driver = self.browser.driver
+        if not driver or not self.main_window_handle or not self.main_page_url:
+            logger.error("浏览器未初始化或主窗口信息未记录，无法返回我的订单页面")
+            return False
+
+        try:
+            # 1. 检查当前窗口是否是主窗口（通过句柄判断）
+            current_window = driver.current_window_handle
+            if current_window == self.main_window_handle:
+                # 2. 验证当前页面是否是「我的订单」页面（URL特征+订单表格元素）
+                if self.main_page_config['url_keyword'] in driver.current_url and \
+                        self.browser.safe_find_element(*self.main_page_config['identifier']):
+                    logger.info("✅ 当前已在我的订单页面，无需切换")
+                    return True
+                else:
+                    logger.warning("当前窗口是主窗口，但页面不是我的订单页面，重新加载...")
+                    driver.get(self.main_page_url)
+                    time.sleep(3)
+                    # 重新验证订单表格是否存在
+                    return self.browser.safe_find_element(*self.main_page_config['identifier']) is not None
+
+            # 3. 非主窗口：关闭当前窗口并切换回主窗口
+            logger.info(f"❌ 当前在非主窗口（句柄：{current_window}），关闭并返回我的订单页面")
+            # 关闭当前非主窗口（比如下载时打开的新窗口）
+            driver.close()
+            # 切换到「我的订单」主窗口
+            driver.switch_to.window(self.main_window_handle)
+            time.sleep(3)
+
+            # 4. 验证是否成功返回「我的订单」页面
+            if self.browser.safe_find_element(*self.main_page_config['identifier']):
+                logger.info("✅ 成功关闭非主窗口并返回我的订单页面")
+                return True
+            else:
+                logger.warning("切换到主窗口，但未找到订单表格，重新加载我的订单页面...")
+                driver.get(self.main_page_url)
+                time.sleep(4)
+                return self.browser.safe_find_element(*self.main_page_config['identifier']) is not None
+
+        except Exception as e:
+            logger.error(f"返回我的订单页面时出错：{str(e)}")
+            logger.error(traceback.format_exc())
+            # 异常情况下，强制切换回主窗口并重新加载
+            try:
+                driver.switch_to.window(self.main_window_handle)
+                driver.get(self.main_page_url)
+                time.sleep(4)
+                return self.browser.safe_find_element(*self.main_page_config['identifier']) is not None
+            except:
+                return False
 
 # 主程序入口
 if __name__ == "__main__":
-    logger.info("===== 开始下载订单了 =====")
+    logger.info("[流程]开始下载订单数据......")
     if len(sys.argv) < 2:
         print("错误：未收到时间参数")
         sys.exit(1)
