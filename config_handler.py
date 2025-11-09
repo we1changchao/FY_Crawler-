@@ -7,9 +7,9 @@ logger = logging.getLogger(__name__)  # 初始化日志模块
 
 class ConfigHandler:
     def __init__(self, config_file=None):  # 配置文件名
+        # region  获取程序的路径 + 创建配置解析器实例 + 读取配置文件
         # 获取当前脚本（config_handler.py）所在的目录
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
-
         # 确定最终的配置文件路径
         if config_file is None:
             self.config_file = os.path.join(self.script_dir, "config.ini")  # 拼接绝对路径
@@ -25,6 +25,7 @@ class ConfigHandler:
 
         # 读取配置文件（同样使用 self.config_file）
         self.config.read(self.config_file, encoding='utf-8')
+        # endregion
 
     def _create_default_config(self):
         """创建包含所有必要配置项的默认配置文件"""

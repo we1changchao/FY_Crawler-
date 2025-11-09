@@ -282,6 +282,14 @@ class SatelliteDataDownloader:
             'beginDate': (By.XPATH, '//*[@id="c-beginDate"]'),  # 开始时间
             'endDate': (By.XPATH, '//*[@id="c-endDate"]'),  # 结束时间
 
+            'choseAll': (By.XPATH, '//*[@id="allSele1"]'),  # 全部选择
+            '3E_delete4': (By.XPATH, '//*[@id="fileListHead"]/th[3]/div/ul/li[4]/a/input'),  # 产品名去第4个
+            '3E_delete1': (By.XPATH, '//*[@id="fileListHead"]/th[3]/div/ul/li[1]/a/input'),  # 产品名去第1个
+            '3D_delete3': (By.XPATH, '//*[@id="fileListHead"]/th[3]/div/ul/li[3]/a/input'),  # 产品名去第3个
+            'deleteWindow': (By.XPATH, '//*[@id="fileListModal"]/div[2]/div/div[1]/button/span'),  # 关闭模态框
+
+
+
         }
 
     def run(self,time_param,time_param2,North,South,East,West,selected_text_comboBox):
@@ -313,7 +321,7 @@ class SatelliteDataDownloader:
                 sys.exit(4)  # 4表示地理范围选择失败
 
             # 提交订单
-            if not self._submit_order():
+            if not self._submit_order(time_param,time_param2,North,South,East,West):
                 logger.error("[错误]提交订单失败，程序退出")
                 sys.exit(5)  # 5表示订单提交失败
 
@@ -415,13 +423,13 @@ class SatelliteDataDownloader:
 
 
         # 选择卫星 是3D还是3E
-        if selected_text_comboBox.split(":",1)[0] == "FY-3D" :
-            if not self.browser.safe_click_element(*self.locators['fy3d_satellite']):
-                return False
+      #  if selected_text_comboBox.split(":",1)[0] == "FY-3D" :
+        if not self.browser.safe_click_element(*self.locators['fy3d_satellite']):
+            return False
 
-        elif selected_text_comboBox.split(":",1)[0] == "FY-3E":
-            if not self.browser.safe_click_element(*self.locators['fy3e_satellite']):
-                return False
+        # elif selected_text_comboBox.split(":",1)[0] == "FY-3E":
+        #     if not self.browser.safe_click_element(*self.locators['fy3e_satellite']):
+        #         return False
 
         # 选择1级数据
         if not self.browser.safe_click_element(*self.locators['level1_data']):
@@ -429,34 +437,17 @@ class SatelliteDataDownloader:
         # 等待数据名称 可见
         if not self.browser.safe_click_element(*self.locators['data_type_select']):
             return False
-        # self.browser.wait.until(
-        #     EC.presence_of_element_located(self.locators['data_type_select'])
-        # )
-        # time.sleep(2)
-        # # 点击数据名称框
-        # # 定位触发按钮（通过容器 id 找子元素）
-        # trigger = WebDriverWait(self.browser.driver, 10).until(
-        #     EC.element_to_be_clickable(
-        #         (By.XPATH,'//*[@id="select2-sel-dataType-container"]')
-        #     )
-        # )
-        # trigger.click()
-        # # 等待下拉框展开（验证选项列表可见）
-        # WebDriverWait(self.browser.driver, 10).until(
-        #     EC.visibility_of_element_located(
-        #         (By.XPATH,'/html/body/span/span')
-        #     )
-        # )
+
         time.sleep(2)  # 给下拉框展开动画留时间
 
         # 选择MERSI
-        if selected_text_comboBox.split(":", 1)[0] == "FY-3D":
-            if not self.browser.safe_click_element(*self.locators['choose_MERSI']):
-                return False
+        # if selected_text_comboBox.split(":", 1)[0] == "FY-3D":
+        if not self.browser.safe_click_element(*self.locators['choose_MERSI']):
+            return False
 
-        elif selected_text_comboBox.split(":", 1)[0] == "FY-3E":
-            if not self.browser.safe_click_element(*self.locators['choose_MERSI_3e1']):
-                return False
+        # elif selected_text_comboBox.split(":", 1)[0] == "FY-3E":
+        #     if not self.browser.safe_click_element(*self.locators['choose_MERSI_3e1']):
+        #         return False
 
 
 
@@ -507,7 +498,7 @@ class SatelliteDataDownloader:
         logger.info("[流程]空间范围选择完成")
         return True
 
-    def _submit_order(self):
+    def _submit_order(self,time_param,time_param2,North,South,East,West):
         """提交订单"""
         logger.info("[流程]开始筛选数据提交订单......")
         time.sleep(2)
@@ -525,17 +516,51 @@ class SatelliteDataDownloader:
         # 点击筛选
         if not self.browser.safe_click_element(*self.locators['click_filter']):
             return False
-        # 选中第二个数据
-        if not self.browser.safe_click_element(*self.locators['second_data_row']):
+        # 选中所有的
+        if not self.browser.safe_click_element(*self.locators['choseAll']):
             return False
-        # if not self.browser.safe_click_element(*self.locators['page_all_choose']):
-        #     return False
+
+
+
+        # 点× 关闭这个模态框
+        if not self.browser.safe_click_element(*self.locators['deleteWindow']):
+            return False
+        # 选择3E
+        if not self.browser.safe_click_element(*self.locators['fy3e_satellite']):
+            return False
+        # 点击白框
+        if not self.browser.safe_click_element(*self.locators['data_type_select']):
+            return False
+        # 选择MERSI
+        if not self.browser.safe_click_element(*self.locators['choose_MERSI_3e1']):
+            return False
+        # 再选择一次空间和时间
+        self._select_Range(time_param, time_param2, North, South, East, West)
+        # 点击检索
+        if not self.browser.safe_click_element(*self.locators['search_button']):
+            return False
+        time.sleep(3)  # 等待搜索结果
+        # 点击“产品名”
+        if not self.browser.safe_click_element(*self.locators['click_productName']):
+            return False
+        # 取消不需要的数据分辨率
+        if not self.browser.safe_click_element(*self.locators['3E_delete4']):
+            return False
+        if not self.browser.safe_click_element(*self.locators['3E_delete1']):
+            return False
+        # 点击筛选
+        if not self.browser.safe_click_element(*self.locators['click_filter']):
+            return False
+        # 选择所有数据
+        if not self.browser.safe_click_element(*self.locators['choseAll']):
+            return False
+
         # 去购物车
         if not self.browser.safe_click_element(*self.locators['commit_edit']):
             return False
-        # 勾选发送确认邮件
-        if not self.browser.safe_click_element(*self.locators['send_email_checkbox']):
-            return False
+        # # 勾选发送确认邮件
+        # if not self.browser.safe_click_element(*self.locators['send_email_checkbox']):
+        #     return False
         # 提交订单
         if not self.browser.safe_click_element(*self.locators['submit_order']):
             return False

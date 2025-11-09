@@ -55,68 +55,115 @@ logger.info(f"当前工作目录: {os.getcwd()}")
 
 
 # 带进度显示的FTP下载函数
-def download_ftp_with_progress(ftp_url, save_dir):     # 参数（url ，保存位置）
-    """下载FTP文件并显示进度"""
-    try:
-        # urlparse 是 Python 内置的 URL 解析工具，能从类似 ftp://user:pass@host/path/file.txt 的链接中提取关键信息。
-        parsed_url = urlparse(ftp_url)  # 解析FTP URL（分离主机、路径、用户名、密码等）
-        os.makedirs(save_dir, exist_ok=True)  # 创建本地保存目录（若不存在）
-        filename = os.path.basename(parsed_url.path)  # 从URL路径中提取文件名（如 "file.txt"）
-        save_path = os.path.join(save_dir, filename)   # 拼接本地保存的完整路径
+# 带进度显示的FTP下载函数（已整合重试逻辑）
+def download_ftp_with_progress(ftp_url, save_dir, timeout=30, idle_timeout=60, max_retry=2):
+    parsed_url = urlparse(ftp_url)
+    filename = os.path.basename(parsed_url.path)
+    save_path = os.path.join(save_dir, filename)
+    os.makedirs(save_dir, exist_ok=True)  # 确保保存目录存在
 
-        # 解析 FTP 连接信息
-        username = parsed_url.username if parsed_url.username else 'anonymous'   # 用户名（默认匿名）
-        password = parsed_url.password if parsed_url.password else ''   # 密码（默认空）
-        host = parsed_url.hostname   # FTP服务器主机地址（如 ftp.example.com）
-        path = parsed_url.path   # 服务器上的文件路径（如 /data/file.txt）
+    # 重试循环（核心：函数内部实现重试）
+    for retry in range(max_retry):
+        logger.info(f"[FTP下载] 第{retry+1}/{max_retry}次尝试：文件={filename}，URL={ftp_url}")
+        try:
+            # 1. FTP连接配置
+            username = parsed_url.username if parsed_url.username else 'anonymous'
+            password = parsed_url.password if parsed_url.password else ''
+            host = parsed_url.hostname
+            path = parsed_url.path
 
-        # 连接FTP服务器
-        ftp = FTP(host)   # 建立与FTP服务器的连接
-        ftp.login(username, password)  # 使用用户名密码登录
+            # 2. 建立FTP连接
+            ftp = FTP(host, timeout=timeout)
+            ftp.login(username, password)
+            ftp.voidcmd('TYPE I')  # 二进制传输模式
+            ftp.sock.settimeout(timeout)  # socket超时设置
+            file_size = ftp.size(path)  # 获取文件总大小
+            downloaded_size = 0
 
-        # 获取文件大小
-        ftp.voidcmd('TYPE I') # 切换到二进制传输模式（适用于所有文件类型，避免文本模式的编码问题）
-        file_size = ftp.size(path)   # 获取服务器上文件的总大小（字节）
-        downloaded_size = 0  # 记录已下载的字节数（初始为0）
+            # 3. 进度监控和超时监控变量
+            last_print_time = time.time()
+            print_interval = 2
+            last_progress = -0.1
+            min_progress_change = 5
+            last_data_time = time.time()  # 最后一次接收数据的时间
+            download_aborted = False
 
-        # 新增：记录上次输出进度的时间（初始为当前时间）
-        last_print_time = time.time()
-        # 设定输出间隔（0.25秒）
-        print_interval = 2
-        last_progress = -0.1  # 初始进度（确保首次能输出）
-        min_progress_change = 5  # 最小进度变化量（0.1%）
+            # 4. 启动空闲超时监控线程
+            import threading
+            def monitor_idle():
+                nonlocal download_aborted
+                while not download_aborted:
+                    time.sleep(5)  # 每5秒检查一次
+                    if time.time() - last_data_time > idle_timeout:
+                        logger.warning(f"[FTP下载] 超时警告：{idle_timeout}秒未接收数据，中断下载")
+                        download_aborted = True
+                        ftp.abort()  # 强制中断FTP连接
 
-        # 下载文件并显示进度
-        with open(save_path, 'wb') as file:  # 以二进制写模式打开本地文件
-            def callback(data):    # 回调函数：每次接收数据时触发
-                nonlocal downloaded_size , last_print_time,last_progress # 引用外部变量 downloaded_size
-                file.write(data)  # 将接收到的数据写入本地文件
-                downloaded_size += len(data)   # 更新已下载大小
+            monitor_thread = threading.Thread(target=monitor_idle)
+            monitor_thread.daemon = True
+            monitor_thread.start()
 
-                # 显示下载进度
-                if file_size > 0:
-                    current_progress = (downloaded_size / file_size) * 100
-                    current_time = time.time()
-                    # 双重条件：间隔≥2秒 AND 进度变化≥0.1%
-                    if (current_time - last_print_time >= print_interval) and \
-                            (current_progress - last_progress >= min_progress_change):
-                        print(f"\r下载进度: {filename} {current_progress:.2f}%", end='', flush=True)
-                        last_print_time = current_time
-                        last_progress = current_progress  # 更新上次进度
+            # 5. 执行下载（带进度回调）
+            with open(save_path, 'wb') as file:
+                def callback(data):
+                    nonlocal downloaded_size, last_print_time, last_progress, last_data_time
+                    file.write(data)
+                    downloaded_size += len(data)
+                    last_data_time = time.time()  # 每次接收数据更新时间
 
-            ftp.retrbinary(f'RETR {path}', callback)   # 二进制方式下载文件，每收到数据调用 callback
+                    # 进度打印（控制台+日志）
+                    if file_size > 0:
+                        current_progress = (downloaded_size / file_size) * 100
+                        current_time = time.time()
+                        # 停滞警告（10秒无进度更新）
+                        if (current_time - last_print_time > 10) and (current_progress < 99.9):
+                            logger.warning(f"[FTP下载] 停滞警告：{filename} 当前进度{current_progress:.2f}%（10秒无更新）")
+                        # 进度更新（每2秒或进度变化≥5%时打印）
+                        if (current_time - last_print_time >= print_interval) and \
+                                (current_progress - last_progress >= min_progress_change):
+                            print(f"\r下载进度: {filename} {current_progress:.2f}%", end='', flush=True)
+                            logger.info(f"[FTP下载] 进度：{filename} {current_progress:.2f}%")
+                            last_print_time = current_time
+                            last_progress = current_progress
 
-        # 下载完成后，强制输出一次完整进度（100%）
-        if file_size > 0:
+                ftp.retrbinary(f'RETR {path}', callback)
+
+            # 6. 下载完成后清理
+            download_aborted = True
+            monitor_thread.join()  # 等待监控线程退出
+
+            # 7. 验证文件完整性
+            local_file_size = os.path.getsize(save_path)
+            if file_size > 0 and local_file_size != file_size:
+                raise ValueError(f"文件不完整：服务器大小{file_size}字节，本地大小{local_file_size}字节")
+
+            # 8. 输出完成信息
             print(f"\r下载进度: {filename} 100.00%", end='', flush=True)
-            print()  # 换行
-        ftp.quit()
-        logger.info(f"成功下载: {filename}")
-        return True
-    except Exception as e:
-        logger.error(f"FTP下载失败: {str(e)}")
-        return False
+            print()
+            ftp.quit()
+            logger.info(f"[FTP下载] 成功：{filename}（大小：{local_file_size:,}字节）")
+            return True
 
+        except Exception as e:
+            # 异常处理：清理不完整文件 + 重试判断
+            logger.error(f"[FTP下载] 第{retry+1}次失败：{str(e)[:200]}")
+            if os.path.exists(save_path):
+                os.remove(save_path)
+                logger.warning(f"[FTP下载] 已清理不完整文件：{save_path}")
+            # 关闭FTP连接（避免资源泄露）
+            try:
+                ftp.quit()
+            except:
+                pass
+            # 还有重试次数就等待后重试
+            if retry < max_retry - 1:
+                wait_time = 3
+                logger.warning(f"[FTP下载] 剩余{max_retry - retry - 1}次重试，{wait_time}秒后重试...")
+                time.sleep(wait_time)
+                continue
+            # 所有重试失败
+            logger.error(f"[FTP下载] 所有{max_retry}次尝试均失败：{filename}")
+            return False
 def get_order_status(browser, order_number):
     """
     根据订单号查找对应行，并返回订单状态
@@ -637,24 +684,37 @@ class SatelliteDataDownloader:
             logger.info(f"[流程]从txt文件中提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
             for i, hdf_url in enumerate(http_matches, 1):
                 logger.info(f"[流程]正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
-                if download_http_file(hdf_url, save_dir):
+                # 核心修改：传递空闲超时和重试参数（使用默认值或自定义）
+                if download_http_file(
+                        hdf_url,
+                        save_dir,
+                        idle_timeout=60,  # 60秒无数据自动中断（可根据网络调整）
+                        max_retry=2  # 失败重试2次（重要文件可改3次）
+                ):
                     success += 1
                     logger.info(f"[流程]✅ 第{i}个HTTP链接下载成功: {hdf_url}")
                 else:
                     failed += 1
-                    logger.error(f"❌ 第{i}个HTTP链接下载失败: {hdf_url}")
+                    logger.error(f"❌ 第{i}个HTTP链接下载失败（已重试2次）: {hdf_url}")
 
         # 下载FTP链接
         if ftp_matches:
             logger.info(f"[流程]从txt文件中提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
             for i, hdf_url in enumerate(ftp_matches, 1):
                 logger.info(f"[流程]正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
-                if download_ftp_with_progress(hdf_url, save_dir):
+                # 直接调用函数（内部已包含2次重试），传递max_retry参数
+                if download_ftp_with_progress(
+                        hdf_url,
+                        save_dir,
+                        timeout=30,
+                        idle_timeout=60,
+                        max_retry=2  # 重试次数在函数内部生效
+                ):
                     success += 1
                     logger.info(f"[流程]✅ 第{i}个FTP链接下载成功: {hdf_url}")
                 else:
                     failed += 1
-                    logger.error(f"❌ 第{i}个FTP链接下载失败: {hdf_url}")
+                    logger.error(f"[流程]❌ 第{i}个FTP链接多次重试失败: {hdf_url}")
 
         # 未识别到链接的处理
         if not http_matches and not ftp_matches:
@@ -671,23 +731,36 @@ class SatelliteDataDownloader:
             logger.info(f"[流程]从页面中提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
             for i, hdf_url in enumerate(http_matches, 1):
                 logger.info(f"[流程]正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
-                if download_http_file(hdf_url, save_dir):
+                # 同样传递新增参数
+                if download_http_file(
+                        hdf_url,
+                        save_dir,
+                        idle_timeout=60,
+                        max_retry=2
+                ):
                     success += 1
                     logger.info(f"[流程]✅ 第{i}个HTTP链接下载成功: {hdf_url}")
                 else:
                     failed += 1
-                    logger.error(f"❌ 第{i}个HTTP链接下载失败: {hdf_url}")
+                    logger.error(f"❌ 第{i}个HTTP链接下载失败（已重试2次）: {hdf_url}")
 
         if ftp_matches:
             logger.info(f"[流程]从页面中提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
             for i, hdf_url in enumerate(ftp_matches, 1):
                 logger.info(f"[流程]正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
-                if download_ftp_with_progress(hdf_url, save_dir):
+                # 直接调用函数（内部已包含2次重试），传递max_retry参数
+                if download_ftp_with_progress(
+                        hdf_url,
+                        save_dir,
+                        timeout=30,
+                        idle_timeout=60,
+                        max_retry=2  # 重试次数在函数内部生效
+                ):
                     success += 1
                     logger.info(f"[流程]✅ 第{i}个FTP链接下载成功: {hdf_url}")
                 else:
                     failed += 1
-                    logger.error(f"❌ 第{i}个FTP链接下载失败: {hdf_url}")
+                    logger.error(f"[流程]❌ 第{i}个FTP链接多次重试失败: {hdf_url}")
 
         # 输出汇总统计
         if total == 0:
