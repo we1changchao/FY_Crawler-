@@ -39,7 +39,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(log_path, encoding='utf-8', mode='a'),
+        logging.FileHandler(log_path, encoding='utf-8', mode='w'),
         logging.StreamHandler(sys.stdout)
     ],
     force=True
@@ -335,7 +335,7 @@ class SatelliteBrowser:
             return True
 
         except Exception as e:
-            logger.error(f"浏览器初始化失败: {str(e)}")
+            logger.error(f"[错误]浏览器初始化失败: {str(e)}")
             #logger.error(traceback.format_exc())
             return False
         # endregion
@@ -351,6 +351,7 @@ class SatelliteBrowser:
                 time.sleep(1)
                 return self.safe_find_element(by, value, retry + 1)
             logger.error(f"多次尝试后仍无法找到元素: {by}: {value}")
+            logger.error("[错误]多次尝试后仍无法找到元素")
             # logger.error(traceback.format_exc())
             return None
         # endregion
@@ -397,10 +398,9 @@ class SatelliteBrowser:
         for i in range(retries):
             try:
                 # 显示等待这个元素可以被点击
-                # element = WebDriverWait(self.driver, self.retry_attempts).until(EC.element_to_be_clickable((by, value))) ！！！
-                element = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((by, value))) # 这个10 需要改
+                element = WebDriverWait(self.driver, self.retry_attempts).until(EC.element_to_be_clickable((by, value)))
                 element.click()
-                time.sleep(3)    # ！！！
+                time.sleep(3)
                 return True
             except Exception as e:
                 logger.warning(f"点击元素失败，重试 {i + 1}/{retries} - {by}: {value}")
@@ -413,6 +413,7 @@ class SatelliteBrowser:
             return True
         except Exception as e:
             logger.error(f"多次尝试后仍无法点击元素--{by}: {value}")
+            logger.error(f"[错误]多次尝试后仍无法点击元素")
             # logger.error(e)
             return False
         # endregion
@@ -431,6 +432,7 @@ class SatelliteBrowser:
                 time.sleep(1)
                 return self.safe_send_keys(by, value, text, retry + 1)
             logger.error(f"多次尝试后仍无法输入文本到元素: {by}: {value}")
+            logger.error("[错误]多次尝试后仍无法输入文本到元素")
             # logger.error(traceback.format_exc())
             return False
          #endregion
@@ -453,8 +455,6 @@ class SatelliteBrowser:
                 logger.warning(f"验证码识别失败，重试 {retry + 1}/{self.retry_attempts}")
                 time.sleep(1)
                 return self.solve_captcha(captcha_xpath, retry + 1)
-            logger.error(f"验证码识别失败: {str(e)}")
-            logger.error(traceback.format_exc())
             return None
         # endregion
 
@@ -477,7 +477,7 @@ class SatelliteBrowser:
         try:
             # 点击文件按钮
             if not self.safe_click_element(*file_button_locator):
-                logger.error("无法点击文件按钮")
+                logger.error("[流程]无法点击文件按钮")
                 return None
 
             # 等待操作结果
@@ -524,13 +524,13 @@ class SatelliteBrowser:
                 time.sleep(1)  # 降低检查频率，减少资源占用
 
             # 超时处理
-            logger.warning("超时未检测到下载或页面跳转")
+            logger.warning("[错误]超时未检测到下载或页面跳转")
             observer.stop()
             observer.join()
             return None
 
         except Exception as e:
-            logger.error(f"点击并读取内容时出错: {str(e)}")
+            logger.error(f"[错误]点击并读取内容时出错: {str(e)}")
             observer.stop()
             observer.join()
             return None
@@ -586,7 +586,7 @@ class SatelliteDataDownloader:
             # region 初始化浏览器+打开网站+执行登录流程+点击我的订单
             # 初始化浏览器
             if not self.browser.init_browser():
-                logger.error("无法初始化浏览器，程序退出")
+                logger.error("[错误]无法初始化浏览器，程序退出")
                 sys.exit(1)  # 1表示浏览器初始化失败
 
             # 打开网站
@@ -596,12 +596,12 @@ class SatelliteDataDownloader:
 
             # 执行登录流程
             if not self._login():
-                logger.error("登录失败，程序退出")
+                logger.error("[错误]登录失败，程序退出")
                 sys.exit(2)  # 2表示登录失败
 
             # 登录成功后， 点击我的订单  跳转页面
             if not self.browser.safe_click_element(*self.locators['my_order']):
-                logger.error("无法点击'我的订单'，程序终止")
+                logger.error("[错误]无法点击'我的订单'，程序终止")
                 if self.browser.driver:
                     self.browser.driver.quit()
                 sys.exit(3)  # 3 表示导航失败
@@ -612,7 +612,7 @@ class SatelliteDataDownloader:
             self.main_window_handle = self.browser.driver.current_window_handle  # 记录当前窗口（我的订单页面）
             self.main_page_url = self.browser.driver.current_url  # 记录我的订单页面实际URL
             logger.info(
-                f"[流程]成功跳转至我的订单页面，主窗口句柄：{self.main_window_handle}，URL：{self.main_page_url}")
+                f"成功跳转至我的订单页面，主窗口句柄：{self.main_window_handle}，URL：{self.main_page_url}")
 
             # region 遍历每个订单号检查状态
             for order_number in content:
@@ -683,7 +683,7 @@ class SatelliteDataDownloader:
                         logger.warning(f"[校验]检测到登录按钮，会话已失效，开始自动重登...")
 
                         # 5. 执行重登录流程
-                        if self._login():
+                        if self._login(first_page=0):
                             logger.info(f"[重登]✅ 登录成功，重新跳转至我的订单页面...")
                             # 6. 重登后再次点击“我的订单”（确保回到订单页）
                             if self.browser.safe_click_element(*self.locators['my_order']):
@@ -712,22 +712,22 @@ class SatelliteDataDownloader:
 
                 # 每次操作后等待1-2秒，避免页面未响应
                 time.sleep(2)
-            # endregion
+
 
         except Exception as e:
-            logger.error(f"程序运行出错: {str(e)}")
+            logger.error(f"[错误]程序运行出错: {str(e)}")
             logger.error(traceback.format_exc())
         finally:
             # 可以根据需要决定是否关闭浏览器
             # if self.browser.driver:
             #     self.browser.driver.quit()
             pass
-
+        # endregion
     # 封装的核心函数：处理读取结果
     def process_result(self, result):
         # region 处理从文件或页面提取的结果，提取并下载HDF链接
         if not result:
-            logger.warning("无有效结果可处理")
+            logger.warning("[错误]无有效结果可处理")
             return
 
         save_dir = self.config.get_download_dir()
@@ -837,14 +837,16 @@ class SatelliteDataDownloader:
         return None
         # endregion
 
-    def _login(self):
+    def _login(self,first_page=1):
         # region 登录
+
         logger.info("[流程]开始登录流程......")
         max_login_retries = self.config.get_retry_attempts()
 
         # 1. 在主网页寻找并点击登录按钮
-        if not self.browser.safe_click_element(*self.locators['login_button']):
-            return False
+        if(first_page==1):
+            if not self.browser.safe_click_element(*self.locators['login_button']):
+                return False
 
         # 2. 循环重试登录
         for retry in range(max_login_retries):
@@ -975,7 +977,7 @@ if __name__ == "__main__":
     logger.info("[流程]开始下载订单数据......")
 
     if len(sys.argv) < 2:
-        print("参数个数不够")
+        logger.error("[错误]订单执行参数个数不够")
         sys.exit(101)  # 101 参数不够返回
 
     txt_order_path = sys.argv[1]  # 订单号txt的路径
@@ -986,7 +988,7 @@ if __name__ == "__main__":
         content = [line.strip() for line in f.readlines() if line.strip()]
         # 有效行数 = 订单号列表的长度
         valid_line_count = len(content)
-        print(content)
+        logger.info(content)
 
     downloader = SatelliteDataDownloader()
     downloader.run(content)

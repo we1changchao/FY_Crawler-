@@ -40,7 +40,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # 测试日志系统
-logger.info("[日志初始化成功] √")
+logger.info("=== 日志初始化成功 ===")
 # endregion
 
 # 浏览器操作类
@@ -88,7 +88,7 @@ class SatelliteBrowser:
             return True
 
         except Exception as e:
-            logger.error(f"浏览器初始化失败: {str(e)}")
+            logger.error(f"[错误]浏览器初始化失败--{str(e)}")
             # logger.error(traceback.format_exc())    # 将程序运行时的错误堆栈信息详细记录到日志中
             return False
         # endregion
@@ -110,6 +110,7 @@ class SatelliteBrowser:
                 time.sleep(1)
                 return self.safe_find_element(by, value, retry + 1)
             logger.error(f"多次尝试后仍无法找到元素: {by}: {value}")
+            logger.error(f"[错误]多次尝试查找，但是失败了")
             # logger.error(traceback.format_exc())
             return None
         # endregion
@@ -125,10 +126,10 @@ class SatelliteBrowser:
         for i in range(retries):
             try:
                 # 显示等待这个元素可以被点击
-                # element = WebDriverWait(self.driver, self.retry_attempts).until(EC.element_to_be_clickable((by, value))) ！！！
-                element = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((by, value))) # 这个10 需要改
+                element = WebDriverWait(self.driver, self.retry_attempts).until(EC.element_to_be_clickable((by, value)))
                 element.click()
-                time.sleep(3)    # ！！！
+                time.sleep(3)
+                logger.info(f"点击了元素{value}")
                 return True
             except Exception as e:
                 logger.warning(f"点击元素失败，重试 {i + 1}/{retries} - {by}: {value}")
@@ -141,6 +142,7 @@ class SatelliteBrowser:
             return True
         except Exception as e:
             logger.error(f"多次尝试后仍无法点击元素--{by}: {value}")
+            logger.error(f"[错误]多次尝试点击，但是失败了")
             # logger.error(e)
             return False
         # endregion
@@ -159,6 +161,7 @@ class SatelliteBrowser:
                 time.sleep(1)
                 return self.safe_send_keys(by, value, text, retry + 1)
             logger.error(f"多次尝试后仍无法输入文本到元素: {by}: {value}")
+            logger.error(f"[错误]多次尝试后仍无法输入文本到元素，但是失败了")
             # logger.error(traceback.format_exc())
             return False
          #endregion
@@ -175,7 +178,7 @@ class SatelliteBrowser:
             logger.info(f"成功通过JS设置文本到元素-- {by}: {value}")  # 增加日志
             return True
         except Exception as e:
-            logger.error(f"JS设置文本失败--{e}")  # 使用logger而非print
+            logger.error(f"JS设置文本失败--{e}")
             return False
         # endregion
 
@@ -197,8 +200,7 @@ class SatelliteBrowser:
                 logger.warning(f"验证码识别失败，重试 {retry + 1}/{self.retry_attempts}")
                 time.sleep(1)
                 return self.solve_captcha(captcha_xpath, retry + 1)
-            logger.error(f"验证码识别失败: {str(e)}")
-            logger.error(traceback.format_exc())
+            # logger.error(traceback.format_exc())
             return None
         # endregion
 
@@ -368,7 +370,8 @@ class SatelliteDataDownloader:
                     fengyun_element = WebDriverWait(self.browser.driver, 3).until(
                         EC.presence_of_element_located(self.locators['FengYun_satellite'])
                     )
-                    logger.info("[流程]成功找到'风云极轨卫星'元素，登录成功")
+                    logger.info("成功找到'风云极轨卫星'元素登录成功")
+                    logger.info("[流程]网页登录成功")
                     return True
                 except TimeoutException:
                     # 未找到元素：刷新验证码，进入下一次重试
@@ -517,7 +520,7 @@ class SatelliteDataDownloader:
         # 等待模态框加载完成，获取所有订单号元素
         try:
             # 用find_elements（复数）定位所有class="order-code"的元素，且限定在模态框内   ！！！
-            order_code_elements = WebDriverWait(self.browser.driver, 10).until(
+            order_code_elements = WebDriverWait(self.browser.driver, self.config.get_timeout()).until(
                 EC.presence_of_all_elements_located(
                     (By.CSS_SELECTOR, "#submit-order .order-code")  # 定位模态框内所有符合条件的元素
                 )
@@ -537,7 +540,7 @@ class SatelliteDataDownloader:
 
             logger.info(f"成功写入{len(all_order_ids)}个订单号到download.txt")
         except Exception as e:
-            logger.error(f"获取订单号失败：{e}")
+            logger.error("[错误]获取订单号失败")
 
         logger.info("[流程]筛选数据提交订单完成")
         return True
@@ -582,12 +585,12 @@ class SatelliteDataDownloader:
                 logger.info(f"已将配置文件中的下载目录更新为：{external_save_dir}")
                 return True
             else:
-                logger.error("更新配置文件中的下载目录失败")
+                logger.error("[错误]更新配置文件中的下载目录失败")
                 return False
 
         except Exception as e:
-            logger.error(f"更新INI文件时发生错误：{str(e)}")
-            logger.error(traceback.format_exc())  # 记录详细堆栈信息
+            logger.error("[错误]更新配置文件时发生错误")
+            # logger.error(traceback.format_exc())  # 记录详细堆栈信息
             return False
         # endregion
 
@@ -596,7 +599,7 @@ if __name__  ==  "__main__":
 
     # 检验传递参数的个数
     if len(sys.argv) < 9:  # !!!
-        logger.info("提交订单收到的参数不够")
+        logger.error("[错误]提交订单收到的参数不够")
         sys.exit(101)  # 101 参数不够返回
 
     time_param = sys.argv[1]  # 开始时间
@@ -612,7 +615,7 @@ if __name__  ==  "__main__":
     downloader = SatelliteDataDownloader()
 
     if not downloader.update_ini_from_external(external_save_dir):
-        logger.error("[错误]INI文件更新失败，程序退出")
+        logger.error("[错误]配置文件文件更新失败，程序退出")
         sys.exit(102)  # 102 ini文件更新错误返回
 
     downloader.run(time_param,time_param2,North,South,East,West,selected_text_comboBox)

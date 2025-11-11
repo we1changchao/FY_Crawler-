@@ -101,7 +101,7 @@ class ConfigHandler:
                 self.config.write(f)
             return True
         except Exception as e:
-            logger.error(f"修改配置文件失败：节[{section}]键 {key}值 {str(e)}")
+            logger.error(f"[错误]修改配置文件失败--节[{section}]键 {key}值 {str(e)}")
             return False
         # endregion
 
