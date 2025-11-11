@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)  # 初始化日志模块
 
 class ConfigHandler:
     def __init__(self, config_file=None):  # 配置文件名
-        # region  获取程序的路径 + 创建配置解析器实例 + 读取配置文件
+        # region  为配置解析工具（ConfigParser）确定合法的配置文件绝对路径，不存在则创建默认配置，最终读取配置文件供后续使用
         # 获取当前脚本（config_handler.py）所在的目录
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
         # 确定最终的配置文件路径
@@ -28,52 +28,61 @@ class ConfigHandler:
         # endregion
 
     def _create_default_config(self):
-        """创建包含所有必要配置项的默认配置文件"""
+        # region    创建包含所有必要配置项的默认配置文件
         self.config['USER_INFO'] = {
-            'username': 'your_email@example.com',  # 用户邮箱
-            'password': 'your_password'           # 用户密码
+            'username': 'wcc296044131@163.com',  # 用户邮箱
+            'password': 'oy)9WD8k('           # 用户密码
         }
         self.config['SETTINGS'] = {
-            'timeout': '10',                      # 超时时间（秒）
+            'timeout': '30',                      # 超时时间（秒）
             'retry_attempts': '3',                # 最大重试次数
             'chrome_driver_path': '',             # Chrome驱动路径（留空自动管理）
-            'download_dir': os.path.expanduser("~/Downloads")  # 下载文件保存目录
+            'download_dir': os.path.expanduser("~/Downloads"), # 下载文件保存目录
+            'listen_dir': os.path.expanduser("~/Downloads")  # 下载文件保存目录
         }
-
         # 写入默认配置到文件
         with open(self.config_file, 'w', encoding='utf-8') as f:
             self.config.write(f)
         logger.info(f"已创建默认配置文件: {self.config_file}")
+        # endregion
 
     def get_user_info(self):
-        """获取用户名和密码"""
+        # region 获取用户名和密码
         return {
             'username': self.config.get('USER_INFO', 'username'),
             'password': self.config.get('USER_INFO', 'password')
         }
+        # endregion
 
     def get_timeout(self):
-        """获取超时时间（整数）"""
-        return self.config.getint('SETTINGS', 'timeout', fallback=10)
+        # region获取超时时间（整数）
+        return self.config.getint('SETTINGS', 'timeout', fallback=10)  #默认是10
+        # endregion
 
     def get_retry_attempts(self):
-        """获取最大重试次数（整数）"""
+        # region获取最大重试次数（整数）
         return self.config.getint('SETTINGS', 'retry_attempts', fallback=3)
+        # endregion
 
     def get_chrome_driver_path(self):
-        """获取Chrome驱动路径"""
+        # region获取Chrome驱动路径
         return self.config.get('SETTINGS', 'chrome_driver_path', fallback='')
+        # endregion
 
     def get_download_dir(self):
-        """获取下载目录（统一提供给所有程序使用）"""
+        # region获取下载目录（统一提供给所有程序使用）
         return self.config.get('SETTINGS', 'download_dir', fallback=os.path.expanduser("~/Downloads"))
+        # endregion
+
     def get_listen_dir(self):
+        # region获取监听目录
         """获取下载目录（统一提供给所有程序使用）"""
         return self.config.get('SETTINGS', 'listen_dir', fallback=os.path.expanduser("~/Downloads"))
+        # endregion
 
     def set_config_value(self, section, key, value):
+        # region向配置文件中写入/修改指定字段的值
         """
-        向配置文件中写入/修改指定字段的值
         Args:
             section: 配置节（如'SETTINGS'）
             key: 字段名（如'download_dir'）
@@ -92,108 +101,7 @@ class ConfigHandler:
                 self.config.write(f)
             return True
         except Exception as e:
-            logger.error(f"修改配置文件[{section}] {key} 失败：{str(e)}")
+            logger.error(f"修改配置文件失败：节[{section}]键 {key}值 {str(e)}")
             return False
+        # endregion
 
-
-    # 配置文件处理
-    # class ConfigHandler:
-    #     def __init__(self, config_file='config.ini'):
-    #         self.config_file = config_file
-    #         self.config = configparser.ConfigParser()  # 创建一个配置文件解析器对象
-    #
-    #         # 如果配置文件不存在，创建默认配置
-    #         if not os.path.exists(config_file):
-    #             self._create_default_config()
-    #
-    #         self.config.read(config_file, encoding='utf-8')  # 读取并解析指定的配置文件
-    #
-    #     def _create_default_config(self):
-    #         """创建默认配置文件"""
-    #         self.config['USER_INFO'] = {
-    #             'username': 'your_email@example.com',
-    #             'password': 'your_password'
-    #         }
-    #         self.config['SETTINGS'] = {
-    #             'timeout': '10',
-    #             'retry_attempts': '3',
-    #             'chrome_driver_path': '',  # 留空将使用自动管理的driver
-    #             'download_dir': os.path.expanduser("~/Downloads")  # 添加默认下载目录配置
-    #         }
-    #
-    #         with open(self.config_file, 'w', encoding='utf-8') as f:
-    #             self.config.write(f)
-    #         logger.info(f"已创建默认配置文件: {self.config_file}")
-    #
-    #     def get_user_info(self):
-    #         """获取用户信息"""
-    #         return {
-    #             'username': self.config.get('USER_INFO', 'username'),
-    #             'password': self.config.get('USER_INFO', 'password')
-    #         }
-    #
-    #     def get_timeout(self):
-    #         """获取超时时间"""
-    #         return self.config.getint('SETTINGS', 'timeout', fallback=10)
-    #
-    #     def get_retry_attempts(self):
-    #         """获取重试次数"""
-    #         return self.config.getint('SETTINGS', 'retry_attempts', fallback=3)
-    #
-    #     def get_chrome_driver_path(self):
-    #         """获取Chrome驱动路径"""
-    #         return self.config.get('SETTINGS', 'chrome_driver_path', fallback='')
-    #
-    #     def get_download_dir(self):
-    #         """获取下载目录"""
-    #         return self.config.get('SETTINGS', 'download_dir', fallback=os.path.expanduser("C:/Users/Lenovo/Downloads"))
-
-
-
-    # 配置文件处理
-    # class ConfigHandler:
-    #     def __init__(self, config_file='config.ini'):
-    #         self.config_file = config_file
-    #         self.config = configparser.ConfigParser()  # 创建一个配置文件解析器对象
-    #
-    #         # 如果配置文件不存在，创建默认配置
-    #         if not os.path.exists(config_file):
-    #             self._create_default_config()
-    #
-    #         self.config.read(config_file, encoding='utf-8')  # 读取并解析指定的配置文件
-    #
-    #     def _create_default_config(self):
-    #         """创建默认配置文件"""
-    #         self.config['USER_INFO'] = {
-    #             'username': 'your_email@example.com',
-    #             'password': 'your_password'
-    #         }
-    #         self.config['SETTINGS'] = {
-    #             'timeout': '10',
-    #             'retry_attempts': '3',
-    #             'chrome_driver_path': ''  # 留空将使用自动管理的driver
-    #         }
-    #
-    #         with open(self.config_file, 'w', encoding='utf-8') as f:
-    #             self.config.write(f)
-    #         logger.info(f"已创建默认配置文件: {self.config_file}")
-    #
-    #     def get_user_info(self):
-    #         """获取用户信息"""
-    #         return {
-    #             'username': self.config.get('USER_INFO', 'username'),
-    #             'password': self.config.get('USER_INFO', 'password')
-    #         }
-    #
-    #     def get_timeout(self):
-    #         """获取超时时间"""
-    #         return self.config.getint('SETTINGS', 'timeout', fallback=10)
-    #
-    #     def get_retry_attempts(self):
-    #         """获取重试次数"""
-    #         return self.config.getint('SETTINGS', 'retry_attempts', fallback=3)
-    #
-    #     def get_chrome_driver_path(self):
-    #         """获取Chrome驱动路径"""
-    #         return self.config.get('SETTINGS', 'chrome_driver_path', fallback='')
-    #

@@ -1,26 +1,30 @@
+# region 导入库
 import requests
 import urllib.parse
 from pathlib import Path
 import os
 import time
 import threading
+# endregion
 
-
-def download_http_file(url1, save_dir, timeout=30, idle_timeout=60, max_retry=2):
+def download_http_file(url, save_dir, timeout=30, idle_timeout=60, max_retry=3):
+    # region下载 http形式的文件
     """
     增强版HTTP下载函数：解决停滞问题
-    :param url1: 下载URL
+    :param url: 下载URL
     :param save_dir: 保存目录
     :param timeout: 请求超时时间（秒）
     :param idle_timeout: 无数据传输超时时间（秒）
     :param max_retry: 失败重试次数
     :return: 是否下载成功
     """
-    # 禁用 SSL 安全警告
+
+    # region禁用 SSL 安全警告
     import urllib3
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+    # endregion
 
-    url = url1
+    # region 解析URL→提取文件名→创建保存目录（准备工作）
     # 分割URL，去掉问号后的参数部分（如 ?id=123）
     url_without_params = url.split('?')[0]
     # 按斜杠分割路径，取最后一个元素作为文件名（如从 "http://example.com/file.zip" 提取 "file.zip"）
@@ -29,20 +33,21 @@ def download_http_file(url1, save_dir, timeout=30, idle_timeout=60, max_retry=2)
     # 处理特殊情况：文件名为空时生成默认名
     if not filename:
         filename = f"download_{int(time.time())}.hdf"
-
     # 创建下载目录
     os.makedirs(save_dir, exist_ok=True)
     file_path = os.path.join(save_dir, filename)
+    # endregion
 
-    # 设置请求头，模拟浏览器行为
+    # region 设置请求头，模拟浏览器行为
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'Accept': '*/*',
         'Accept-Encoding': 'identity',
         'Connection': 'keep-alive',
     }
+    # endregion
 
-    # 重试循环（核心新增）
+    #   region重试循环
     for retry in range(max_retry):
         print(f"\n{'=' * 50}")
         print(f"开始下载（第{retry + 1}/{max_retry}次尝试）: {filename}")
@@ -57,9 +62,9 @@ def download_http_file(url1, save_dir, timeout=30, idle_timeout=60, max_retry=2)
         monitor_thread = None
 
         try:
-            # 1. 启动空闲超时监控线程（核心新增）
+            # 1. 实时检测文件下载过程中是否长时间无数据传输，若超过阈值则主动中断下载
             def monitor_idle():
-                nonlocal download_aborted, response
+                nonlocal download_aborted, response  # 声明这两个变量是 “外层嵌套函数的局部变量”，允许在当前内层函数中修改它们的值
                 while not download_aborted:
                     time.sleep(5)  # 每5秒检查一次
                     # 若超过idle_timeout秒无数据传输，中断下载
@@ -82,8 +87,8 @@ def download_http_file(url1, save_dir, timeout=30, idle_timeout=60, max_retry=2)
 
             # 3. 检查请求状态
             if response.status_code == 200:
-                total_size = int(response.headers.get('content-length', 0))
-                downloaded = 0
+                total_size = int(response.headers.get('content-length', 0))  # 获取文件的大小  ！！！如果服务器未提供
+                downloaded = 0  # 目前下载的大小
                 last_reported_percent = -5  # 上次报告的进度（初始值设为-5，确保0%能触发首次输出）
 
                 # 4. 写入文件（带停滞监控）
@@ -91,14 +96,14 @@ def download_http_file(url1, save_dir, timeout=30, idle_timeout=60, max_retry=2)
                     for chunk in response.iter_content(chunk_size=8192):
                         # 检查是否被监控线程中断
                         if download_aborted:
+                            # 退出当前的下载循环和监控线程，并触发外层的 except TimeoutError 异常处理逻辑 —— 最终会执行 “清理不完整文件→判断是否重试→重试或返回失败” 的流程
                             raise TimeoutError(f"下载停滞超过{idle_timeout}秒，已中断")
-
                         if chunk:
                             file.write(chunk)
                             downloaded += len(chunk)
                             last_data_time = time.time()  # 每次接收数据更新时间
 
-                            # 进度打印（保持原有逻辑，每5%输出一次）
+                            # 进度打印（每5%输出一次）
                             if total_size > 0:
                                 current_percent = (downloaded / total_size) * 100
                                 if current_percent - last_reported_percent >= 5:
@@ -114,7 +119,7 @@ def download_http_file(url1, save_dir, timeout=30, idle_timeout=60, max_retry=2)
                 print(f"\r下载进度: 100%", end='', flush=True)
                 print()
 
-                # 6. 验证文件完整性（核心新增）
+                # 6. 验证文件完整性
                 local_file_size = os.path.getsize(file_path)
                 if total_size > 0 and abs(local_file_size - total_size) > 1024:  # 允许1KB误差
                     raise ValueError(f"文件不完整！服务器大小{total_size}字节，本地大小{local_file_size}字节")
@@ -126,7 +131,7 @@ def download_http_file(url1, save_dir, timeout=30, idle_timeout=60, max_retry=2)
 
             else:
                 print(f"❌ 下载失败，状态码: {response.status_code}")
-                print(f"📝 响应内容: {response.text[:500]}")
+                print(f"📝 响应内容: {response.text[:500]}")   #！！！
                 # 重试前清理不完整文件
                 if os.path.exists(file_path):
                     os.remove(file_path)
@@ -135,7 +140,7 @@ def download_http_file(url1, save_dir, timeout=30, idle_timeout=60, max_retry=2)
                     time.sleep(3)
                 continue
 
-        except requests.exceptions.SSLError as e:
+        except requests.exceptions.SSLError as e:  # 处理 SSL 错误（服务端证书不兼容场景）
             print(f"❌ SSL错误: {str(e)[:200]}")
             print("🔄 尝试启用SSL验证重试...")
             try:
@@ -157,7 +162,7 @@ def download_http_file(url1, save_dir, timeout=30, idle_timeout=60, max_retry=2)
                     time.sleep(3)
                 continue
 
-        except TimeoutError as e:
+        except TimeoutError as e:  # 处理停滞超时异常（监控线程触发的中断）
             # 捕获空闲超时异常
             print(f"❌ {str(e)}")
             if os.path.exists(file_path):
@@ -189,3 +194,4 @@ def download_http_file(url1, save_dir, timeout=30, idle_timeout=60, max_retry=2)
     # 所有重试都失败
     print(f"\n❌ 所有{max_retry}次下载尝试均失败！")
     return False
+    # endregion
