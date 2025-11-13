@@ -590,7 +590,6 @@ class SatelliteDataDownloader:
 
         except Exception as e:
             logger.error("[错误]更新配置文件时发生错误")
-            # logger.error(traceback.format_exc())  # 记录详细堆栈信息
             return False
         # endregion
 

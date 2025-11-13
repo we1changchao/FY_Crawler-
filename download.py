@@ -30,6 +30,8 @@ from bs4 import BeautifulSoup
 import re
 import requests
 from download_http_file import download_http_file
+import psutil
+import gc
 # endregion
 
 # region基础日志配置
@@ -64,12 +66,22 @@ def download_ftp_with_progress(ftp_url, save_dir, timeout=30, idle_timeout=60, m
     """
     parsed_url = urlparse(ftp_url)
     filename = os.path.basename(parsed_url.path)
+    if not filename:
+        filename = f"ftp_download_{int(time.time())}.hdf"
     save_path = os.path.join(save_dir, filename)
     os.makedirs(save_dir, exist_ok=True)  # 确保保存目录存在
     # endregion
     # region重试下载循环
     for retry in range(max_retry):
-        logger.info(f"[FTP下载] 第{retry+1}/{max_retry}次尝试：文件={filename}，URL={ftp_url}")
+        logger.info(f"开始FTP下载（第{retry + 1}/{max_retry}次尝试）: {filename}")
+        logger.info(f"{'=' * 50}")
+
+        # 初始化变量
+        download_aborted = False
+        last_data_time = time.time()
+        monitor_thread = None
+        ftp = None
+
         try:
             # 1. FTP连接配置
             # ftp://A202511071509111775:r2u__Rgh@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251105_1935_1000M_MS.HDF
@@ -83,100 +95,108 @@ def download_ftp_with_progress(ftp_url, save_dir, timeout=30, idle_timeout=60, m
             ftp.login(username, password)
             ftp.voidcmd('TYPE I')  # 二进制传输模式
             ftp.sock.settimeout(timeout)  # socket超时设置
-            file_size = ftp.size(path)  # 获取文件总大小
+
+            # 获取文件大小
+            file_size = ftp.size(path)
             downloaded_size = 0
+            last_reported_percent = -5  # 上次报告的进度
 
-            # 3. 进度监控和超时监控变量
-            last_print_time = time.time()
-            print_interval = 2  # 最少打印时间间隔
-            last_progress = -0.1
-            min_progress_change = 1  # 最小输出变化百分比
-            last_data_time = time.time()  # 最后一次接收数据的时间
-            download_aborted = False
-            last_actual_progress = 0.0  # 跟踪真正的进度，判断是否真的停滞
-
-            # 4. 启动空闲超时监控线程
+            # 3. 启动空闲超时监控线程
             import threading
 
             def monitor_idle():
                 nonlocal download_aborted
                 while not download_aborted:
-                    time.sleep(5)  # 每5秒检查一次
+                    time.sleep(5)
                     if time.time() - last_data_time > idle_timeout:
-                        logger.warning(f"[FTP下载] 超时警告：{idle_timeout}秒未接收数据，中断下载")
+                        logger.warning(f"⚠️  警告：{idle_timeout}秒未接收数据，中断下载！")
                         download_aborted = True
-                        ftp.abort()  # 强制中断FTP连接
+                        if ftp:
+                            ftp.abort()
 
             monitor_thread = threading.Thread(target=monitor_idle)
             monitor_thread.daemon = True
             monitor_thread.start()
 
-            # 5. 执行下载（带进度回调）
+            # 4. 执行下载（带进度回调）
             with open(save_path, 'wb') as file:
                 def callback(data):
-                    nonlocal downloaded_size, last_print_time, last_progress, last_data_time,last_actual_progress
+                    nonlocal downloaded_size, last_data_time, last_reported_percent
+                    if download_aborted:
+                        return
+
                     file.write(data)
                     downloaded_size += len(data)
-                    last_data_time = time.time()  # 每次接收数据更新时间
+                    last_data_time = time.time()
 
-                    # 进度打印（控制台+日志）
+                    # 进度打印（每5%输出一次）
                     if file_size > 0:
-                        current_progress = (downloaded_size / file_size) * 100
-                        current_time = time.time()  # 当前时间
-                        # 停滞警告（10秒无进度更新）
-                        if (current_time - last_print_time > 10) and (current_progress < 99.9):
-                            if abs(current_progress - last_actual_progress) < 0.1:
-                                logger.warning(
-                                    f"[FTP下载] 停滞警告：{filename} 当前进度{current_progress:.2f}%（10秒无实质更新）")
-                                # 更新上次实际进度
-                            last_actual_progress = current_progress
-                        # 进度更新（每2秒或进度变化≥5%时打印）
-                        if (current_time - last_print_time >= print_interval) and \
-                                (current_progress - last_progress >= min_progress_change):
-                            print(f"\r下载进度: {filename} {current_progress:.2f}%", end='', flush=True)
-                            logger.info(f"[FTP下载] 进度：{filename} {current_progress:.2f}%")
-                            last_print_time = current_time
-                            last_progress = current_progress
-                            last_actual_progress = current_progress  # 同步更新实际进度
+                        current_percent = (downloaded_size / file_size) * 100
+                        if current_percent - last_reported_percent >= 5:
+                            reported_percent = int(current_percent // 5 * 5)
+                            logger.info(f"下载进度: {reported_percent}%")
+                            last_reported_percent = reported_percent
 
                 ftp.retrbinary(f'RETR {path}', callback)
 
             # 6. 下载完成后清理
             download_aborted = True
-            monitor_thread.join()  # 等待监控线程退出
+            if monitor_thread and monitor_thread.is_alive():
+                monitor_thread.join(timeout=5)
 
-            # 7. 验证文件完整性
+            # 强制输出100%进度
+            logger.info(f"下载进度: 100%")
+
+
+            # 6. 验证文件完整性
             local_file_size = os.path.getsize(save_path)
-            if file_size > 0 and local_file_size != file_size:
-                raise ValueError(f"文件不完整：服务器大小{file_size}字节，本地大小{local_file_size}字节")
+            if file_size > 0 and abs(local_file_size - file_size) > 1024:  # 允许1KB误差
+                raise ValueError(f"文件不完整！服务器大小{file_size}字节，本地大小{local_file_size}字节")
 
-            # 8. 输出完成信息
-            print(f"\r下载进度: {filename} 100.00%", end='', flush=True)
-            print()
-            ftp.quit()
-            logger.info(f"[FTP下载] 成功：{filename}（大小：{local_file_size:,}字节）")
+            # 7. 输出完成信息
+            logger.info(f"✅ FTP文件下载成功！")
+            logger.info(f"📁 保存路径: {save_path}")
+            logger.info(f"📊 文件大小: {local_file_size:,} 字节")
+
+            if ftp:
+                ftp.quit()
             return True
 
-        except Exception as e:
-            # 异常处理：清理不完整文件 + 重试判断
-            logger.error(f"[FTP下载] 第{retry+1}次失败：{str(e)[:200]}")
+        except TimeoutError as e:
+            # 处理空闲超时异常
+            logger.info(f"❌ {str(e)}")
             if os.path.exists(save_path):
                 os.remove(save_path)
-                logger.warning(f"[FTP下载] 已清理不完整文件：{save_path}")
-            # 关闭FTP连接（避免资源泄露）
+            if retry < max_retry - 1:
+                logger.info(f"⏳ 剩余{max_retry - retry - 1}次重试机会，5秒后重试...")
+                time.sleep(5)
+            continue
+
+        except Exception as e:
+            logger.info(f"❌ FTP下载过程中出现错误: {str(e)[:200]}")
+            # 清理不完整文件
+            if os.path.exists(save_path):
+                os.remove(save_path)
+            # 重试判断
+            if retry < max_retry - 1:
+                logger.info(f"⏳ 剩余{max_retry - retry - 1}次重试机会，3秒后重试...")
+                time.sleep(3)
+            continue
+
+        finally:
+            # 确保资源清理
+            download_aborted = True
+            if monitor_thread and monitor_thread.is_alive():
+                monitor_thread.join(timeout=5)
             try:
-                ftp.quit()
+                if ftp:
+                    ftp.quit()
             except:
                 pass
-            # 还有重试次数就等待后重试
-            if retry < max_retry - 1:
-                wait_time = 3
-                logger.warning(f"[FTP下载] 剩余{max_retry - retry - 1}次重试，{wait_time}秒后重试...")
-                time.sleep(wait_time)
-                continue
-            # 所有重试失败
-            logger.error(f"[FTP下载] 所有{max_retry}次尝试均失败：{filename}")
-            return False
+
+    # 所有重试都失败
+    logger.info(f"❌ 所有{max_retry}次FTP下载尝试均失败！")
+    return False
     # endregion
 
 def get_order_status(browser, order_number):
@@ -301,6 +321,10 @@ class SatelliteBrowser:
             # 创建设置浏览器对象
             chrome_options = Options()
             # 基本配置
+            # [1] 无头模式
+            chrome_options.add_argument('--headless=new')  # Chrome 112+推荐的无头模式
+            chrome_options.add_argument('--disable-gpu')  # 无头模式下禁用GPU
+
             chrome_options.page_load_strategy = 'eager'  # 页面加载策略设置为"急切"模式  如果实在不行就改成normal试一下
             chrome_options.add_argument('--disable-background-timer-throttling')  # 禁用后台标签页的定时器节流
             chrome_options.add_argument('--disable-renderer-backgrounding')  # 禁用渲染进程的后台降级
@@ -309,7 +333,7 @@ class SatelliteBrowser:
             chrome_options.add_argument('--disable-gpu')  # 禁用 GPU 加速
             chrome_options.add_argument('--disable-dev-shm-usage')  # 禁用 /dev/shm 临时目录的使用（Linux 系统特有）
             chrome_options.add_argument('--ignore-certificate-errors')  # 忽略 SSL 证书错误。
-            chrome_options.add_experimental_option('detach', True)  # 保持浏览器打开状态,让Chrome浏览器在自动化脚本执行完毕后不自动关闭
+            # chrome_options.add_experimental_option('detach', True)  # 保持浏览器打开状态,让Chrome浏览器在自动化脚本执行完毕后不自动关闭
             # 配置Chrome选项中的下载偏好
             prefs = {
                 "download.prompt_for_download": False,  # 禁用下载弹窗（核心设置）
@@ -458,23 +482,21 @@ class SatelliteBrowser:
             return None
         # endregion
 
-    def click_and_read_content(self, file_button_locator):
-        # region 点击文件按钮并(判断txt生成 以及 新页面)根据结果读取内容 返回
-        # 记录点击前的窗口句柄和下载目录状态
-        original_window = self.driver.current_window_handle  # 记录当前浏览器窗口的唯一标识（句柄），用于后续在多个窗口之间切换时，能准确回到初始窗口
+    def click_and_collect_links(self, file_button_locator):
+        """点击文件按钮并收集链接，不立即下载"""
+        original_window = self.driver.current_window_handle
         start_time = time.time()
         listen_dir = self.listen_dir
-
-        # 初始化文件监控 线程启动
-        event_handler = TxtFileHandler()    # 自定义的 文件下载监控处理器
-        observer = Observer()  # watchdog 库中创建文件系统监控器实例的核心代码，用于启动一个后台线程来监听指定目录的文件变化（如创建、删除、修改、移动等）。
-        observer.schedule(event_handler, listen_dir, recursive=False)  # 请监控 download_dir 目录下的文件变化，当变化时，用 event_handler 中定义的规则来处理这些事件
-        observer.start()
-
-        # 等待监控完全启动
-        time.sleep(2)
+        observer = None
 
         try:
+            # 初始化文件监控
+            event_handler = TxtFileHandler()
+            observer = Observer()
+            observer.schedule(event_handler, listen_dir, recursive=False)
+            observer.start()
+            time.sleep(2)
+
             # 点击文件按钮
             if not self.safe_click_element(*file_button_locator):
                 logger.error("[流程]无法点击文件按钮")
@@ -485,55 +507,75 @@ class SatelliteBrowser:
             while time.time() - start_time < timeout:
                 # 检查是否有新txt文件下载
                 if event_handler.event_detected:
+                    file_content = event_handler.read_file_content()
                     observer.stop()
                     observer.join()
                     logger.info("捕获到直接下载的TXT文件")
+
+                    # 提取链接并返回（不下载）
+                    http_matches, ftp_matches = self.extract_links(file_content)
                     return {
                         'type': 'file',
-                        'content': event_handler.read_file_content(),  # 返回txt的内容  ！！！ 冗余 应该需要改
-                        'path': event_handler.new_txt_file,  # 返回txt文本的路径
-                        'raw_content': event_handler.read_file_content()  # 返回txt的内容，和上面的一样
+                        'http_links': http_matches,
+                        'ftp_links': ftp_matches,
+                        'path': event_handler.new_txt_file
                     }
 
                 # 检查是否打开了新窗口
-                if len(self.driver.window_handles) > 1:  # 判断当前浏览器是否打开了多个窗口
-                    # 切换到新窗口
+                if len(self.driver.window_handles) > 1:
                     for window_handle in self.driver.window_handles:
                         if window_handle != original_window:
-                            self.driver.switch_to.window(window_handle)  # 切换到新窗口
-                            new_window_url = self.driver.current_url   # 获取新窗口的URL
-                            logger.info(f"检测到新窗口，它的URL为: {new_window_url}")
-                            # 若新窗口是HTML页面，读取页面内容
-                            logger.info("新窗口是HTML页面，读取页面源码")
-                            page_content = self.driver.page_source   # 读取新窗口的完整HTML源码
-                            logger.info(f"--------HTMl页面内容:{page_content}")
-                            # 定位<pre>标签并获取文本
+                            self.driver.switch_to.window(window_handle)
+                            new_window_url = self.driver.current_url
+                            logger.info(f"检测到新窗口，URL: {new_window_url}")
+
+                            page_content = self.driver.page_source
                             pre_element = self.driver.find_element(By.TAG_NAME, 'pre')
-                            raw_text = pre_element.text.strip()  # 得到包含链接的文本
-                            logger.info(f"--------真实的页面内容:{raw_text}")
+                            raw_text = pre_element.text.strip()
+
+                            # 提取链接并返回（不下载）
+                            http_matches, ftp_matches = self.extract_links(raw_text)
+
                             observer.stop()
                             observer.join()
+
                             return {
                                 'type': 'page',
-                                'content': page_content,  # 完整HTML源码
-                                'url': new_window_url,   # 新窗口的URL
-                                'raw_content': page_content,   # 原始HTML（与content一致，可能用于备份）  ！！！
-                                'raw_text': raw_text  # <pre>标签中的纯文本（核心数据，如链接列表）
+                                'http_links': http_matches,
+                                'ftp_links': ftp_matches,
+                                'url': new_window_url,
+                                'new_window_handle': window_handle
                             }
 
-                time.sleep(1)  # 降低检查频率，减少资源占用
+                time.sleep(1)
 
             # 超时处理
             logger.warning("[错误]超时未检测到下载或页面跳转")
-            observer.stop()
-            observer.join()
             return None
 
         except Exception as e:
-            logger.error(f"[错误]点击并读取内容时出错: {str(e)}")
-            observer.stop()
-            observer.join()
+            logger.error(f"[错误]点击并收集链接时出错: {str(e)}")
             return None
+        finally:
+            # 确保监控器停止
+            if observer and observer.is_alive():
+                try:
+                    observer.stop()
+                    observer.join(timeout=3)
+                except Exception as e:
+                    logger.warning(f"停止文件监控器时出错: {e}")
+
+    def extract_links(self, raw_text):
+        # region 用正则表达式 在内容中提取多个http 和ftp 的链接
+        # 识别HTTP链接
+        # http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251106/FY3E_MERSI_GRAN_L1_20251106_2315_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762851421&Signature=8RpriAMBD%2FgFVDlrGjszPcuUspE%3D
+        http_pattern = r'http://[^\s"]+\.HDF(?:\?[^\s"]+)?'
+        http_matches = re.findall(http_pattern, raw_text, re.IGNORECASE)
+        # 识别FTP链接
+        # ftp:// A202511070914090878 : F_8rCimc@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251106_2300_1000M_MS.HDF
+        ftp_pattern = r'ftp://(?:[^\s:@]+:[^\s:@]+@)?[^\s/]+/[^\s"]+\.HDF'
+        ftp_matches = re.findall(ftp_pattern, raw_text, re.IGNORECASE)
+        return http_matches, ftp_matches
         # endregion
 
 # 主程序类
@@ -570,19 +612,23 @@ class SatelliteDataDownloader:
                 (By.XPATH, '//*[@id="displayOrderBody"]/tr[1]/td[8]/a/span'),  # 第1个按钮
                 (By.XPATH, '//*[@id="displayOrderBody"]/tr[2]/td[8]/a/span'),  # 第2个按钮
                 (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第3个按钮
-                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第4个按钮
-                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第5个按钮
-                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第6个按钮
-                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第7个按钮
-                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第8个按钮
-                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第9个按钮
-                (By.XPATH, '//*[@id="displayOrderBody"]/tr[3]/td[8]/a/span'),  # 第10个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[4]/td[8]/a/span'),  # 第4个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[5]/td[8]/a/span'),  # 第5个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[6]/td[8]/a/span'),  # 第6个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[7]/td[8]/a/span'),  # 第7个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[8]/td[8]/a/span'),  # 第8个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[9]/td[8]/a/span'),  # 第9个按钮
+                (By.XPATH, '//*[@id="displayOrderBody"]/tr[10]/td[8]/a/span'),  # 第10个按钮
             ]
         }
 
     def run(self,content):
         # region运行主程序
         try:
+
+            all_http_links = []
+            all_ftp_links = []
+
             # region 初始化浏览器+打开网站+执行登录流程+点击我的订单
             # 初始化浏览器
             if not self.browser.init_browser():
@@ -636,11 +682,11 @@ class SatelliteDataDownloader:
 
             # 根据txt行数（content长度）循环点击对应按钮
             line_count = len(content)  # 获取txt有效行数
-            logger.info(f"[流程]共有{line_count}个订单，将执行{line_count}次下载操作......")
+            logger.info(f"[流程]共有{line_count}个订单，开始收集所有下载链接..")
             # endregion
 
             # region 循环下载各个订单
-            for i in range(line_count):  # ！！！有问题
+            for i in range(line_count):
                 # 检查是否有对应的按钮定位符（避免索引越界）
                 if i >= len(self.locators['file_buttons']):
                     logger.error(f"未定义第{i + 1}个按钮的定位符，请补充locators['file_buttons']")
@@ -648,194 +694,127 @@ class SatelliteDataDownloader:
 
                 # 获取当前行对应的按钮定位符
                 current_button = self.locators['file_buttons'][i]
-                logger.info(f"[流程]开始第{i + 1}/{line_count}次下载，点击按钮：{current_button}")
+                logger.info(f"[流程]点击第{i + 1}个文件按钮")
 
-                # 点击按钮并处理结果
-                result = self.browser.click_and_read_content(current_button)
-                self.process_result(result)
+                # 点击按钮收集链接（不下载）
+                result = self.browser.click_and_collect_links(current_button)
 
-                # 处理完成后返回「我的订单」主页面
+                if result:
+                    # 收集链接
+                    all_http_links.extend(result.get('http_links', []))
+                    all_ftp_links.extend(result.get('ftp_links', []))
+                    logger.info(
+                        f"[流程]第{i + 1}个订单收集到 {len(result.get('http_links', []))} 个HTTP链接和 {len(result.get('ftp_links', []))} 个FTP链接")
+                else:
+                    logger.warning(f"[流程]第{i + 1}个订单未能收集到链接")
+
+                # 清理临时文件
+                if result and result.get('path') and os.path.exists(result['path']):
+                    os.remove(result['path'])
+                    logger.info(f"已清理临时TXT文件：{result['path']}")
+
+                # 点击之后 可能跳转页面 这时候需要返回页面 以便于等会儿的重新点击
                 self.back_to_main_page()
 
-                # 刷新页面，确保最新状态
-                logger.info(f"[校验]刷新页面，准备校验第{i + 1}个按钮状态...")
                 self.browser.driver.refresh()
-                time.sleep(4)  # 刷新后等待页面完全加载
-                # 2. 校验下一个按钮是否存在（当前循环是第i次，下一次是i+1，但当前需确保本次按钮可点击？修正：当前循环是第i次，需确保当前按钮可点击，避免会话失效）
-                # 注意：当前循环处理的是第i个按钮，此处校验的是“当前要点击的按钮”是否存在（因返回主页面+刷新后可能失效）
-                try:
-                    # 尝试找到当前要点击的按钮（最多等待5秒）
-                    WebDriverWait(self.browser.driver, 5).until(
-                        EC.presence_of_element_located(current_button)
-                    )
-                    logger.info(f"[校验]✅ 第{i + 1}个按钮存在，继续执行")
-                    # 3. 若能找到按钮，直接继续下一次循环（或当前循环后续逻辑）
-                    time.sleep(2)
-                    continue
-                except TimeoutException:
-                    logger.warning(f"[校验]❌ 未找到第{i + 1}个按钮，开始检测登录状态...")
+                time.sleep(3)  # 刷新后等待页面完全加载
 
-                # 4. 未找到按钮，检测是否需要重新登录（查找“登录”按钮）
-                try:
-                    # 查找登录按钮（使用已定义的locators['submit_login']）
-                    login_btn = self.browser.safe_find_element(*self.locators['submit_login'], retry=1)
-                    if login_btn:
-                        logger.warning(f"[校验]检测到登录按钮，会话已失效，开始自动重登...")
+            # region 集中下载所有链接
+            logger.info(f"[流程]链接收集完成，总计 {len(all_http_links)} 个HTTP链接和 {len(all_ftp_links)} 个FTP链接")
+            logger.info("[流程]开始集中下载所有文件...")
 
-                        # 5. 执行重登录流程
-                        if self._login(first_page=0):
-                            logger.info(f"[重登]✅ 登录成功，重新跳转至我的订单页面...")
-                            # 6. 重登后再次点击“我的订单”（确保回到订单页）
-                            if self.browser.safe_click_element(*self.locators['my_order']):
-                                time.sleep(3)  # 等待跳转加载
-                                # 7. 再次校验当前按钮是否存在
-                                try:
-                                    WebDriverWait(self.browser.driver, 5).until(
-                                        EC.presence_of_element_located(current_button)
-                                    )
-                                    logger.info(f"[重登校验]✅ 第{i + 1}个按钮已找到，继续下载...")
-                                    time.sleep(2)
-                                    continue
-                                except TimeoutException:
-                                    logger.error(f"[重登校验]❌ 重登后仍未找到第{i + 1}个按钮，跳过该订单")
-                                    continue
-                        else:
-                            logger.error(f"[重登]❌ 重登录失败，跳过该订单")
-                            continue
-                    else:
-                        # 未找到登录按钮，也未找到订单按钮（页面异常）
-                        logger.error(f"[校验]❌ 未找到登录按钮和第{i + 1}个按钮，跳过该订单")
-                        continue
-                except Exception as e:
-                    logger.error(f"[校验]检测登录状态/按钮时出错：{str(e)}", exc_info=True)
-                    continue
+            # 关闭浏览器，释放内存
+            if self.browser.driver:
+                self.browser.driver.quit()
+                self.browser.driver = None
 
-                # 每次操作后等待1-2秒，避免页面未响应
-                time.sleep(2)
+            # 执行集中下载
+            save_dir = self.config.get_download_dir()
+            self.download_all_links_concentrated(all_http_links, all_ftp_links, save_dir)
 
+            logger.info("[流程]所有文件下载完成！")
+            # endregion
 
         except Exception as e:
             logger.error(f"[错误]程序运行出错: {str(e)}")
             logger.error(traceback.format_exc())
         finally:
-            # 可以根据需要决定是否关闭浏览器
-            # if self.browser.driver:
-            #     self.browser.driver.quit()
-            pass
-        # endregion
-    # 封装的核心函数：处理读取结果
-    def process_result(self, result):
-        # region 处理从文件或页面提取的结果，提取并下载HDF链接
-        if not result:
-            logger.warning("[错误]无有效结果可处理")
-            return
-
-        save_dir = self.config.get_download_dir()
-
-        # 根据结果类型处理（文件或页面）
-        if result['type'] == 'file':
-            logger.info("成功获取下载的txt文件内容")
-            raw_text = result['raw_content'].strip()
-            # 提取HTTP和FTP链接
-            http_matches, ftp_matches = self.extract_links(raw_text)
-            # 下载链接
-            self.download_all_links(
-                http_matches, ftp_matches, save_dir
-            )
-            # 清理临时TXT文件
-            if result.get('path') and os.path.exists(result['path']):
-                os.remove(result['path'])
-                logger.info(f"已清理临时TXT文件：{result['path']}")
-
-        elif result['type'] == 'page':
-            logger.info('识别到是页面了，并且拿到了页面内容')
-            raw_text = result['raw_text']
-            # 提取HTTP和FTP链接
-            http_matches, ftp_matches = self.extract_links(raw_text)
-            # 下载链接（页面处理不统计成功/失败数，保持原逻辑）
-            self.download_all_links(http_matches, ftp_matches, save_dir)
+            # [关闭浏览器]
+            if hasattr(self, 'browser') and self.browser.driver:
+                self.browser.driver.quit()
         # endregion
 
-    def extract_links(self, raw_text):
-        # region 用正则表达式 在内容中提取多个http 和ftp 的链接
-        # 识别HTTP链接
-        # http://clouddata.nsmc.org.cn:8089/DATA/FY3/FY3E/MERSI/L1/GEO1K/2025/20251106/FY3E_MERSI_GRAN_L1_20251106_2315_GEO1K_V0.HDF?AccessKeyId=LKI0VZTG4IR1UYTUSXQZ&Expires=1762851421&Signature=8RpriAMBD%2FgFVDlrGjszPcuUspE%3D
-        http_pattern = r'http://[^\s"]+\.HDF(?:\?[^\s"]+)?'
-        http_matches = re.findall(http_pattern, raw_text, re.IGNORECASE)
-        # 识别FTP链接
-        # ftp:// A202511070914090878 : F_8rCimc@ftp.nsmc.org.cn/FY3D_MERSI_GBAL_L1_20251106_2300_1000M_MS.HDF
-        ftp_pattern = r'ftp://(?:[^\s:@]+:[^\s:@]+@)?[^\s/]+/[^\s"]+\.HDF'
-        ftp_matches = re.findall(ftp_pattern, raw_text, re.IGNORECASE)
-        return http_matches, ftp_matches
-        # endregion
 
-    def download_all_links(self, http_matches, ftp_matches, save_dir, return_stats=False):
-        # region根据链接，去循环调用下载函数
-        """
-        通用链接下载函数（适配文件/页面两种场景）
-        :param http_matches: HTTP链接列表
-        :param ftp_matches: FTP链接列表
-        :param save_dir: 保存目录
-        :param return_stats: 是否返回统计结果（文件场景用True，页面场景用False）
-        :return: 若return_stats=True，返回 (total, success, failed)；否则返回None
-        """
-        total = len(http_matches) + len(ftp_matches)
-        success = 0
-        failed = 0
+
+    def download_all_links_concentrated(self, http_links, ftp_links, save_dir):
+
+        # HTTP链接文件路径
+        http_links_file = os.path.join(save_dir, "http_links.txt")
+        # FTP链接文件路径
+        ftp_links_file = os.path.join(save_dir, "ftp_links.txt")
+        with open(http_links_file, 'w', encoding='utf-8') as f:
+            for link in http_links:
+                f.write(link + '\n')
+        with open(ftp_links_file, 'w', encoding='utf-8') as f:
+            for link in ftp_links:
+                f.write(link + '\n')
+
+        # 下载前强制垃圾回收
+        import gc
+        gc.collect()
+
+        """集中下载所有链接"""
+        total_files = len(http_links) + len(ftp_links)
+        success_count = 0
+        failed_count = 0
+
+        logger.info(f"[流程]开始下载 {total_files} 个文件...")
 
         # 下载HTTP链接
-        if http_matches:
-            logger.info(f"[流程]提取到{len(http_matches)}个HTTP格式HDF链接，开始下载...")
-            for i, hdf_url in enumerate(http_matches, 1):
-                logger.info(f"[流程]正在下载第{i}/{len(http_matches)}个HTTP链接: {hdf_url}")
-                if download_http_file(
-                        hdf_url,
-                        save_dir,
-                        idle_timeout=60,
-                        max_retry=3
-                ):
-                    success += 1
-                    logger.info(f"[流程]✅ 第{i}个HTTP链接下载成功: {hdf_url}")
+        if http_links:
+            logger.info(f"[流程]开始下载 {len(http_links)} 个HTTP文件")
+            for i, hdf_url in enumerate(http_links, 1):
+                filename = os.path.basename(hdf_url.split('?')[0])
+                logger.info(f"[流程]进度: {i}/{len(http_links)} - {filename}")
+
+                if download_http_file(hdf_url, save_dir, idle_timeout=60, max_retry=3):
+                    success_count += 1
+                    logger.info(f"[流程]✅ HTTP文件下载成功: {i}/{len(http_links)}")
                 else:
-                    failed += 1
-                    logger.error(f"❌ 第{i}个HTTP链接下载失败（已重试2次）: {hdf_url}")
+                    failed_count += 1
+                    logger.error(f"[流程]❌ HTTP文件下载失败: {i}/{len(http_links)}")
+                # 显示总体进度
+                current_total = i + min(len(ftp_links), 0)  # 假设FTP还没开始
+                overall_progress = (current_total / total_files) * 100
+                print(f"总体进度: {overall_progress:.1f}% ({current_total}/{total_files})", end='', flush=True)
+
+        gc.collect()
 
         # 下载FTP链接
-        if ftp_matches:
-            logger.info(f"[流程]提取到{len(ftp_matches)}个FTP格式HDF链接，开始下载...")
-            for i, hdf_url in enumerate(ftp_matches, 1):
-                logger.info(f"[流程]正在下载第{i}/{len(ftp_matches)}个FTP链接: {hdf_url}")
-                if download_ftp_with_progress(
-                        hdf_url,
-                        save_dir,
-                        timeout=30,
-                        idle_timeout=60,
-                        max_retry=3
-                ):
-                    success += 1
-                    logger.info(f"[流程]✅ 第{i}个FTP链接下载成功: {hdf_url}")
+        if ftp_links:
+            logger.info(f"[流程]开始下载 {len(ftp_links)} 个FTP文件")
+            for i, hdf_url in enumerate(ftp_links, 1):
+                filename = os.path.basename(urlparse(hdf_url).path)
+                logger.info(f"[流程]进度: {i}/{len(ftp_links)} - {filename}")
+
+                if download_ftp_with_progress(hdf_url, save_dir, timeout=30, idle_timeout=60, max_retry=3):
+                    success_count += 1
+                    logger.info(f"[流程]✅ FTP文件下载成功: {i}/{len(ftp_links)}")
                 else:
-                    failed += 1
-                    logger.error(f"[流程]❌ 第{i}个FTP链接多次重试失败: {hdf_url}")
+                    failed_count += 1
+                    logger.error(f"[流程]❌ FTP文件下载失败: {i}/{len(ftp_links)}")
 
-        # 无链接处理
-        if not http_matches and not ftp_matches:
-            logger.error("未找到有效HDF链接（支持格式：HTTP带参数/纯链接、FTP带用户名/匿名登录）")
-            if return_stats:
-                return 0, 0, 0
+                # 显示总体进度
+                current_total = len(http_links) + i
+                overall_progress = (current_total / total_files) * 100
+                print(f"\r总体进度: {overall_progress:.1f}% ({current_total}/{total_files})", end='', flush=True)
 
-        # 输出统计日志（两种场景都需要）
-        logger.info(f"[流程]链接处理完成：总计{total}个文件, 成功{success}个, 失败{failed}个")
-        if success > 0:
-            logger.info(f"[流程]✅ 成功下载{success}个HDF文件！")
-        if failed > 0:
-            logger.error(f"❌ {failed}个HDF文件下载失败！")
+        gc.collect()
+        # 输出统计
+        logger.info(f"[流程]下载完成: 总计{total_files}个文件, 成功{success_count}个, 失败{failed_count}个")
 
-        # 根据参数决定是否返回统计结果
-        if return_stats:
-            return total, success, failed
-        return None
-        # endregion
+        if failed_count > 0:
+            logger.warning(f"[流程]有 {failed_count} 个文件下载失败，请检查网络连接或文件可用性")
 
     def _login(self,first_page=1):
         # region 登录

@@ -5,7 +5,29 @@ from pathlib import Path
 import os
 import time
 import threading
+from config_handler import ConfigHandler
+import  logging
+import sys
 # endregion
+
+
+# 配置日志：输出到download.log文件，设置格式和级别
+# region基础日志配置
+log_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "download.log")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_path, encoding='utf-8', mode='w'),
+        logging.StreamHandler(sys.stdout)
+    ],
+    force=True
+)
+
+logger = logging.getLogger(__name__)
+
+
 
 def download_http_file(url, save_dir, timeout=30, idle_timeout=60, max_retry=3):
     # region下载 http形式的文件
@@ -49,11 +71,8 @@ def download_http_file(url, save_dir, timeout=30, idle_timeout=60, max_retry=3):
 
     #   region重试循环
     for retry in range(max_retry):
-        print(f"\n{'=' * 50}")
-        print(f"开始下载（第{retry + 1}/{max_retry}次尝试）: {filename}")
-        print(f"下载URL: {url}")
-        print(f"保存路径: {file_path}")
-        print(f"{'=' * 50}")
+        logger.info(f"开始下载（第{retry + 1}/{max_retry}次尝试）: {filename}")
+        logger.info(f"{'=' * 50}")
 
         # 初始化变量
         download_aborted = False  # 是否中断下载
@@ -69,7 +88,7 @@ def download_http_file(url, save_dir, timeout=30, idle_timeout=60, max_retry=3):
                     time.sleep(5)  # 每5秒检查一次
                     # 若超过idle_timeout秒无数据传输，中断下载
                     if time.time() - last_data_time > idle_timeout:
-                        print(f"\n⚠️  警告：{idle_timeout}秒未接收数据，中断下载！")
+                        logger.warning(f"\n⚠️  警告：{idle_timeout}秒未接收数据，中断下载！")
                         download_aborted = True
                         # 主动关闭响应流，释放连接
                         if response:
@@ -108,7 +127,7 @@ def download_http_file(url, save_dir, timeout=30, idle_timeout=60, max_retry=3):
                                 current_percent = (downloaded / total_size) * 100
                                 if current_percent - last_reported_percent >= 5:
                                     reported_percent = int(current_percent // 5 * 5)
-                                    print(f"\r下载进度: {reported_percent}%", end='', flush=True)
+                                    logger.info(f"下载进度: {filename} {reported_percent}%")
                                     last_reported_percent = reported_percent
 
                 # 5. 下载完成后处理
@@ -116,33 +135,32 @@ def download_http_file(url, save_dir, timeout=30, idle_timeout=60, max_retry=3):
                 monitor_thread.join()  # 等待监控线程退出
 
                 # 强制输出100%进度
-                print(f"\r下载进度: 100%", end='', flush=True)
-                print()
+                logger.info(f"下载进度: {filename} 100%")
 
                 # 6. 验证文件完整性
                 local_file_size = os.path.getsize(file_path)
                 if total_size > 0 and abs(local_file_size - total_size) > 1024:  # 允许1KB误差
                     raise ValueError(f"文件不完整！服务器大小{total_size}字节，本地大小{local_file_size}字节")
 
-                print(f"✅ 文件下载成功！")
-                print(f"📁 保存路径: {file_path}")
-                print(f"📊 文件大小: {local_file_size:,} 字节")
+                logger.info(f"✅ 文件下载成功！")
+                logger.info(f"📁 保存路径: {file_path}")
+                logger.info(f"📊 文件大小: {local_file_size:,} 字节")
                 return True
 
             else:
-                print(f"❌ 下载失败，状态码: {response.status_code}")
-                print(f"📝 响应内容: {response.text[:500]}")   #！！！
+                logger.error(f"❌ 下载失败，状态码: {response.status_code}")
+                logger.info(f"📝 响应内容: {response.text[:500]}")   #！！！
                 # 重试前清理不完整文件
                 if os.path.exists(file_path):
                     os.remove(file_path)
                 if retry < max_retry - 1:
-                    print(f"⏳ {max_retry - retry - 1}次重试机会，3秒后重试...")
+                    logger.info(f"⏳ {max_retry - retry - 1}次重试机会，3秒后重试...")
                     time.sleep(3)
                 continue
 
         except requests.exceptions.SSLError as e:  # 处理 SSL 错误（服务端证书不兼容场景）
-            print(f"❌ SSL错误: {str(e)[:200]}")
-            print("🔄 尝试启用SSL验证重试...")
+            logger.error(f"❌ SSL错误: {str(e)[:200]}")
+            logger.info("🔄 尝试启用SSL验证重试...")
             try:
                 response = requests.get(url, stream=True, verify=True, headers=headers, timeout=timeout)
                 if response.status_code == 200:
@@ -150,36 +168,36 @@ def download_http_file(url, save_dir, timeout=30, idle_timeout=60, max_retry=3):
                         for chunk in response.iter_content(chunk_size=8192):
                             if chunk:
                                 file.write(chunk)
-                    print(f"✅ SSL验证模式下载成功！")
-                    print(f"📁 保存路径: {file_path}")
+                    logger.info(f"✅ SSL验证模式下载成功！")
+                    logger.info(f"📁 保存路径: {file_path}")
                     return True
             except Exception as e2:
-                print(f"❌ SSL验证模式重试失败: {str(e2)[:200]}")
+                logger.error(f"❌ SSL验证模式重试失败: {str(e2)[:200]}")
                 if os.path.exists(file_path):
                     os.remove(file_path)
                 if retry < max_retry - 1:
-                    print(f"⏳ {max_retry - retry - 1}次重试机会，3秒后重试...")
+                    logger.info(f"⏳ {max_retry - retry - 1}次重试机会，3秒后重试...")
                     time.sleep(3)
                 continue
 
         except TimeoutError as e:  # 处理停滞超时异常（监控线程触发的中断）
             # 捕获空闲超时异常
-            print(f"❌ {str(e)}")
+            logger.error(f"❌ {str(e)}")
             if os.path.exists(file_path):
                 os.remove(file_path)
             if retry < max_retry - 1:
-                print(f"⏳ {max_retry - retry - 1}次重试机会，5秒后重试...")
+                logger.info(f"⏳ {max_retry - retry - 1}次重试机会，5秒后重试...")
                 time.sleep(5)
             continue
 
         except Exception as e:
-            print(f"❌ 下载过程中出现错误: {str(e)[:200]}")
+            logger.error(f"❌ 下载过程中出现错误: {str(e)[:200]}")
             # 清理不完整文件
             if os.path.exists(file_path):
                 os.remove(file_path)
             # 重试判断
             if retry < max_retry - 1:
-                print(f"⏳ {max_retry - retry - 1}次重试机会，3秒后重试...")
+                logger.info(f"⏳ {max_retry - retry - 1}次重试机会，3秒后重试...")
                 time.sleep(3)
             continue
 
@@ -192,6 +210,6 @@ def download_http_file(url, save_dir, timeout=30, idle_timeout=60, max_retry=3):
                 response.close()
 
     # 所有重试都失败
-    print(f"\n❌ 所有{max_retry}次下载尝试均失败！")
+    logger.error(f"❌ 所有{max_retry}次下载尝试均失败！")
     return False
     # endregion
