@@ -125,7 +125,7 @@ def download_http_file(url, save_dir, timeout=30, idle_timeout=60, max_retry=3):
                             # 进度打印（每5%输出一次）
                             if total_size > 0:
                                 current_percent = (downloaded / total_size) * 100
-                                if current_percent - last_reported_percent >= 5:
+                                if current_percent - last_reported_percent >= 25:
                                     reported_percent = int(current_percent // 5 * 5)
                                     logger.info(f"下载进度: {filename} {reported_percent}%")
                                     last_reported_percent = reported_percent

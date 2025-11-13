@@ -747,6 +747,7 @@ class SatelliteDataDownloader:
 
 
     def download_all_links_concentrated(self, http_links, ftp_links, save_dir):
+        failed_files = []
 
         # HTTP链接文件路径
         http_links_file = os.path.join(save_dir, "http_links.txt")
@@ -783,6 +784,7 @@ class SatelliteDataDownloader:
                 else:
                     failed_count += 1
                     logger.error(f"[流程]❌ HTTP文件下载失败: {i}/{len(http_links)}")
+                    failed_files.append((hdf_url, filename))
                 # 显示总体进度
                 current_total = i + min(len(ftp_links), 0)  # 假设FTP还没开始
                 overall_progress = (current_total / total_files) * 100
@@ -803,6 +805,7 @@ class SatelliteDataDownloader:
                 else:
                     failed_count += 1
                     logger.error(f"[流程]❌ FTP文件下载失败: {i}/{len(ftp_links)}")
+                    failed_files.append((hdf_url, filename))
 
                 # 显示总体进度
                 current_total = len(http_links) + i
@@ -813,8 +816,21 @@ class SatelliteDataDownloader:
         # 输出统计
         logger.info(f"[流程]下载完成: 总计{total_files}个文件, 成功{success_count}个, 失败{failed_count}个")
 
-        if failed_count > 0:
-            logger.warning(f"[流程]有 {failed_count} 个文件下载失败，请检查网络连接或文件可用性")
+        # 新增：汇总输出失败文件列表
+        logger.info(f"\n[流程]下载完成: 总计{total_files}个文件, 成功{success_count}个, 失败{failed_count}个")
+        if failed_files:
+            logger.warning(f"[流程] 共{len(failed_files)}个文件下载失败：")
+            for idx, (link, filename) in enumerate(failed_files, 1):
+                logger.warning(f"[流程] {idx}. 文件名: {filename}  链接: {link}")
+            # 可选：将失败列表保存到文件（方便后续重试）
+            failed_file_path = os.path.join(save_dir, "failed_downloads.txt")
+            with open(failed_file_path, 'w', encoding='utf-8') as f:
+                f.write("下载失败的文件列表：\n")
+                for link, filename in failed_files:
+                    f.write(f"文件名: {filename}\n链接: {link}\n\n")
+            logger.info(f"[流程] 失败文件列表已保存至：{failed_file_path}")
+        else:
+            logger.info("[流程] 所有文件均下载成功！")
 
     def _login(self,first_page=1):
         # region 登录
